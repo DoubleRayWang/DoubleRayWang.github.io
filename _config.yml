@@ -4,10 +4,10 @@
 
 # Site
 title: Love Light
-subtitle: 王雷雷的个人博客
-description: 王雷雷的个人博客，JavaScript，WEB，CSS，HTML，前端
+subtitle: DoubleRay 的个人博客
+description: 像疯了一样！
 author: DoubleRay
-language:
+language: zh-Hans
 timezone:
 
 # URL
@@ -49,8 +49,17 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 2
+  per_page: 5
   order_by: -date
+
+archive_generator:
+	per_page: 10 #归档页面默认10篇文章标题
+	yearly: true  #生成年视图
+	monthly: true #生成月视图
+tag_generator:
+	per_page: 10 #标签分类页面默认10篇文章
+category_generator:
+	per_page: 10 #分类页面默认10篇文章
   
 # Category & Tag
 default_category: uncategorized
@@ -80,3 +89,10 @@ deploy:
   type: git
   repo: https://github.com/DoubleRayWang/DoubleRayWang.github.io.git
   branch: master
+
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000

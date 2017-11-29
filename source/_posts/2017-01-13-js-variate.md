@@ -1,7 +1,8 @@
----
 layout: post
 title: "JavaScript 变量作用域"
 date: 2017-01-13 12:19:15 +0800
+comments: false
+type: "categories"
 categories: 面试总结
 tag: JavaScript
 ---
@@ -123,7 +124,8 @@ console.log(name);
 　　先来看一段代码：
 
 ```js
-name="lwy";  
+
+var name="lwy";  
 function t(){  
     var name="tlwy";  
     function s(){  
