@@ -3,7 +3,7 @@ layout: post
 title: "JavaScript 中 Null 和 Undefined"
 date: 2017-01-20 21:25:15 +0800
 categories: 面试总结
-tag: JavaScript
+tags: JavaScript
 ---
 
 
@@ -110,3 +110,5 @@ Object.prototype.toString.call(undefined); // [object Undefined]
 ## 5. 结论
 
 　　无论这些原生对象多么不寻常，理解`null`和`undefined`之间的差异，和他们在`JavaScript`的语言基础中截然不同的角色。它可能不能使你的应用程序有所突破，但是一般来说，它仅被证明在开发和调试中长期有益。
+
+<hr>

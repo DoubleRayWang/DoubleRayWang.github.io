@@ -1,10 +1,10 @@
+---
 layout: post
 title: "JavaScript 变量作用域"
 date: 2017-01-13 12:19:15 +0800
 comments: false
-type: "categories"
 categories: 面试总结
-tag: JavaScript
+tags: JavaScript
 ---
 
 　　在 `JavaScript` 当中一个变量的作用域（scope）是程序中定义这个变量的区域。变量分为两类：全局（global）的和局部的。其中全局变量的作用域是全局性的，即在 `JavaScript` 代码中，它处处都有定义。而在函数之内声明的变量，就只在函数体内部有定义。它们是局部变量，作用域是局部性的。 **函数的参数也是局部变量**，它们只在函数体内部有定义，**局部变量省略了 var 也就默认成为了全局变量**。
@@ -180,3 +180,5 @@ with(person.wife){
 ```
 
 　　with 语句将 person.wife 添加到当前作用域链的头部，所以输出的就是：“lwy"。with 语句结束后，作用域链恢复正常。
+
+<hr>

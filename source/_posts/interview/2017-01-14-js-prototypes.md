@@ -3,7 +3,7 @@ layout: post
 title: "JavaScript 原型及原型链"
 date: 2017-01-14 21:25:15 +0800
 categories: 面试总结
-tag: JavaScript
+tags: JavaScript
 ---
 
 
@@ -152,7 +152,7 @@ function Person(name){                             //构造函数
 
 　　`Person`的实例`person1`中包含了`name`属性，同时自动生成一个`__proto__`属性，该属性指向`Person`的`prototype`，可以访问到`prototype`内定义的`printName`方法，大概就是这个样子的:
 
-![ptototype]({{ '/styles/images/js/prototype1.png' | prepend: site.baseurl  }})
+![ptototype](/styles/images/js/prototype1.png)
 
 　　每个`JavaScript`函数都有`prototype`属性，这个属性引用了一个对象，这个对象就是原型对象。原型对象初始化的时候是空的，我们可以在里面自定义任何属性和方法，这些方法和属性都将被该构造函数所创建的对象继承。
   
@@ -196,7 +196,7 @@ function Person(name){                             //构造函数
 var array1 = [1,2,3];
 ```
 
-![ptototype]({{ '/styles/images/js/prototype2.png' | prepend: site.baseurl  }})
+![ptototype](/styles/images/js/prototype2.png)
 
 　　array1对象具有一个length属性值为3，但是我们可以通过如下的方法来为array1增加元素：
 
@@ -214,7 +214,7 @@ function Base() {
 }   
 ```
 
-![ptototype]({{ '/styles/images/js/prototype3.png' | prepend: site.baseurl  }})
+![ptototype](/styles/images/js/prototype3.png)
 
 ```js
 var obj = new Base(); 
@@ -222,7 +222,7 @@ var obj = new Base();
 
 　　这样代码的结果是什么，我们在`Javascript`引擎中看到的对象模型是：
 
-![ptototype]({{ '/styles/images/js/prototype4.png' | prepend: site.baseurl  }})
+![ptototype](/styles/images/js/prototype4.png)
 
 　　`new`操作符具体干了什么呢?其实很简单，就干了三件事情:
 
@@ -234,7 +234,7 @@ Base.call(obj);
 
 ## 8. 原型链
 
-　　**原型链**：当从一个对象那里调取属性或方法时，如果该对象自身不存在这样的属性或方法，就会去自己关联的```prototype```对象那里寻找，如果```prototype```没有，就会去```prototype```关联的前辈```prototype```那里寻找，如果再没有则继续查找```Prototype.Prototype```引用的对象，依次类推，直到```Prototype```.….```Prototype```为```undefined```（```Object```的```Prototype```就是```undefined```）从而形成了所谓的“**原型链**”。
+　　**原型链**：当从一个对象那里调取属性或方法时，如果该对象自身不存在这样的属性或方法，就会去自己关联的`prototype`对象那里寻找，如果`prototype`没有，就会去`prototype`关联的前辈`prototype`那里寻找，如果再没有则继续查找`Prototype.Prototype`引用的对象，依次类推，直到`Prototype`.….`Prototype`为`undefined`（`Object`的`Prototype`就是`undefined`）从而形成了所谓的“**原型链**”。
 
 ```html
 <script type="text/javascript">
@@ -261,7 +261,7 @@ Base.call(obj);
 </script>
 ```
 
-　　这里，用构造器```Shape()```新建了一个实体，然后用它去覆盖该对象的原型。
+　　这里，用构造器`Shape()`新建了一个实体，然后用它去覆盖该对象的原型。
 
 ```html
 <script type="text/javascript">
@@ -298,9 +298,9 @@ Base.call(obj);
 
 ## 9. 原型继承
 
-　　**原型继承**：在原型链的末端，就是```Object```构造函数```prototype```属性指向的那个原型对象。这个原型对象是所有对象的祖先，这个老祖宗实现了诸如```toString```等所有对象天生就该具有的方法。其他内置构造函数，如```Function```，```Boolean```，```String```，```Date```和```RegExp```等的```prototype```都是从这个老祖宗传承下来的，但他们各自又定义了自身的属性和方法，从而他们的子孙就表现出各自宗族的那些特征。
+　　**原型继承**：在原型链的末端，就是`Object`构造函数`prototype`属性指向的那个原型对象。这个原型对象是所有对象的祖先，这个老祖宗实现了诸如`toString`等所有对象天生就该具有的方法。其他内置构造函数，如`Function`，`Boolean`，`String`，`Date`和`RegExp`等的`prototype`都是从这个老祖宗传承下来的，但他们各自又定义了自身的属性和方法，从而他们的子孙就表现出各自宗族的那些特征。
 
-　　```ECMAScript```中，实现继承的方法就是依靠原型链实现的。
+　　`ECMAScript`中，实现继承的方法就是依靠原型链实现的。
 
 ```html
 <script type="text/javascript">
@@ -356,9 +356,9 @@ alert(son.name);//弹出 Jack
 
 ## 10. __ptoto__属性
 
-　　```__ptoto__```属性（IE 浏览器不支持）是实例指向原型对象的一个指针，它的作用就是指向构造函数的原型属性```constructor```，通过这两个属性，就可以访问原型里的属性和方法了。
+　　`__ptoto__`属性（IE 浏览器不支持）是实例指向原型对象的一个指针，它的作用就是指向构造函数的原型属性`constructor`，通过这两个属性，就可以访问原型里的属性和方法了。
 
-　　```Javascript```中的对象实例本质上是由一系列的属性组成的，在这些属性中，有一个内部的不可见的特殊属性——```__proto__```，该属性的值指向该对象实例的原型，一个对象实例只拥有一个唯一的原型。
+　　`Javascript`中的对象实例本质上是由一系列的属性组成的，在这些属性中，有一个内部的不可见的特殊属性——`__proto__`，该属性的值指向该对象实例的原型，一个对象实例只拥有一个唯一的原型。
 
 ```html
 <script type="text/javascript">
@@ -380,9 +380,9 @@ alert(son.name);//弹出 Jack
 
 ### 10.1 __proto__属性和prototype属性的区别
 
-　　```prototype```是```function```对象中专有的属性。 
+　　`prototype`是`function`对象中专有的属性。 
 
-　　```__proto__```是普通对象的隐式属性，在```new```的时候，会指向```prototype```所指的对象；```__ptoto__```实际上是某个实体对象的属性，而```prototype```则是属于构造函数的属性。```__ptoto__```只能在学习或调试的环境下使用。
+　　`__proto__`是普通对象的隐式属性，在`new`的时候，会指向`prototype`所指的对象；`__ptoto__`实际上是某个实体对象的属性，而`prototype`则是属于构造函数的属性。`__ptoto__`只能在学习或调试的环境下使用。
 
 ## 11. 原型模式的执行流程
 
@@ -461,7 +461,7 @@ alert(son.name);//弹出 Jack
 ```js
 构造函数.prototype = 原型对象
 原型对象.constructor = 构造函数(模板)
-原型对象.isPrototypeof(实例对象)   判断实例对象的原型 是不是当前对象
+原型对象.isPrototypeof(实例对象)  // 判断实例对象的原型 是不是当前对象
 ```
 
 ## 12. 工厂模式
@@ -481,19 +481,21 @@ alert(son.name);//弹出 Jack
 
 <hr>
 
-1. 构造函数方法没有显示的创建对象(```new Object()```);
-2. 直接将属性和方法赋值给```this```对象;
-3. 没有```return``` 语句。
+1. 构造函数方法没有显示的创建对象(`new Object()`);
+2. 直接将属性和方法赋值给`this`对象;
+3. 没有`return` 语句。
 
 <hr>
 
-　　当使用了构造函数，并且```new``` 构造函数，那么就在后台执行了```new Object()```；
+　　当使用了构造函数，并且`new` 构造函数，那么就在后台执行了`new Object()`；
 
-　　函数体内的```this```代表了```new Object()```出来的对象。
+　　函数体内的`this`代表了`new Object()`出来的对象。
 
 <hr>
 
-1. 判断属性是在构造函数的实例里，还是在原型里，可以使用```hasOwnProperty()```函数
-2. 字面量创建的方式使用```constructor```属性不会指向实例，而会指向```Object```，构造函数创建的方式则相反；为什么指向```Object```？因为```Box.prototype = {}```;这种写法其实就是创建了一个新对象。而每创建一个函数，就会同时创建它的```prototype```，这个对象也会自动获取```constructor```属性
+1. 判断属性是在构造函数的实例里，还是在原型里，可以使用`hasOwnProperty()`函数
+2. 字面量创建的方式使用`constructor`属性不会指向实例，而会指向`Object`，构造函数创建的方式则相反；为什么指向`Object`？因为`Box.prototype = {}`;这种写法其实就是创建了一个新对象。而每创建一个函数，就会同时创建它的`prototype`，这个对象也会自动获取`constructor`属性
 3. 如果是实例方法，不同的实例化，他们的方法地址是不一样的，是唯一的
 4. 如果是原型方法，那么他们的地址的共享的
+
+<hr>
