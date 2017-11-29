@@ -3,11 +3,9 @@ layout: post
 title: "常用 git 命令行总结"
 date: 2017-01-09 13:13:05 +0800
 categories: 干货分享
-tag: Git
+tags: Git
 ---
 
-* content
-{:toc}
 
 
 　　这些基础命令是首次使用 git 配置连接 github 时常用的命令（本人博客搭建过程中主要使用的）。<!-- more -->
@@ -55,7 +53,7 @@ tag: Git
 
 　　一般来说，日常使用只要记住下图6个命令，就可以了。但是熟练使用，恐怕要记住60～100个命令。
 
-<img src="{{ '/styles/images/git/git-s.png' | prepend: site.baseurl }}" alt="git 常用命令" />
+<img src="/styles/images/git/git-s.png" alt="git 常用命令" />
 
 　　下面是我整理的常用 Git 命令清单。几个专用名词的译名如下。
 
@@ -337,4 +335,4 @@ tag: Git
     $ git archive
 
 
-<br>
+<hr>

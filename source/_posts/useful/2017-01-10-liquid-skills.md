@@ -3,11 +3,9 @@ layout: post
 title: "Liquid 指南"
 date: 2017-01-10 19:25:15 +0800
 categories: 干货分享
-tag: Jekyll
+tags: Jekyll
 ---
 
-* content
-{:toc}
 
 　　最近折腾 github pages 上博客的时候, 遇到一些 jekyll 问题，准确的来说应该是 Liquid 用法的问题。
 
@@ -17,23 +15,21 @@ tag: Jekyll
 
 -----------
 
-　　在 Liquid 中有两种类型的标记：```Output```(用于输出文本) 和 ```Tag```(用于执行命令或者处理) 。
+　　在 Liquid 中有两种类型的标记：`Output`(用于输出文本) 和 `Tag`(用于执行命令或者处理) 。
 
-+ ```Output``` 标记被包含在：
++ `Output` 标记被包含在：
 
-{% raw %} 
+
 ```ruby
 {{ 两个配对的花括号中 }}
 ``` 
-{% endraw %}
 
-+ ```Tag``` 标记被包含在:
++ `Tag` 标记被包含在:
  
-{% raw %} 
+
 ```ruby
 {% 成对的花括号和百分号中 %}
 ``` 
-{% endraw %}
 
 ## Output
 
@@ -41,26 +37,24 @@ tag: Jekyll
 
 　　下面是关于输出标记的简单实例：
 
-{% raw %} 
+
 ```liquid
 Hello {{ name }}
 Hello {{ user.name }}
 Hello {{ 'tobi' }}
 ``` 
-{% endraw %}
 
 ### 2. 高级 Output：过滤器 (Filters)
 
 　　输入标记带有过滤器，方法很简单。第一个参数总是过滤器左边值的输出。当下个过滤器运行时，刚刚所得到的过滤器返回值就会成为新的左边值。直到最后没有过滤器时，模板就会接受最后的结果字符串。
 
-{% raw %} 
+
 ```liquid
 Hello {{ 'tobi' | upcase }}
 Hello tobi has {{ 'tobi' | size }} letters!
 Hello {{ 'tobi' | capitalize }}
 Hello {{ '1984-02-01' | date: "%Y" }}
 ``` 
-{% endraw %}
 
 　　输出结果是：
 
@@ -73,7 +67,7 @@ Hello {{ '1984-02-01' | date: "%Y" }}
 
 ### 3. 标准过滤器
 
-{% raw %} 
+
 ```liquid
 date - 格式化日期
 capitalize - 将输入语句的首字母大写
@@ -105,11 +99,10 @@ divided_by - 除，如 {{ 10 | divided_by:2 }} #=> 5
 split - 将一串字符串根据匹配模式分割成数组，如 {{ "a~b" | split:~ }} #=> \['a','b'\]
 modulo - 余数，如 {{ 3 | modulo:2 }} #=> 1
 ```
-{% endraw %}
 
 ## Tags
 
-　　```Tags``` 用于你的模板逻辑。新的标签很容易开发，因此我希望在发布这些代码后，大家可以为标准标签库增加更多的内容。
+　　`Tags` 用于你的模板逻辑。新的标签很容易开发，因此我希望在发布这些代码后，大家可以为标准标签库增加更多的内容。
 
 　　下列是当前已经支持的标签：
 
@@ -130,11 +123,10 @@ unless - if 语句的简版
 
 　　注释是最简单的标签，它只是把内容包含起来。
 
-{% raw %} 
+
 ```liquid
 We made 1 million dollars {% comment %} in losses {% endcomment %} this year
 ``` 
-{% endraw %}
 
 ### 2. Raw
 
@@ -147,13 +139,13 @@ We made 1 million dollars {% comment %} in losses {% endcomment %} this year
     We made 1 million dollars {% comment %} in losses {% endcomment %} this year
 ｛% endraw %｝
 ```
- {% endraw %}
+
  
 ### 3. If/Else
  
-　　```if/else``` 在其他编程语言里应该已经被熟知了。```Liquid``` 使得你可以通过 ```if``` 或 ```unless``` ( ```elsif``` 和 ```else``` 为可选 ) 编写简单的表达式:
+　　`if/else` 在其他编程语言里应该已经被熟知了。`Liquid` 使得你可以通过 if``` 或 `unless` ( `elsif` 和 `else` 为可选 ) 编写简单的表达式:
 
-{% raw %} 
+
 ```liquid
 {% if user %}
     Hello {{ user.name }}
@@ -213,13 +205,12 @@ We made 1 million dollars {% comment %} in losses {% endcomment %} this year
    string includes 'hello'
 {% endif %}
 ``` 
-{% endraw %}
 
 ### 4. Case
 
-　　如果你需要更多的条件判断，你可以使用 ```case``` 语句:
+　　如果你需要更多的条件判断，你可以使用 `case` 语句:
 
-{% raw %} 
+
 ```liquid
 {% case condition %}
     {% when 1 %}
@@ -230,11 +221,10 @@ We made 1 million dollars {% comment %} in losses {% endcomment %} this year
         ... else ...
 {% endcase %}
 ``` 
-{% endraw %}
 
 + **Example**:
 
-{% raw %} 
+
 ```liquid
 {% case template %}
     {% when 'label' %}
@@ -245,13 +235,12 @@ We made 1 million dollars {% comment %} in losses {% endcomment %} this year
         // {{page_title}}
 {% endcase %}
 ``` 
-{% endraw %}
 
 ### 5. Cycle
 
-　　我们常常需要在不同的颜色或类似的任务间轮流切换。```Liquid``` 对于这样的操作有内置支持，通过使用 ```cicle``` 标签。
+　　我们常常需要在不同的颜色或类似的任务间轮流切换。`Liquid` 对于这样的操作有内置支持，通过使用 cicle``` 标签。
 
-{% raw %} 
+
 ```liquid
 {% cycle 'one', 'two', 'three' %}
 {% cycle 'one', 'two', 'three' %}
@@ -265,11 +254,10 @@ two
 three
 one
 ``` 
-{% endraw %}
 
-　　如果一组 ```cycle``` 没有命名，那默认情况下有用相同参数的会被认为是一个组。如果你希望完全控制 ```cycle``` 组，你可以指定一个组名，这个组名甚至可以是一个变量。
+　　如果一组 `cycle` 没有命名，那默认情况下有用相同参数的会被认为是一个组。如果你希望完全控制 `cycle` 组，你可以指定一个组名，这个组名甚至可以是一个变量。
 
-{% raw %} 
+
 ```liquid
 {% cycle 'group 1': 'one', 'two', 'three' %}
 {% cycle 'group 1': 'one', 'two', 'three' %}
@@ -283,23 +271,21 @@ two
 one
 two
 ``` 
-{% endraw %}
 
 ### 6. for 循环
 
-　　```Liquid``` 允许循环一个集合 :
+　　`Liquid` 允许循环一个集合 :
 
-{% raw %} 
+
 ```liquid
 {% for item in array %}
     {{ item }}
 {% endfor %}
 ``` 
-{% endraw %}
 
 　　在每次循环期间，下列的帮助变量都可用于额外的展示需要:
 
-{% raw %} 
+
 ```coffeescript
 forloop.length      # => length of the entire for loop
 forloop.index       # => index of the current iteration
@@ -309,13 +295,12 @@ forloop.rindex0     # => how many items are still left? (zero based)
 forloop.first       # => is this the first iteration?
 forloop.last        # => is this the last iteration?
 ``` 
-{% endraw %}
 
 　　你可以使用一些属性来影响接受循环中的哪项。
 
-　　```limit:int``` 使你可以限制接受的循环项个数；```offset:int``` 可以可以让你从循环集合的第 n 项开始。
+　　`limit:int` 使你可以限制接受的循环项个数；offset:int 可以可以让你从循环集合的第 n 项开始。
 
-{% raw %} 
+
 ```liquid
 # array = \[1,2,3,4,5,6\]
 {% for item in array limit:2 offset:2 %}
@@ -323,21 +308,19 @@ forloop.last        # => is this the last iteration?
 {% endfor %}
 # results in 3,4
 ``` 
-{% endraw %}
 
 　　反转循环:
 
-{% raw %} 
+
 ```liquid
 {% for item in collection reversed %}
     {{item}}
 {% endfor %}
 ``` 
-{% endraw %}
 
 　　除了对一个已经存在的集合进行循环，你还可以定义一段范围区域内的数字进行循环。这段区域既可以通过文字也可以通过变量数定义得到:
 
-{% raw %} 
+
 ```liquid
 # if item.quantity is 4...
 {% for i in (1..item.quantity) %}
@@ -345,13 +328,12 @@ forloop.last        # => is this the last iteration?
 {% endfor %}
 # results in 1,2,3,4
 ``` 
-{% endraw %}
 
 ### 7. Variable Assignment(变量赋值)
 
 　　你可以把数据存储在你自己定义的变量中，以便在输出或者其他标签中使用。创建一个变量的最简单方式是使用 assign 标签，其语法也是简单明了的：
 
-{% raw %} 
+
 ```liquid
 {% assign name = 'freestyle' %}
 
@@ -361,11 +343,10 @@ forloop.last        # => is this the last iteration?
     {% endif %}
 {% endfor %}
 ``` 
-{% endraw %}
 
-　　另一种常见用法是把 ```true/false``` 值赋给变量:
+　　另一种常见用法是把 `true/false` 值赋给变量:
 
-{% raw %} 
+
 ```liquid
 {% assign freestyle = false %}
 
@@ -379,11 +360,10 @@ forloop.last        # => is this the last iteration?
     <p>Freestyle!</p>
 {% endif %}
 ``` 
-{% endraw %}
 
-　　如果你希望把一系列字符串连接为一个字符串，并将其存储到变量中，你可以使用 ```capture``` 标签。这个标签是一个块级标签，它会 ```captures``` 任何在其中渲染的元素，并把捕获的值赋给给定的变量，而不是把这些值渲染在页面中。
+　　如果你希望把一系列字符串连接为一个字符串，并将其存储到变量中，你可以使用 `capture` 标签。这个标签是一个块级标签，它会 `captures` 任何在其中渲染的元素，并把捕获的值赋给给定的变量，而不是把这些值渲染在页面中。
 
-{% raw %} 
+
 ```html
 {% capture attribute_name %}{{ item.title | handleize }}-{{ i }}-color{% endcapture %}
 
@@ -394,6 +374,5 @@ forloop.last        # => is this the last iteration?
   <option value="blue">Blue</option>
 </select>
 ``` 
-{% endraw %}
 
-<br>
+<hr>

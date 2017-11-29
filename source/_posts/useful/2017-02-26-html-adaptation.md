@@ -3,11 +3,9 @@ layout: post
 title: "H5 移动多终端适配"
 date: 2017-02-26 13:13:05 +0800
 categories: 干货分享
-tag: HTML
+tags: HTML
 ---
 
-* content
-{:toc}
 
 　　移动端的浏览器在展示页面时会出现许多非预期的现象，比如有的可能浏览器自动缩放网页让整个内容能够在可视区域展示，但内容会缩小；有的可能会出现横向滚动条。这些都不是理想的浏览状态，理想的网页展示应该是用户进入页面不需要手动缩放就能够看清页面的内容也没有横向滚动条。
 
@@ -127,7 +125,7 @@ function refreshRem(){
 
     /*将布局视口宽度除以10得到html字体大小*/
     var rem = width / 10;
-    document.documentElement.style.fontSize = rem + 'px';
+    document.documentElement.style.fontSize = rem + 'px'
 ```
 
 　　比如iphone5的设备下布局视口是640，所以 html 的字体大小会设置为64px，而在开发的时候设置的单位为 rem,这个时候rem 自动根据 64px 转换，就实现了等比缩放。写 rem 的时候可以通过 CSSREM 插件来写，只是后期维护比较麻烦。
@@ -155,3 +153,5 @@ div.box{
 <hr>
 
 　　移动端适配的原理很简单，各个项目在用的时候也能去选一个适合的方案。在 vw 和 vh 单位兼容性不够的时候，要做到设置的单位等比缩放只能用 rem。另外现在是不是有更好的适配方案不太清楚，本文主要是对现在我所知道的方案做一个总结。
+
+<hr>

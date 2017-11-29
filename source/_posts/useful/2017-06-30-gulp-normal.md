@@ -3,12 +3,9 @@ layout: post
 title: "gulp 常用插件的功能和用法"
 date: 2017-06-30 12:13:05 +0800
 categories: 干货分享
-tag: gulp
+tags: gulp
 ---
 
-
-* content
-{:toc}
 
 　　gulp的官方定义非常简洁： 基于文件流的构建系统 。通过代码优于配置的策略，Gulp 让简单的任务简单，复杂的任务可管理。利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO 操作。Gulp 严格的插件指南确保插件如你期望的那样简洁高质得工作。<!-- more -->
 
@@ -303,3 +300,5 @@ gulp.src('./js/index.js')
     }))
     .pipe(gulp.dest('./dist'))
 ```
+
+<hr>

@@ -3,11 +3,9 @@ layout: post
 title: "前端切图大法"
 date: 2017-03-01 18:13:05 +0800
 categories: 干货分享
-tag: PhotoShop
+tags: PhotoShop
 ---
 
-* content
-{:toc}
 
 　　作为一名“称职”的前端开发者，今天要“不知羞耻”的写一篇关于切图大法的总结，事情是这样的，就在前不久面试过程中有实操这么一个环节，面试官给了我一个很 easy 的 PSD 来让我完成一个简单的页面，本来半个小时四十分钟能解决的事情，我让 PS 愣给憋了半个小时（得亏面试官很 nice，当时真的是很尴尬），看来真是好记性不如烂键盘，所以也要劝诫大家不能忘了基本功啊。
 
@@ -23,7 +21,7 @@ tag: PhotoShop
 
 　　先来简单熟悉一下 ps 的主界面：
 
-<img src="{{ '/styles/images/ps/ps-view.jpg' | prepend: site.baseurl }}" alt="ps 面板" />
+<img src="/styles/images/ps/ps-view.jpg" alt="ps 面板" />
 
 　　① 为工具栏　　② 为画布　　③ 为图层操作面板
 
@@ -35,7 +33,7 @@ tag: PhotoShop
 
 　　分析设计稿有哪些内容是需要进行切图保留的内容，主要内容考虑主要有以下几个部分：
 
-<img src="{{ '/styles/images/ps/ps-pic.jpg' | prepend: site.baseurl }}" alt="ps 分析设计稿" />
+<img src="/styles/images/ps/ps-pic.jpg" alt="ps 分析设计稿" />
 
 　　① 图标（是否可以使用伪元素 :before、:after 实现，例如各种箭头图标）
 
@@ -67,9 +65,9 @@ tag: PhotoShop
 
 　　使用切片切图时建议使用 **基于参考线的切片**，也就是先用参考线选好，然后再选择切片工具，然后点击基于参考线的切片：
 
-<img src="{{ '/styles/images/ps/qiepian_01.jpg' | prepend: site.baseurl }}" alt="ps 切片切图法" />
-<img src="{{ '/styles/images/ps/qiepian_02.jpg' | prepend: site.baseurl }}" alt="ps 切片切图法" />
-<img src="{{ '/styles/images/ps/qiepian_03.jpg' | prepend: site.baseurl }}" alt="ps 切片切图法" />
+<img src="/styles/images/ps/qiepian_01.jpg" alt="ps 切片切图法" />
+<img src="/styles/images/ps/qiepian_02.jpg" alt="ps 切片切图法" />
+<img src="/styles/images/ps/qiepian_03.jpg" alt="ps 切片切图法" />
 
 ### 3.2 文艺切图法
 
@@ -79,7 +77,7 @@ tag: PhotoShop
 
 　　**执行“文件>脚本>将图层导出到文件**:
 
-<img src="{{ '/styles/images/ps/save-layer.jpg' | prepend: site.baseurl }}" alt="ps 脚本切图法" />
+<img src="/styles/images/ps/save-layer.jpg" alt="ps 脚本切图法" />
 
 ### 3.3 2B 切图法
 
@@ -89,7 +87,7 @@ tag: PhotoShop
 
 　　新版 PS CC 可以右键直接导出 PNG 文件～～～
 
-<img src="{{ '/styles/images/ps/you-png.jpg' | prepend: site.baseurl }}" />
+<img src="/styles/images/ps/you-png.jpg" />
 
 ### 3.5 简单实用
 
@@ -100,3 +98,5 @@ tag: PhotoShop
 ## 4. 结语
 
 　　当然，本文主要还是针对的传统 Web 切图工作，现在也有很多新兴的工具，可以更加有效率的完成前端的设计编码工作，不忘初衷，方得始终，与时俱进，一定要装作好像自己很熟练了的样子～～～
+
+<hr>

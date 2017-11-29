@@ -3,11 +3,9 @@ layout: post
 title: "awesome-gulp 中文版"
 date: 2017-01-11 10:13:05 +0800
 categories: 干货分享
-tag: gulp
+tags: gulp
 ---
 
-* content
-{:toc}
 
 - 一份[gulp](https://github.com/gulpjs/gulp)的资源，插件和使用实例清单， 致力于打造更好的前端工程构建流程。
 
@@ -304,3 +302,5 @@ tag: gulp
 * [gulp-app](https://github.com/sindresorhus/gulp-app) - 将Gulp作为一个应用(OS X).
 * [lmn-gulp-tasks](https://github.com/Lostmyname/lmn-gulp-tasks) - gulp任务的单元测试示例.
 * [gulp-chef](http://gulp-cookery.github.io/gulp-chef/) - 一个优雅的、简单的重复使用gulp task的方法.
+
+<hr>

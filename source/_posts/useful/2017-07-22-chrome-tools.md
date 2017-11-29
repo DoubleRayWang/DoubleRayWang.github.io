@@ -3,20 +3,18 @@ layout: post
 title: "掌握Chrome开发工具"
 date: 2017-07-31 13:13:05 +0800
 categories: 干货分享
-tag: Debug
+tags: Debug
 ---
 
-* content
-{:toc}
 
 你可能已经熟悉了Chrome开发工具的基本功能。: DOM检查器、样式面板和JavaScript控制台。 但也有一些不太为人所知的特性可以显著提高你调试或开发应用的速度。<!-- more -->
 
-<img src="{{ '/styles/images/chrome/tools.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/tools.png" />
 
 
 ### 黑色主题
 
-<img src="{{ '/styles/images/chrome/black.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/black.png" />
 
 Chrome开发工具的内置了黑色主题。你可以通过点击开发工具窗口右上角的三点图标，之后点击进入设置页面，切换主题。
 
@@ -24,7 +22,7 @@ Chrome开发工具的内置了黑色主题。你可以通过点击开发工具�
 
 ### 选择模式
 
-<img src="{{ '/styles/images/chrome/modul.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/modul.png" />
 
 Chrome开发者工具提供了很多选择元素的方法，其中最快捷的方法就是使用选择模式。
 
@@ -36,13 +34,13 @@ Chrome开发者工具提供了很多选择元素的方法，其中最快捷的�
 
 ### 存储为全局变量
 
-<img src="{{ '/styles/images/chrome/global.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/global.png" />
 
 有时在控制台中查看一个复杂对象是一件很麻烦的事，因为他们可能有很多的键值或者一些很难手动解析的值。幸运的是，Chrome可以让检查这类JavaScript对象变得很容易。 你只需在控制台中右键点击对象后选择“存储为全局变量”，chrome就会将这个变量存储为一个名叫“temp1”的变量，之后你可以通过Javascript对其进行操作。
 
 ### 动画工具
 
-<img src="{{ '/styles/images/chrome/animation.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/animation.png" />
 
 最近，Chrome团队为调试和创建动画添加了一些新特性。
 
@@ -50,23 +48,23 @@ Chrome开发者工具提供了很多选择元素的方法，其中最快捷的�
 
 你也可以暂停所有动画。这对于一个充斥着动画内容的站点尤其有用。
 
-<img src="{{ '/styles/images/chrome/animation_1.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/animation_1.png" />
 
 动画查看器允许你单独控制每个属性的时间曲线！
 
-<img src="{{ '/styles/images/chrome/saibeier.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/saibeier.png" />
 
 通过点击一个元素 `transition` 属性中的紫色曲线图表按钮，你可以看到动画的移动曲线，并且微调他的属性。此外，你还可以使用一些预置的时间曲线来应用到你的元素上。
 
 ### 模拟元素伪态
 
-<img src="{{ '/styles/images/chrome/hover.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/hover.png" />
 
 通过点击样式窗口右上角的`:hover` 图标，你可以打开元素状态模拟工具。
 
 该工具可以让你模拟一个元素的hover,active,focused和visited伪态，并且看到不同伪态的相关样式与选择符。
 
-<img src="{{ '/styles/images/chrome/hover_1.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/hover_1.png" />
 
 如果要为这些伪态添加样式，可以添加一个新的选择器（使用“+”图标），并将:添加到选择器的结尾。
 
@@ -76,7 +74,7 @@ Chrome开发者工具提供了很多选择元素的方法，其中最快捷的�
 
 ### 美化CSS和JavaScript
 
-<img src="{{ '/styles/images/chrome/good.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/good.png" />
 
 调试、浏览压缩后的JavaScript和CSS是一件非常困难的事情，好在调试工具让这件事情变得容易了一些。
 
@@ -86,7 +84,7 @@ Chrome开发者工具提供了很多选择元素的方法，其中最快捷的�
 
 ### Alt + Up / Alt + Down
 
-<img src="{{ '/styles/images/chrome/alt.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/alt.png" />
 
 在调试CSS时，你可以选择一个属性然后使用上下箭头来调整它的值。默认情况下，上下箭头会将值加减1。但如果你按住了`alt`键，再通过上下箭头调整值时候，每次增减的值就会变成0.1，这在处理一些浮点类型的数值属性时非常有用。
 
@@ -94,7 +92,7 @@ Chrome开发者工具提供了很多选择元素的方法，其中最快捷的�
 
 ### 保存日志
 
-<img src="{{ '/styles/images/chrome/save.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/save.png" />
 
 保存日志是一个复选框，它允许在页面刷新后仍然保存日志。这在调试需要刷新页面的网站问题时非常有用，因为默认情况下，所有控制台输出的信息在页面刷新后都会被清除。
 
@@ -102,7 +100,7 @@ Chrome开发者工具提供了很多选择元素的方法，其中最快捷的�
 
 ### 网络 + 日志过滤
 
-<img src="{{ '/styles/images/chrome/filter.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/filter.png" />
 
 当调试具有大量网络请求或控制台日志的应用程序时，过滤特定类型的事件是很有用的。
 
@@ -112,7 +110,7 @@ Chrome有一种支持多种属性的过滤语言，以及类似于*的通配符�
 
 ### 代码覆盖率
 
-<img src="{{ '/styles/images/chrome/cover.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/cover.png" />
 
 代码覆盖率可以在运行Web应用程序后针对每个JavaScript和CSS文件，查看哪些代码行运行了，哪些代码没有运行。这是很有用的，因为在处理复杂或长期项目时，很容易在项目中累积无用的代码。
 
@@ -122,7 +120,7 @@ Chrome有一种支持多种属性的过滤语言，以及类似于*的通配符�
 
 通常来说调试工具只有在你自己的机器上才会生效。但如果你有兴趣了解用户在使用过程中遇到的的bug和性能问题，不妨尝试一下 [LogRocket](https://logrocket.com/)。
 
-<img src="{{ '/styles/images/chrome/LogRocket.png' | prepend: site.baseurl }}" />
+<img src="/styles/images/chrome/LogRocket.png" />
 
 `LogRocket` 是一个前端日志记录工具，它可以让你重放问题，就像它们发生在你自己的浏览器中一样。 不是通过猜测错误发生的原因，或要求用户提供截图或者错误日志，`logrocket`可以让你通过重放快速了解到问题出在哪里。它的兼容性很好，无论在任何框架下都可以使用，并且`LogRocket`对于React、Angular、和Vue的提供了额外的日志插件。
 
@@ -138,6 +136,8 @@ LogRocket 会记录你应用程序中的日志信息、带有header和body的网
 > 链接：[http://www.zcfy.cc/article/3722](http://www.zcfy.cc/article/3722)
 
 > 原文：[https://medium.freecodecamp.com/mastering-chrome-developer-tools-next-level-front-end-development-techniques-3ac0b6fe8a3](https://medium.freecodecamp.com/mastering-chrome-developer-tools-next-level-front-end-development-techniques-3ac0b6fe8a3)
+
+<hr>
 
 
 

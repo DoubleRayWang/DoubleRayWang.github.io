@@ -3,11 +3,9 @@ layout: post
 title: "Markdown 实用技巧"
 date: 2017-01-09 19:19:15 +0800
 categories: 干货分享
-tag: Markdown
+tags: Markdown
 ---
 
-* content
-{:toc}
 
 
 　　最开始接触了解 Markdown 是在 github 中写 README.md ，Markdown 的目标是实现「易读易写」，其语法格式最大灵感来源其实是纯文本电子邮件的格式，因此 Markdown 的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。
@@ -18,9 +16,9 @@ tag: Markdown
 
 ## 1. 首行缩进
 
-　　① 在段首加入 ```&ensp;``` 来输入一个空格；加入 ```&emsp;``` 来输入两个空格 （注：首行缩进为四个空格）；
+　　① 在段首加入 `&ensp;` 来输入一个空格；加入 `&emsp;` 来输入两个空格 （注：首行缩进为四个空格）；
 
-　　② 将输入法切换到 ```全角``` 状态（Shift + Space），按两下空格即可，输完后记得切换回正常输入的 ```半角``` 状态（尽量不用）。
+　　② 将输入法切换到 `全角` 状态（Shift + Space），按两下空格即可，输完后记得切换回正常输入的 `半角` 状态（尽量不用）。
 
 ## 2. 插入代码
 
@@ -40,8 +38,8 @@ tag: Markdown
 
 **注意**：
 
-+ HTML 的块元素――比如 ```<div>、<table>、<pre>、<p>``` 等标签，必须在前后加上空行与其它内容区隔开，并且开始标签与结尾标签不能用制表符或空格来缩进；
-+ HTML 的行内元素——如 ```<span>、<cite>、<del>``` 可以在 Markdown 的段落、列表或是标题里随意使用，[特殊符号](http://blog.csdn.net/html5_/article/details/21639475) 的输入同 html。
++ HTML 的块元素――比如 `<div>、<table>、<pre>、<p>` 等标签，必须在前后加上空行与其它内容区隔开，并且开始标签与结尾标签不能用制表符或空格来缩进；
++ HTML 的行内元素——如 `<span>、<cite>、<del>` 可以在 Markdown 的段落、列表或是标题里随意使用，[特殊符号](http://blog.csdn.net/html5_/article/details/21639475) 的输入同 html。
 
 ## 4. 流程图画法
 
@@ -63,6 +61,6 @@ c2(yes)->io->e
 c2(no)->op2->e  
 ```
 
-<img src="{{ '/styles/images/jekyll/flow.png' | prepend: site.baseurl }}" alt="Markdown 流程图" />
+<img src="/styles/images/jekyll/flow.png" alt="Markdown 流程图" />
 
-<br>
+<hr>
