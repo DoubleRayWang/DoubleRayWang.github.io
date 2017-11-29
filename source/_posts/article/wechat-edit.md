@@ -8,8 +8,10 @@ tags:
 - WeChat
 ---
 
+{% centerquote %}微信公众号发布内容过程小白教程，大神请无视！{% endcenterquote %}
 
-微信公众号发布内容过程小白教程，大神请无视！
+
+{% fullimage /styles/banner/wechat-edit.png, 微信公众号, 官网的图 %}
 
 <!-- more -->
 
@@ -58,33 +60,40 @@ https://mp.weixin.qq.com/cgi-bin/registermidpage?action=index&lang=zh_CN
 
 这里我罗列一些常用的编辑器（功能都是大同小异）
 
-1. 135
 
-> http://www.135editor.com/
+{% note info %}
+135
+http://www.135editor.com/{% endnote %}
 
-2. i排版
 
-> https://ipaiban.com/
+{% note info %}
+i排版
+https://ipaiban.com/{% endnote %}
 
-3. 易点
 
-> http://www.wxeditor.com/
+{% note info %}
+易点
+http://www.wxeditor.com/{% endnote %}
 
-4. 秀米
 
-> https://xiumi.us/
+{% note info %}
+秀米
+https://xiumi.us/{% endnote %}
 
-5. 小蚂蚁
 
-> http://www.xmyeditor.com/
+{% note info %}
+小蚂蚁
+http://www.xmyeditor.com/{% endnote %}
 
-6. 非找你
 
-> http://editor.fzn.cc/
+{% note info %}
+非找你
+http://editor.fzn.cc/{% endnote %}
 
-7. 96
 
-> http://bj.96weixin.com/
+{% note info %}
+96
+http://bj.96weixin.com/{% endnote %}
 
 可参考 [这里](https://www.zhihu.com/question/30770510)
 
