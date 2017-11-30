@@ -119,6 +119,7 @@ scheme: Pisces
 # Sidebar Settings
 # ---------------------------------------------------------------
 
+
 # Social Links.
 # Usage: `Key: permalink || icon`
 # Key is the link label showing to end users.
@@ -147,11 +148,11 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
-links_layout: block
-#links_layout: inline
-#links:
-  #Title: http://example.com/
+links_title: 链接导航
+#links_layout: block
+links_layout: inline
+links:
+  老版博客: http://doubleray.tech/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif

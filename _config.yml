@@ -4,15 +4,15 @@
 
 # Site
 title: Love Light
-subtitle: DoubleRay 的个人博客
-description: 前端大法好！
+subtitle: DoubleRay的个人博客
+description: 前端日常
 author: DoubleRay
 language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://doubleray.top
+url: https://doubleray.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
