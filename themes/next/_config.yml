@@ -152,7 +152,7 @@ links_title: 链接导航
 #links_layout: block
 links_layout: inline
 links:
-  老版博客: http://doubleray.tech/
+  旧版博客: http://doubleray.tech/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
