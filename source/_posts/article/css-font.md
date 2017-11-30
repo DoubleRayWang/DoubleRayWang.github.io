@@ -7,7 +7,7 @@ tags: CSS
 ---
 
 
-　　本文记录总结一些平时经常用的字体知识，方便查阅。（`font-family`、`font-size`、`font-weight`等。）<!-- more -->
+　　本文记录总结一些平时经常用的字体知识，方便查阅。（`font-family`、`font-size`、`font-weight`等。）
 
 ## font-family
 

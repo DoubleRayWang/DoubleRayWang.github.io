@@ -11,7 +11,7 @@ tags:
 {% centerquote %}微信公众号发布内容过程小白教程，大神请无视！{% endcenterquote %}
 
 
-{% fullimage /styles/banner/wechat-edit.png, 微信公众号, 官网的图 %}
+{% fullimage /styles/banner/wechat-edit.jpg, 微信公众号, 公众号文章编辑 %}
 
 <!-- more -->
 

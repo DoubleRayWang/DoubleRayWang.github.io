@@ -15,42 +15,7 @@ tags: JavaScript
 
 　　如果两个页面拥有相同的协议（protocol），端口（如果指定），和主机，那么这两个页面就属于同一个源（origin）。以下是同源检测的示例：
 
-<div class="table-responsive"><table class="table table-bordered table-hover">
-   <thead>
-    <tr align="center">
-        <td>URL</td>
-        <td>结果</td>
-        <td>原因</td>
-   </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>http://store.company.com/dir2/other.html</td>
-        <td>Success</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>http://store.company.com/dir/inner/another.html</td>
-        <td>Success</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>https://store.company.com/secure.html</td>
-        <td>Failure</td>
-        <td>协议不同</td>
-    </tr>
-    <tr>
-        <td>http://store.company.com:81/dir/etc.html</td>
-        <td>Failure</td>
-        <td>端口不同</td>
-    </tr>
-    <tr>
-        <td>http://news.company.com/dir/other.html</td>
-        <td>Failure</td>
-        <td>主机不同</td>
-    </tr>
-   </tbody>
-</table></div>
+<div class="table-responsive"><table class="table table-bordered table-hover"><thead><tr align="center"><td>URL</td><td>结果</td><td>原因</td></tr></thead><tbody><tr><td>http://store.company.com/dir2/other.html</td><td>Success</td><td></td></tr><tr><td>http://store.company.com/dir/inner/another.html</td><td>Success</td><td></td></tr><tr><td>https://store.company.com/secure.html</td><td>Failure</td><td>协议不同</td></tr><tr><td>http://store.company.com:81/dir/etc.html</td><td>Failure</td><td>端口不同</td></tr><tr><td>http://news.company.com/dir/other.html</td><td>Failure</td><td>主机不同</td></tr></tbody></table></div>
 
 ## 1. jsonp
 

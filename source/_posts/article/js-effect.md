@@ -6,8 +6,7 @@ categories: 干货分享
 tags: JavaScript
 ---
 
-
-　　一直只顾着码效果，都是想到哪儿就写到哪儿，今天对平时用过的效果做一下总结。<!-- more -->
+{% centerquote %}一直只顾着码效果，都是想到哪儿就写到哪儿，今天对平时用过的效果做一下总结。{% endcenterquote %}<!-- more -->
 
 ## 1. 图片遮罩条
 

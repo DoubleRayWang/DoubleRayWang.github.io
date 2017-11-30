@@ -6,9 +6,7 @@ categories: 干货分享
 tags: Git
 ---
 
-
-
-　　这些基础命令是首次使用 git 配置连接 github 时常用的命令（本人博客搭建过程中主要使用的）。<!-- more -->
+{% centerquote %}这些基础命令是首次使用 git 配置连接 github 时常用的命令（本人博客搭建过程中主要使用的）。{% endcenterquote %}<!-- more -->
 
     $ ssh-keygen -t rsa -C youremail@example.com
     # 生成SSH Key与github连接用；

@@ -6,15 +6,13 @@ categories: 学习笔记
 tags: JavaScript
 ---
 
+> 本文转自 [码农网](http://www.codeceo.com/) 的 [深入理解 JavaScript 中的函数](http://www.codeceo.com/article/javascript-function-coding.html)。
 
 本文旨在提供web开发人员必须了解的所有JavaScript函数的基本知识。
 
 函数于软件开发者而言并不是什么奇幻世界。如果你的日常活动涉及到编码，哪怕是一点点，那么在一天结束的时候，你一定创建/修改了一个或多个函数。
 
-简而言之函数只不过是一组执行某个操作的语句。函数可能会有一些输入参数（在函数体中使用），并在执行后返回值。
-
-> 本文转自 [码农网](http://www.codeceo.com/) 的 [深入理解 JavaScript 中的函数](http://www.codeceo.com/article/javascript-function-coding.html)。
-<!-- more -->
+简而言之函数只不过是一组执行某个操作的语句。函数可能会有一些输入参数（在函数体中使用），并在执行后返回值。<!-- more -->
 
 JavaScript函数也具有这些特性，但它们不仅仅是常规函数。JavaScript函数是对象。你可以查看我曾经写的关于JavaScript对象的文章，里面我提到几乎JavaScript中的所有一切都是对象。
 

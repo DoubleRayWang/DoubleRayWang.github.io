@@ -13,7 +13,6 @@ tags: Git
 Push failed: Failed with error: fatal: Could not read from remote repository.
 ```
 
-<!-- more -->
 ## 原因
 
 　　没有匹配正确 ssh 公钥密钥对。要么是你没有生成对应的公钥密钥对并将公钥部署在 github 上的对应项目，要么就是生成了密钥对并将公钥部署在了 github 上之后，你的本地目录没有将私钥配置上或者是**之前有配置，但是过期了**。

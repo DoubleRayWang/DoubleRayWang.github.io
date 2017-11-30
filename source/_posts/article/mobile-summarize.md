@@ -6,6 +6,8 @@ categories: 实践之路
 tags: Web
 ---
 
+{% fullimage /styles/banner/mobile-h5.jpg, 移动端, H5踩坑 %}
+
 这里收集了许多移动端上遇到的各种坑与相对解决方案！
 
 <!-- more -->

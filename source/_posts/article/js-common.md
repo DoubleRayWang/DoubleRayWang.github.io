@@ -6,6 +6,7 @@ categories: 干货分享
 tags: JavaScript
 ---
 
+{% fullimage /styles/banner/javascript.jpg, 通用脚本, JavaScript %}
 
 　　本文旨在总结一些在 JavaScript 中常用的**算法**及**通用脚本**。<!-- more -->
 
