@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Flex布局新旧混合写法详解"
+title: "Flex 布局新旧混合写法详解"
 date: 2017-01-15 12:19:15 +0800
 categories: 学习笔记
-tags: CSS
+tags: [CSS,Flex]
 ---
 
 
