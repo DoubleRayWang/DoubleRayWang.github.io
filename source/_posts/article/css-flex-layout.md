@@ -7,11 +7,13 @@ tags: [CSS,Flex]
 ---
 
 
-{% centerquote %}flex 实现 5 种常用布局，希望对大家的学习有帮助! {% endcenterquote %}
+{% centerquote %}flex 实现 5 种常用布局，学习一下! {% endcenterquote %}
 
 
 {% fullimage /styles/banner/css3-flex-layout.png, Flex 布局, 常见 Flex Layout %}
 
+
+> 参考：https://github.com/meikidd/flex-layout
 <!-- more -->
 
 
