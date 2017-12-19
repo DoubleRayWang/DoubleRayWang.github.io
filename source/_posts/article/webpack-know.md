@@ -6,7 +6,7 @@ categories: 前沿技术
 tags: [webpack,ES6,JavaScript]
 ---
 
-　　**本文转自博客园的 [一小时包教会 —— webpack 入门指南](http://www.cnblogs.com/chris-oil/p/5681225.html)。**
+> **本文转自博客园的 [一小时包教会 —— webpack 入门指南](http://www.cnblogs.com/chris-oil/p/5681225.html)。**
 
 > **有些知识点已过时，请参考结合 [webpack 3 入门指南](/2017/12/19/article-webpack-3-10-0/)**
 
