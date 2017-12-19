@@ -3,7 +3,7 @@ layout: post
 title: "webpack 入门指南"
 date: 2017-02-12 13:15:15 +0800
 categories: 前沿技术
-tags: webpack
+tags: [webpack,ES6,JavaScript]
 ---
 
 　　**本文转自博客园的 [一小时包教会 —— webpack 入门指南](http://www.cnblogs.com/chris-oil/p/5681225.html)。**
