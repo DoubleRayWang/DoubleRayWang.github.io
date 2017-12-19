@@ -8,6 +8,8 @@ tags: [webpack,ES6,JavaScript]
 
 　　**本文转自博客园的 [一小时包教会 —— webpack 入门指南](http://www.cnblogs.com/chris-oil/p/5681225.html)。**
 
+> **有些知识点已过时，请参考结合 [webpack 3 入门指南](/2017/12/19/article-webpack-3-10-0/)**
+
 　　webpack 是近期最火的一款模块加载器兼打包工具，它能把各种资源，例如 JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理。
 
 　　你可以不打算将其用在你的项目上，但没有理由不去掌握它，因为以近期 Github 上各大主流的（React相关）项目来说，它们仓库上所展示的示例已经是基于 webpack 来开发的，比如 React-Boostrap 和 Redux。<!-- more -->

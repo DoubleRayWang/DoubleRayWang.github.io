@@ -28,7 +28,7 @@ Webpack的两个最核心的原理分别是：
 
 首先要知道的是Webpack有许许多多的特性，一些是”开发模式“下才有的，一些是”生产模式“下才有的，还有一些是两种模式下都有的。
 
-![A sample dev v/s prod Webpack files](https://cdn-images-1.medium.com/max/800/1*WCAdMi04IFEWdngK8bkFcw.png)
+![A sample dev v/s prod Webpack files](/styles/images/webpack/Webpack_files.png)
 
 > 通常使用到Webpack如此多特性的项目都会有两个比较大的Webpack配置文件
 
@@ -171,7 +171,7 @@ Enter配置项告诉Webpack应用的根模块或起始点在哪里，它的值�
 
 像绝大多数app一样，倘若你的应用只有一个单一的入口，enter项的值你可以使用任意类型，最终输出的结果都是一样的。
 
-![Different entry types but same output](https://cdn-images-1.medium.com/max/800/1*OnXpfv4zjL-5zO2Ha6mXDw.png)
+![Different entry types but same output](/styles/images/webpack/Different.png)
 
 
 
@@ -181,7 +181,7 @@ Enter配置项告诉Webpack应用的根模块或起始点在哪里，它的值�
 
 例如，你可能在html文件里引用了“googleAnalytics.js”文件，可以告诉Webpack将其加到bundle.js的最后。
 
-![enter array](https://cdn-images-1.medium.com/max/800/1*yLVdS3oN4Xo8KInoTIfi0A.png)
+![enter array](/styles/images/webpack/enter.png)
 
 
 
@@ -191,7 +191,7 @@ Enter配置项告诉Webpack应用的根模块或起始点在哪里，它的值�
 
 以下的配置将会生成两个js文件：indexEntry.js和profileEntry.js分别会在index.html和profile.html中被引用。
 
-![entry object](https://cdn-images-1.medium.com/max/800/1*xB51RRC4ik6BBP2lJ90Iuw.png)
+![entry object](/styles/images/webpack/enter_1.png)
 
 用法：
 
@@ -210,7 +210,7 @@ Enter配置项告诉Webpack应用的根模块或起始点在哪里，它的值�
 
 你也可以在enter对象里使用数组类型，例如下面的配置将会生成3个文件：vender.js（包含三个文件），index.js和profile.js文件。
 
-![enter combination](https://cdn-images-1.medium.com/max/800/1*yz76QY1fVzBGKJ-6X6Eleg.png)
+![enter combination](/styles/images/webpack/enter_2.png)
 
 
 
@@ -220,13 +220,13 @@ output项告诉webpack怎样存储输出结果以及存储到哪里。output的�
 
 “path”仅仅告诉Webpack结果存储在哪里，然而“publicPath”项则被许多Webpack的插件用于在生产模式下更新内嵌到css、html文件里的url值。
 
-![publicPath in Development vs Production](https://cdn-images-1.medium.com/max/800/1*63Zta4mbC_3o44QdycrD7Q.png)
+![publicPath in Development vs Production](/styles/images/webpack/enter_3.png)
 
 例如，在localhost（译者注：即本地开发模式）里的css文件中边你可能用“./test.png”这样的url来加载图片，但是在生产模式下“test.png”文件可能会定位到CDN上并且你的Node.js服务器可能是运行在HeroKu上边的。这就意味着在生产环境你必须手动更新所有文件里的url为CDN的路径。
 
 然而你也可以使用Webpack的“publicPath”选项和一些插件来在生产模式下编译输出文件时自动更新这些url。
 
-![publicPath Production example](https://cdn-images-1.medium.com/max/800/1*aOM5ZF8alWLr4BC0CfZe0w.png)
+![publicPath Production example](/styles/images/webpack/publicPath.png)
 
 ```css
 // 开发环境：Server和图片都是在localhost（域名）下
@@ -275,7 +275,7 @@ module: {
 
 这里展示它是如何工作的：
 
-![chaining loaders](https://cdn-images-1.medium.com/max/800/1*nes9iLmskmsD8Fp4Ek3u-A.png)
+![chaining loaders](/styles/images/webpack/loaders.png)
 
 1. Webpack在模块颞部搜索在css的依赖项，即Webpack检查js文件是否有“require('myCssFile.css')”的引用，如果它发现有css的依赖，Webpack将css文件交给“css-loader”去处理
 2. css-loader加载所有的css文件以及css自身的依赖（如，@import 其他css）到JSON对象里，Webpack然后将处理结果传给“style-loader”
@@ -290,7 +290,7 @@ module: {
 
 在下面的例子中，我们可以配置url-loader来将小于1024字节的图片使用DataUrl替换而大于1024字节的图片使用url，我们可以用如下两种方式通过传入“limit“参数来实现这一目的：
 
-![configure loaders](https://cdn-images-1.medium.com/max/800/1*-qVdcA3E8JSdtszxHqfIdA.png)
+![configure loaders](/styles/images/webpack/loaders_1.png)
 
 
 
