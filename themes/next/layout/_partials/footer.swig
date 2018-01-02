@@ -40,6 +40,10 @@
 #}</div>
 {% endif %}
 
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
 {% if theme.footer.custom_text %}
   <div class="footer-custom">{#
   #}{{ theme.footer.custom_text }}{#
