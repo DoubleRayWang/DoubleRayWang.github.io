@@ -2,7 +2,7 @@
 layout: post
 title: "微信H5 Video 开发小结"
 date: 2018-02-01 14:41:15 +0800
-categories: 知识点
+categories: 实践之路
 tags: [CSS,JavaScript,HTML]
 ---
 
@@ -137,7 +137,7 @@ document.getElementById('my-video').play();
 这样就可以了吗？不，万恶的微信限制了必须用户行为才能播放媒体资源，因此我们只能再祭出万能 hack：
 
 ```html
-<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 ```
 
 ```js
@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200);
     }
     document.addEventListener("WeixinJSBridgeReady",  preload, false);
+    /*这一段调用会有内存问题，暂未找到原因*/
     if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
         WeixinJSBridge.invoke("getNetworkType", {}, preload);
     }
