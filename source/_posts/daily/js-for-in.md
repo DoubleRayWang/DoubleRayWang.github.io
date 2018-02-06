@@ -109,4 +109,32 @@ var color2 = "coral";
 
 如果你使用`delete`操作符删除了一个属性，再次用`in`检查时，会返回`false`
 
+```js
+var mycar = {make: "Honda", model: "Accord", year: 1998};
+delete mycar.make;
+"make" in mycar;  // 返回false
+
+var trees = new Array("redwood", "bay", "cedar", "oak", "maple");
+delete trees[3];
+3 in trees; // 返回false
+```
+
 如果你把一个属性值设为`undefined`，但是没有使用`delete`操作符，使用`in`检查，会返回`true`
+
+```js
+var mycar = {make: "Honda", model: "Accord", year: 1998};
+mycar.make = undefined;
+"make" in mycar;  // 返回true
+```
+
+```js
+var trees = new Array("redwood", "bay", "cedar", "oak", "maple");
+trees[3] = undefined;
+3 in trees; // 返回true
+```
+
+如果一个属性是从原型链上继承来的，in 运算符也会返回 true。
+
+```js
+"toString" in {}; // 返回true
+```
