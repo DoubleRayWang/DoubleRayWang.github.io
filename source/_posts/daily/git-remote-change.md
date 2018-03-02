@@ -6,6 +6,8 @@ categories: 知识点
 tags: git
 ---
 
+> 查看仓库地址 ： `git remote -v`
+
 方法有三种：
 
 1、 修改命令
