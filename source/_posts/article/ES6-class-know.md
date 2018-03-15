@@ -142,7 +142,7 @@ class Foo{
     static addMethod(){
         console.log(this);
         console.log('hello class');
-        this.
+        //this.
     }
 }
 
