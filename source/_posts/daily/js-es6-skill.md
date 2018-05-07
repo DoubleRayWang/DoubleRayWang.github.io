@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JavaScript 跳转页面"
+title: "ES6 的小技巧"
 date: 2018-05-06 12:41:15 +0800
 categories: 知识点
 tags: [JavaScript,ES6]
