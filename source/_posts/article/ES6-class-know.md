@@ -3,7 +3,7 @@ layout: post
 title: "ES6新特性 —— Class"
 date: 2018-03-14 19:41:15 +0800
 categories: 前沿技术
-tags: [ES6.JavaScript]
+tags: [ES6,JavaScript]
 ---
 
 ## 前言

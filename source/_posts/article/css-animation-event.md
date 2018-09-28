@@ -3,7 +3,7 @@ layout: post
 title: "animationend 事件"
 date: 2017-12-21 09:12:15 +0800
 categories: 学习笔记
-tags: [CSS,JacaScript]
+tags: [CSS,JavaScript]
 ---
 
 

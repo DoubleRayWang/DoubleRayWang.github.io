@@ -3,7 +3,7 @@ layout: post
 title: "ECMAScript 6 扫盲学习"
 date: 2017-02-23 19:41:15 +0800
 categories: 前沿技术
-tags: [ES6.JavaScript]
+tags: [ES6,JavaScript]
 ---
 
 　　ECMAScript 6 目前基本成为业界标准，它的普及速度比 ES5 要快很多，主要原因是现代浏览器对 ES6 的支持相当迅速，尤其是 Chrome 和 Firefox 浏览器，已经支持 ES6 中绝大多数的特性。
