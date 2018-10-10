@@ -19,7 +19,7 @@ git remote set-url origin [url]
 2、 先删后加
 
 ```
-it remote rm origin
+git remote rm origin
 git remote add origin [url]
 ```
 
