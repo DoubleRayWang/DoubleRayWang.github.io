@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2021/06/24/article-blog-coding/</url>
-    <content><![CDATA[<hr>
-<p>layout: post<br>title: “与时俱进（折腾）”<br>date: 2017-04-11 15:25:15 +0800<br>categories: 实践之路<br>tags: Web</p>
-<hr>
-<p>　　2017年3月21日收到一条来自多说的消息，多说将要关闭服务继而成为历史，首先感谢多说团队这些年来提供的免费服务！希望你们转型后能更加美好～</p>
-<p>　　那么，我们的评论该迁移至何处呢？这个问题，对有服务器的同学来说其实也并不是问题，在服务器上部署一个评论系统不是一个难事，也可以直接安装诸如 wordpress 之类的产品，自带了完善了评论功能，并且还支持导入多说的数据。其实，受伤的是那些使用诸如 hexo/jekyll 构建的静态博客，没有数据库能力的，首先想到的有两个方案：</p>
-<ul>
-<li><a href="https://disqus.com/" target="_blank" rel="noopener">Disqus</a>：这款国外最流行的社会化评论组件，体验优良，而且基于评论做了一个交流社区，形成了良好的生态；</li>
-<li><a href="https://commentit.io/" target="_blank" rel="noopener">commentit.io</a>：可以将评论直接作为 commit，用 JS 脚本提交到 Github，保存进代码库。</li>
-</ul>
-<p>　　但是呢，这两个解决方案都有被墙的可能，左思右想而且还都亲自尝试了一下，在国内体验确实比较糟糕，那么只能暂时另辟蹊径了！<a id="more"></a></p>
-<h2 id="多说到跟帖"><a href="#多说到跟帖" class="headerlink" title="多说到跟帖"></a>多说到跟帖</h2><p>　　通过多方“打听”和尝试，最后选择了<strong>网易云跟帖</strong>。<strong>先声明我不是打广告</strong>，我也是个多说的忠实用户，现在多说要关闭了，很难过的就是它的之前的评论，看了友言不支持导入多说、畅言必须是备案的域名，使用‘网易云跟帖’，不必备案域名，也支持导入多说的评论。真是好极了。。。</p>
-<blockquote>
-<p>有兴趣的可以参看这里<a href="https://blog.vadxq.com/dstogentie/" target="_blank" rel="noopener">从多说到跟帖：推荐网易云跟帖</a>，文章中详细说明了 <strong>注册网易云跟帖站点</strong> 和 <strong>如何导入多说的评论</strong>。</p>
-</blockquote>
-<h2 id="拥抱Coding"><a href="#拥抱Coding" class="headerlink" title="拥抱Coding"></a>拥抱Coding</h2><p>　　<a href="https://coding.net/" target="_blank" rel="noopener">CODING</a> 是国内首个一站式云端软件服务平台，于 2014 年 2 月在深圳成立，并于北京、上海、成都、西雅图设立分部。在云计算时代，CODING 致力于通过技术创新推动软件开发与交付模式的转变，让开发更简单。</p>
-<p>　　CODING 旗下自主研发运营 Coding.net 云端软件开发协作平台，目前已累积 30 万开发者，50 万个项目。秉承着“让开发更简单”的使命，将代码托管、项目管理、WebIDE 等开发工具集成到浏览器中，免除繁杂的开发环境部署，降低开发和部署软件的成本，提升团队协作沟通效率，提高软件开发生产力，最终实现 “Coding Anytime Anywhere” 的愿景。</p>
-<h3 id="Coding-Pages"><a href="#Coding-Pages" class="headerlink" title="Coding Pages"></a>Coding Pages</h3><p>　　Coding Pages 是一个免费的静态网页托管和演示服务。您可以使用 Coding Pages 托管博客、项目官网等静态网页，还可以绑定自定义域名。而且Coding Pages 可自动构建 Jekyll 网站，目前支持 Jekyll 3.0。</p>
-<p>　　<strong>等等。。。</strong></p>
-<p>　　这不是和github pages同效嘛，既然想让站点更快，那就干脆回到祖国的怀抱吧，OK，正式拥抱 Coding！</p>
-<blockquote>
-<p>没有用迁移这个说法，这是因为就是重新部署了一下。至于要切过去的原因，我乃天朝子民，岂久用番邦外夷器具乎（i.e. vpn严重影响打开速度）。</p>
-</blockquote>
-<p>具体步骤和github差不多，而且还是母语，相信不用教程也完全可以，我就不详细说了，有问题请自行看<a href="https://coding.net/help/" target="_blank" rel="noopener">帮助</a>或者去<a href="https://www.google.com.hk/?gws_rd=ssl" target="_blank" rel="noopener">Google</a>。</p>
-<p>　　转移仓库时Coding提供了一个导入仓库功能，可直接从github上“pull”过来，如图：</p>
-<p>![coding git](/styles/images/build blog/coding_git.png)</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>　　互联网的世界真是日新月异，生命不息折腾不止！</p>
-<hr>]]></content>
-  </entry>
-  <entry>
     <title>安装 node-sass 报错的解决记录</title>
     <url>/2020/06/18/article-node-sass-error/</url>
     <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>yarn 或 npm install 命令的时候，总是在安装node-sass这一步卡住。终其原因还是「墙」的问题。<a id="more"></a></p>
