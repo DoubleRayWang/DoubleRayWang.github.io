@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,React,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1 引言站在 React 已经繁荣昌盛、无需四处布道宣传的今天，我们不妨冷静下来问问自己，React 真的是一个完美的框架吗？社区里一直不缺少吐槽的声音，这周我们就来看看，React 到底有哪些槽点。 针对以下两篇文章： 一篇是 Gianluca Guarini 写的 《Things nobody will tell you about React.js》，我将它译作 《那些入坑 React 前没">
+<meta name="keywords" content="JavaScript,React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="那些入坑 React 前没有人会提醒你的事">
+<meta property="og:url" content="https://doubleray.top/2018/12/15/article-react-cao-dian/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="1 引言站在 React 已经繁荣昌盛、无需四处布道宣传的今天，我们不妨冷静下来问问自己，React 真的是一个完美的框架吗？社区里一直不缺少吐槽的声音，这周我们就来看看，React 到底有哪些槽点。 针对以下两篇文章： 一篇是 Gianluca Guarini 写的 《Things nobody will tell you about React.js》，我将它译作 《那些入坑 React 前没">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.976Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="那些入坑 React 前没有人会提醒你的事">
+<meta name="twitter:description" content="1 引言站在 React 已经繁荣昌盛、无需四处布道宣传的今天，我们不妨冷静下来问问自己，React 真的是一个完美的框架吗？社区里一直不缺少吐槽的声音，这周我们就来看看，React 到底有哪些槽点。 针对以下两篇文章： 一篇是 Gianluca Guarini 写的 《Things nobody will tell you about React.js》，我将它译作 《那些入坑 React 前没">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2018/12/15/article-react-cao-dian/">
+
+
+
+
+
+  <title>那些入坑 React 前没有人会提醒你的事 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2018/12/15/article-react-cao-dian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">那些入坑 React 前没有人会提醒你的事</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T21:13:05+08:00">
+                2018-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/干货分享/" itemprop="url" rel="index">
+                    <span itemprop="name">干货分享</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/15/article-react-cao-dian/" class="leancloud_visitors" data-flag-title="那些入坑 React 前没有人会提醒你的事">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><p>站在 React 已经繁荣昌盛、无需四处布道宣传的今天，我们不妨冷静下来问问自己，React 真的是一个完美的框架吗？社区里一直不缺少吐槽的声音，这周我们就来看看，React 到底有哪些槽点。</p>
+<p>针对以下两篇文章：</p>
+<p>一篇是 Gianluca Guarini 写的 《<a href="https://medium.com/@gianluca.guarini/things-nobody-will-tell-you-about-react-js-3a373c1b03b4" target="_blank" rel="noopener">Things nobody will tell you about React.js</a>》，我将它译作 《那些入坑 React 前没有人会提醒你的事》，因为作者行文中明显带着对 React 的批判和失望。</p>
+<p>另一篇则是 Facebook 员工，也是 Redux 作者的 Dan Abramov 针对上文的回复 《<a href="https://medium.com/@dan_abramov/hey-thanks-for-feedback-bf9502689ca4" target="_blank" rel="noopener">Hey, thanks for feedback!</a>》。</p>
+<a id="more"></a>
+<h1 id="2-内容概要"><a href="#2-内容概要" class="headerlink" title="2 内容概要"></a>2 内容概要</h1><p>Gianluca Guarini 着重吐槽的点在于：</p>
+<ul>
+<li>React 项目文件组织规范不统一，社区中 Starter Kit 太多（100+），新手不知道该怎么组织文件</li>
+<li>由于 React 只关心 View 层，开发者就要面临选择 mobx 还是 redux 的纠结，无论选择哪种都会带来一系列的问题（重新配置构建脚本，更新 eslint 规则等）</li>
+<li>如果选了 mobx，会发现 mobx 无法保证自己的 store 不被外部更新（官方建议是加上特殊的前缀）</li>
+<li>如果选了 redux，会发现要实现同样的功能需要写很多的重复代码（这也是为什么社区中有海量的 redux helper 存在）</li>
+<li>路由用起来也很蛋疼，因为 React Router 几乎是社区中唯一的选择，但是这货版本更新太快，一不小心就用了废弃的 API</li>
+<li>用 JSX 的时候总是要嵌很多没必要的 <code>div</code> 或 <code>span</code></li>
+<li>要上手一个 React 应用，要配置很多的构建工具和规则才能看到效果</li>
+<li>…</li>
+</ul>
+<p>Dan Abramov 的回复：</p>
+<ul>
+<li>「React 16.0 引入的 Fiber 架构会导致现有代码全部需要重构」的说法是不对的，因为新的架构做到了向后兼容，而且 Facebook 内部超过 3 万个组件都能无痛迁移到新架构上</li>
+<li>缺少统一脚手架的问题，可以通过 create-react-app 解决</li>
+<li>觉得 redux 和 mobx 繁琐的话，对于刚刚上手的小应用不建议使用</li>
+<li>React Router 升级太频繁？2015 年发布的 1.0，2016 年 2 月发布的 2.0，2016 年 10 月发布的 3.0。虽然 4.0 紧接着 3.0 马上就发布了，但是 React Router 很早就已经公布了这样的升级计划。</li>
+<li>…</li>
+</ul>
+<h1 id="3-精读"><a href="#3-精读" class="headerlink" title="3 精读"></a>3 精读</h1><p>本次提出独到观点的同学有：<a href="https://www.zhihu.com/people/rccoder/answers" target="_blank" rel="noopener">@rccoder</a>  <a href="https://www.zhihu.com/people/turbe-xue" target="_blank" rel="noopener">@Turbe Xue</a> <a href="https://github.com/Pines-Cheng" target="_blank" rel="noopener">@Pines-Cheng</a> <a href="https://github.com/jin5354" target="_blank" rel="noopener">@An Yan</a> <a href="https://www.zhihu.com/people/5ac53c9c0484e83672e1c1716bdf0ff9" target="_blank" rel="noopener">@淡苍</a>  <a href="https://www.zhihu.com/people/3ec85a04bc9eaa35b1830874cc463a52" target="_blank" rel="noopener">@黄子毅</a> <a href="https://www.zhihu.com/people/twobin/pins/posts" target="_blank" rel="noopener">@宾彬</a> <a href="https://github.com/cisen" target="_blank" rel="noopener">@cisen</a> <a href="https://github.com/ybning" target="_blank" rel="noopener">@Bobo</a> 精读由此归纳。</p>
+<p>很高兴能看到不少新同学积极参与到精读的讨论中来，每一个人的声音都是社区发展的一份力量。</p>
+<h3 id="React-上手困难"><a href="#React-上手困难" class="headerlink" title="React 上手困难"></a>React 上手困难</h3><p>很早之前我们去四处布道 React 的时候，都会强调 React 很简单，因为它的 public API 非常之少，React 完整的文档 1 个小时就能看完。</p>
+<p>那么说「React 上手困难」又是从何谈起呢？参与精读的同学中有不少都有 Vue 的使用经验（包括本周吐槽文的作者），所以不免会把两个框架上手的难易程度放在心里做个对比。</p>
+<p>都说没有对比就没有伤害，大家普遍的观点是 Vue 上手简单、文档清晰、构建工具完善、脚手架统一……再反观 React，虽然 Dan 在文章里做了不少解释，但引用 @An Yan 的原话，『他也只是在说「事情没有那么糟糕」』。</p>
+<p>所以说，大家认为的 React 上手困难，很大程度上不是 React 本身，而是 React 附带的生态圈野蛮发展太快，导致新人再进入的时候普遍感觉无所适从。虽然官方的 create-react-app 缓解了这一问题，但还没有从根本程度上找到解法。</p>
+<h3 id="状态管理的迷思"><a href="#状态管理的迷思" class="headerlink" title="状态管理的迷思"></a>状态管理的迷思</h3><p>在今时今日的前端圈子里，说 React 不说 Redux 就像说 Ruby 却不说 Rails 一样，总感觉缺点儿什么。</p>
+<p>因为 React 将自己定位成 View 层的解决方案，所以对于中大型业务来说一个合适的状态管理方案是不可或缺的。从最早的 Backbone Model，到 Flux，再到 reflux、Redux，再到 mobx 和 redux-observable，你不得不感叹 React 社区的活力是多么强大。</p>
+<p>然而当你真正开始做新项目架构的时候，你到底是选 Redux 还是 Mobx，疑惑是封装解决方案如 dva 呢？ @淡苍 认为，Redux 与 MobX，React 两大状态管理方案，各有千秋，Redux 崇尚自由，扩展性好，却也带来了繁琐，一个简单的异步请求都必须引入中间件才能解决，MobX 上手容易，Reactive 避免不必要的渲染，带来性能提升，但相对封闭，不利于业务抽象，缺少最佳实践。至于如何选择？根据具体场景与需求判断。</p>
+<p>不难看出，想要做好基于 React 的前端架构，你不仅需要对自己的业务了如指掌，还需要对各种解决方案的特性以及适合怎样的业务形态了如指掌。在 React 社区，永远没有标准解决方案。</p>
+<h3 id="Redux-亦非万能解"><a href="#Redux-亦非万能解" class="headerlink" title="Redux 亦非万能解"></a>Redux 亦非万能解</h3><p>Redux 在刚刚推出的时候凭借酷炫的 devtool 和时间旅行功能，瞬间俘获了不少工程师的心。</p>
+<p>但当你真正开始使用 Redux 的时候，你会发现你不仅需要学习很多新的概念，如 reducer、store、dispatch、action 等，还有很多基础的问题都没有标准解法，最典型的例子就是异步 action。虽然 Redux 的 middleware 机制提供了实现异步 action 的可能性，但是对于小白来说去 dispatch 一个非 Object 类型的 action 之前需要先了解 thunk 的概念，还要给 Redux 添加一个 redux-thunk 中间件实属难题。</p>
+<p>不仅如此，在前端工程中常见的表单处理，Redux 社区也一直没有给出完美的解法。前有简单的 util 工具 redux-form-utils，后有庞大复杂的 redux-form，还有 rc-component 实现的一套基于 HOC 的解决方案。若没有充分的了解和调研，你将如何选择？</p>
+<p>这还没有提到最近非常火热的 redux-saga 和 redux-observable，虽然 Dan 说如果你不需要的话完全可以不用了解，但是如果你不了解他们的话怎么知道自己需不需要呢？</p>
+<h3 id="React-与-Vue-之争"><a href="#React-与-Vue-之争" class="headerlink" title="React 与 Vue 之争"></a>React 与 Vue 之争</h3><p>Vue 之所以觉得入门简单，因为一开始就提供了 umd 的引入方式，这与传统 js 开发的习惯一致，以及 Avalon 多年布道的铺垫，大家可以很快接受一个不依赖于构建的 Vue。</p>
+<p>React 因为引入了 JSX 概念，本可以以 umd 方式推广，但为了更好的 DX 所以上来就推荐大家使用 JSX，导致新手觉得门槛高。</p>
+<p>React + Mobx 约等于一个复杂的 Vue，但这不是抛弃 React 的理由。为什么大家觉得 Vuex 比 Redux 更适合 Vue 呢？因为 Vuex 简单，而 Redux 麻烦，这已经将两个用户群划分开了。</p>
+<p>一个简单的小公司，就是需要这种数据流简单，不需要编译，没有太多技术选型要考虑的框架，他们看中的是开发效率，可维护性并不是第一位，这点根本性的导致了这两类人永远也撮合不到一块。</p>
+<p>而 Vue 就是解决了这个问题，帮助了那么多开发者，仅凭这点就非常值得称赞，而我们不应该从 React 维护性的角度去抨击谁好谁坏，因为站在我们的角度，大部分中小公司的开发者是不 care 的。</p>
+<p>React 用户圈汇集了一批高端用户，他们不断探索技术选型，为开源社区迸发活力，如果大家都转向 Vue，这块摊子就死了，函数式、响应式编程的演进也会从框架的大统一而暂时终止，起码这是不利于技术进步的，也是不可能发生的。Vue 在自己的领域做好，将 React 敏捷思想借鉴过来，帮助更多适合场景的开发者，应该才是作者的目的。</p>
+<h3 id="小贴士：如何在开源社区优雅的撕逼"><a href="#小贴士：如何在开源社区优雅的撕逼" class="headerlink" title="小贴士：如何在开源社区优雅的撕逼"></a>小贴士：如何在开源社区优雅的撕逼</h3><p>开源社区撕逼常有，各种嘴炮也吃充斥在社区里，甚至有人在 Github 上维护了一份开源社区撕逼历史。虽然说做技术的人有争论很正常，但是撕的有理有据令人信服的案例却不多。这次 Facebook 的员工 Dan Abramov 就做出了很好的表率。面对咄咄逼人的文章，逐条回复，不回避、不扯淡且态度保持克制，实属难能可贵。</p>
+<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h1><p>React 开发者们也不要因为产生了 Mobx 这种亲 Vue 派而产生焦虑，这也是对特定业务场景的权衡，未来更多更好的数据流方案还会继续诞生，技术社区对技术的优化永无止尽。</p>
+<p>比如 <a href="https://github.com/mobxjs/mobx-state-tree" target="_blank" rel="noopener">mobx-state-tree</a> 就是一种 redux 与 mobx 结合的大胆尝试，作者在很早之前也申明了，Mobx 一样可以做时间旅行，只要遵守一定的开发规范。</p>
+<p>最后打个比方：安卓手机在不断进步，体验越来越逼近苹果，作为一个逼格高的用户，果断换苹果吧。但作为 java 开发人员的你，是否要为此换到 oc 流派呢？换，或者不换，其实都一样，安卓和苹果已经越来越像了。</p>
+
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2018/12/15/article-react-cao-dian/" title="那些入坑 React 前没有人会提醒你的事">https://doubleray.top/2018/12/15/article-react-cao-dian/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/17/article-react-learn-sum/" rel="next" title="React学习总结">
+                <i class="fa fa-chevron-left"></i> React学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/26/article-react-clean/" rel="prev" title="React 代码整洁之道">
+                React 代码整洁之道 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-引言"><span class="nav-text">1 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-内容概要"><span class="nav-text">2 内容概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-精读"><span class="nav-text">3 精读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React-上手困难"><span class="nav-text">React 上手困难</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态管理的迷思"><span class="nav-text">状态管理的迷思</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-亦非万能解"><span class="nav-text">Redux 亦非万能解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-与-Vue-之争"><span class="nav-text">React 与 Vue 之争</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小贴士：如何在开源社区优雅的撕逼"><span class="nav-text">小贴士：如何在开源社区优雅的撕逼</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#3-总结"><span class="nav-text">3 总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

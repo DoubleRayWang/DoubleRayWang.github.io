@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前端发展很快，现代浏览器原生 API 已经足够好用。我们并不需要为了操作 DOM、Event 等再学习一下 jQuery 的 API。同时由于 React、Angular、Vue 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。本项目总结了大部分 jQuery API 替代的方法，暂时只支持 IE10 以上浏览器。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery API 替代的方法">
+<meta property="og:url" content="https://doubleray.top/2018/05/20/article-js-jq-native/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="前端发展很快，现代浏览器原生 API 已经足够好用。我们并不需要为了操作 DOM、Event 等再学习一下 jQuery 的 API。同时由于 React、Angular、Vue 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。本项目总结了大部分 jQuery API 替代的方法，暂时只支持 IE10 以上浏览器。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery API 替代的方法">
+<meta name="twitter:description" content="前端发展很快，现代浏览器原生 API 已经足够好用。我们并不需要为了操作 DOM、Event 等再学习一下 jQuery 的 API。同时由于 React、Angular、Vue 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。本项目总结了大部分 jQuery API 替代的方法，暂时只支持 IE10 以上浏览器。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2018/05/20/article-js-jq-native/">
+
+
+
+
+
+  <title>jQuery API 替代的方法 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2018/05/20/article-js-jq-native/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">jQuery API 替代的方法</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T12:41:15+08:00">
+                2018-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实践之路/" itemprop="url" rel="index">
+                    <span itemprop="name">实践之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/20/article-js-jq-native/" class="leancloud_visitors" data-flag-title="jQuery API 替代的方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端发展很快，现代浏览器原生 API 已经足够好用。我们并不需要为了操作 DOM、Event 等再学习一下 jQuery 的 API。同时由于 React、Angular、Vue 等框架的流行，直接操作 DOM 不再是好的模式，jQuery 使用场景大大减少。本项目总结了大部分 jQuery API 替代的方法，暂时只支持 IE10 以上浏览器。<a id="more"></a></p>
+<h2 id="Query-Selector"><a href="#Query-Selector" class="headerlink" title="Query Selector"></a>Query Selector</h2><p>常用的 class、id、属性 选择器都可以使用 <code>document.querySelector</code> 或 <code>document.querySelectorAll</code> 替代。区别是</p>
+<ul>
+<li><code>document.querySelector</code> 返回第一个匹配的 Element</li>
+<li><code>document.querySelectorAll</code> 返回所有匹配的 Element 组成的 NodeList。它可以通过 <code>[].slice.call()</code> 把它转成 Array</li>
+<li>如果匹配不到任何 Element，jQuery 返回空数组 <code>[]</code>，但 <code>document.querySelector</code> 返回 <code>null</code>，注意空指针异常。当找不到时，也可以使用 <code>||</code> 设置默认的值，如 <code>document.querySelectorAll(selector) || []</code></li>
+</ul>
+<blockquote>
+<p>注意：<code>document.querySelector</code> 和 <code>document.querySelectorAll</code> 性能很<strong>差</strong>。如果想提高性能，尽量使用 <code>document.getElementById</code>、<code>document.getElementsByClassName</code> 或 <code>document.getElementsByTagName</code>。</p>
+</blockquote>
+<ul>
+<li><a href="#1.0">1.0</a> <a name="1.0"></a> 选择器查询</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'selector'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'selector'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#1.1">1.1</a> <a name="1.1"></a> class 查询</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'.class'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'.class'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">'class'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#1.2">1.2</a> <a name="1.2"></a> id 查询</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'#id'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'#id'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'id'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#1.3">1.3</a> <a name="1.3"></a> 属性查询</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'a[target=_blank]'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'a[target=_blank]'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#1.4">1.4</a> <a name="1.4"></a> 后代查询</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.find(<span class="string">'li'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.querySelectorAll(<span class="string">'li'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#1.5">1.5</a> <a name="1.5"></a> 兄弟及上下元素</p>
+<ul>
+<li>兄弟元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.siblings();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native - latest, Edge13+</span></span><br><span class="line">[...el.parentNode.children].filter(<span class="function">(<span class="params">child</span>) =&gt;</span></span><br><span class="line">  child !== el</span><br><span class="line">);</span><br><span class="line"><span class="comment">// Native (alternative) - latest, Edge13+</span></span><br><span class="line"><span class="built_in">Array</span>.from(el.parentNode.children).filter(<span class="function">(<span class="params">child</span>) =&gt;</span></span><br><span class="line">  child !== el</span><br><span class="line">);</span><br><span class="line"><span class="comment">// Native - IE10+</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.filter.call(el.parentNode.children, (child) =&gt;</span><br><span class="line">  child !== el</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上一个元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.prev();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.previousElementSibling;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下一个元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// next</span></span><br><span class="line">$el.next();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.nextElementSibling;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#1.6">1.6</a> <a name="1.6"></a> Closest</p>
+<p>Closest 获得匹配选择器的第一个祖先元素，从当前元素开始沿 DOM 树向上。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.closest(queryString);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native - Only latest, NO IE</span></span><br><span class="line">el.closest(selector);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native - IE10+</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">closest</span>(<span class="params">el, selector</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (el) &#123;</span><br><span class="line">    <span class="keyword">if</span> (matchesSelector.call(el, selector)) &#123;</span><br><span class="line">      <span class="keyword">return</span> el;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      el = el.parentElement;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#1.7">1.7</a> <a name="1.7"></a> Parents Until</p>
+<p>获取当前每一个匹配元素集的祖先，不包括匹配元素的本身。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.parentsUntil(selector, filter);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parentsUntil</span>(<span class="params">el, selector, filter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line">  <span class="keyword">const</span> matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// match start from parent</span></span><br><span class="line">  el = el.parentElement;</span><br><span class="line">  <span class="keyword">while</span> (el &amp;&amp; !matchesSelector.call(el, selector)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!filter) &#123;</span><br><span class="line">      result.push(el);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (matchesSelector.call(el, filter)) &#123;</span><br><span class="line">        result.push(el);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    el = el.parentElement;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#1.8">1.8</a> <a name="1.8"></a> Form</p>
+<ul>
+<li>Input/Textarea</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'#my-input'</span>).val();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'#my-input'</span>).value;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取 e.currentTarget 在 <code>.radio</code> 中的数组索引</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'.radio'</span>).index(e.currentTarget);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.indexOf.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'.radio'</span>), e.currentTarget);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#1.9">1.9</a> <a name="1.9"></a> Iframe Contents</p>
+<p>jQuery 对象的 iframe <code>contents()</code> 返回的是 iframe 内的 <code>document</code></p>
+<ul>
+<li>Iframe contents</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$iframe.contents();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">iframe.contentDocument;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Iframe Query</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$iframe.contents().find(<span class="string">'.css'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">iframe.contentDocument.querySelectorAll(<span class="string">'.css'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#1.10">1.10</a> <a name="1.10"></a> 获取 body</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'body'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">document</span>.body;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#1.11">1.11</a> <a name="1.11"></a> 获取或设置属性</p>
+<ul>
+<li>获取属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.attr(<span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.getAttribute(<span class="string">'foo'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery, note that this works in memory without change the DOM</span></span><br><span class="line">$el.attr(<span class="string">'foo'</span>, <span class="string">'bar'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.setAttribute(<span class="string">'foo'</span>, <span class="string">'bar'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取 <code>data-</code> 属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.data(<span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (use `getAttribute`)</span></span><br><span class="line">el.getAttribute(<span class="string">'data-foo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (use `dataset` if only need to support IE 11+)</span></span><br><span class="line">el.dataset[<span class="string">'foo'</span>];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="CSS-amp-Style"><a href="#CSS-amp-Style" class="headerlink" title="CSS &amp; Style"></a>CSS &amp; Style</h2><ul>
+<li><p><a href="#2.1">2.1</a> <a name="2.1"></a> CSS</p>
+<ul>
+<li>Get style</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.css(<span class="string">"color"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="comment">// 注意：此处为了解决当 style 值为 auto 时，返回 auto 的问题</span></span><br><span class="line"><span class="keyword">const</span> win = el.ownerDocument.defaultView;</span><br><span class="line"></span><br><span class="line"><span class="comment">// null 的意思是不返回伪类元素</span></span><br><span class="line">win.getComputedStyle(el, <span class="literal">null</span>).color;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Set style</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.css(&#123; <span class="attr">color</span>: <span class="string">"#ff0011"</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.style.color = <span class="string">'#ff0011'</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Get/Set Styles</p>
+<p>注意，如果想一次设置多个 style，可以参考 oui-dom-utils 中 <a href="https://github.com/oneuijs/oui-dom-utils/blob/master/src/index.js#L194" target="_blank" rel="noopener">setStyles</a> 方法</p>
+</li>
+<li><p>Add class</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.addClass(className);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.classList.add(className);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Remove class</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.removeClass(className);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.classList.remove(className);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>has class</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.hasClass(className);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.classList.contains(className);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Toggle class</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.toggleClass(className);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.classList.toggle(className);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#2.2">2.2</a> <a name="2.2"></a> Width &amp; Height</p>
+<p>Width 与 Height 获取方法相同，下面以 Height 为例：</p>
+<ul>
+<li>Window height</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// window height</span></span><br><span class="line">$(<span class="built_in">window</span>).height();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 含 scrollbar</span></span><br><span class="line"><span class="built_in">window</span>.document.documentElement.clientHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不含 scrollbar，与 jQuery 行为一致</span></span><br><span class="line"><span class="built_in">window</span>.innerHeight;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Document height</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="built_in">document</span>).height();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">document</span>.body;</span><br><span class="line"><span class="keyword">const</span> html = <span class="built_in">document</span>.documentElement;</span><br><span class="line"><span class="keyword">const</span> height = <span class="built_in">Math</span>.max(</span><br><span class="line">  body.offsetHeight,</span><br><span class="line">  body.scrollHeight,</span><br><span class="line">  html.clientHeight,</span><br><span class="line">  html.offsetHeight,</span><br><span class="line">  html.scrollHeight</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Element height</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.height();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHeight</span>(<span class="params">el</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> styles = <span class="keyword">this</span>.getComputedStyle(el);</span><br><span class="line">  <span class="keyword">const</span> height = el.offsetHeight;</span><br><span class="line">  <span class="keyword">const</span> borderTopWidth = <span class="built_in">parseFloat</span>(styles.borderTopWidth);</span><br><span class="line">  <span class="keyword">const</span> borderBottomWidth = <span class="built_in">parseFloat</span>(styles.borderBottomWidth);</span><br><span class="line">  <span class="keyword">const</span> paddingTop = <span class="built_in">parseFloat</span>(styles.paddingTop);</span><br><span class="line">  <span class="keyword">const</span> paddingBottom = <span class="built_in">parseFloat</span>(styles.paddingBottom);</span><br><span class="line">  <span class="keyword">return</span> height - borderBottomWidth - borderTopWidth - paddingTop - paddingBottom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 精确到整数（border-box 时为 height - border 值，content-box 时为 height + padding 值）</span></span><br><span class="line">el.clientHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 精确到小数（border-box 时为 height 值，content-box 时为 height + padding + border 值）</span></span><br><span class="line">el.getBoundingClientRect().height;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#2.3">2.3</a> <a name="2.3"></a> Position &amp; Offset</p>
+<ul>
+<li><p>Position</p>
+<p>获得匹配元素相对父元素的偏移</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.position();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">&#123; <span class="attr">left</span>: el.offsetLeft, <span class="attr">top</span>: el.offsetTop &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Offset</p>
+<p>获得匹配元素相对文档的偏移</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.offset();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getOffset</span> (<span class="params">el</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> box = el.getBoundingClientRect();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    top: box.top + <span class="built_in">window</span>.pageYOffset - <span class="built_in">document</span>.documentElement.clientTop,</span><br><span class="line">    left: box.left + <span class="built_in">window</span>.pageXOffset - <span class="built_in">document</span>.documentElement.clientLeft</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#2.4">2.4</a> <a name="2.4"></a> Scroll Top</p>
+</li>
+</ul>
+<p>  获取元素滚动条垂直位置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="built_in">window</span>).scrollTop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">(<span class="built_in">document</span>.documentElement &amp;&amp; <span class="built_in">document</span>.documentElement.scrollTop) || <span class="built_in">document</span>.body.scrollTop;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DOM-Manipulation"><a href="#DOM-Manipulation" class="headerlink" title="DOM Manipulation"></a>DOM Manipulation</h2><ul>
+<li><p><a href="#3.1">3.1</a> <a name="3.1"></a> Remove</p>
+<p>从 DOM 中移除元素。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.remove();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.parentNode.removeChild(el);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.2">3.2</a> <a name="3.2"></a> Text</p>
+<ul>
+<li><p>Get text</p>
+<p>返回指定元素及其后代的文本内容。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.text();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.textContent;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Set text</p>
+<p>设置元素的文本内容。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.text(string);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.textContent = string;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#3.3">3.3</a> <a name="3.3"></a> HTML</p>
+<ul>
+<li>Get HTML</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.html();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.innerHTML;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Set HTML</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.html(htmlString);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.innerHTML = htmlString;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#3.4">3.4</a> <a name="3.4"></a> Append</p>
+<p>Append 插入到子节点的末尾</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.append(<span class="string">"&lt;div id='container'&gt;hello&lt;/div&gt;"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (HTML string)</span></span><br><span class="line">el.insertAdjacentHTML(<span class="string">'beforeend'</span>, <span class="string">'&lt;div id="container"&gt;Hello World&lt;/div&gt;'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (Element)</span></span><br><span class="line">el.appendChild(newEl);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#3.5">3.5</a> <a name="3.5"></a> Prepend</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.prepend(<span class="string">"&lt;div id='container'&gt;hello&lt;/div&gt;"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (HTML string)</span></span><br><span class="line">el.insertAdjacentHTML(<span class="string">'afterbegin'</span>, <span class="string">'&lt;div id="container"&gt;Hello World&lt;/div&gt;'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (Element)</span></span><br><span class="line">el.insertBefore(newEl, el.firstChild);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.6">3.6</a> <a name="3.6"></a> insertBefore</p>
+<p>在选中元素前插入新节点</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$newEl.insertBefore(queryString);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (HTML string)</span></span><br><span class="line">el.insertAdjacentHTML(<span class="string">'beforebegin '</span>, <span class="string">'&lt;div id="container"&gt;Hello World&lt;/div&gt;'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (Element)</span></span><br><span class="line"><span class="keyword">const</span> el = <span class="built_in">document</span>.querySelector(selector);</span><br><span class="line"><span class="keyword">if</span> (el.parentNode) &#123;</span><br><span class="line">  el.parentNode.insertBefore(newEl, el);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.7">3.7</a> <a name="3.7"></a> insertAfter</p>
+<p>在选中元素后插入新节点</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$newEl.insertAfter(queryString);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (HTML string)</span></span><br><span class="line">el.insertAdjacentHTML(<span class="string">'afterend'</span>, <span class="string">'&lt;div id="container"&gt;Hello World&lt;/div&gt;'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native (Element)</span></span><br><span class="line"><span class="keyword">const</span> el = <span class="built_in">document</span>.querySelector(selector);</span><br><span class="line"><span class="keyword">if</span> (el.parentNode) &#123;</span><br><span class="line">  el.parentNode.insertBefore(newEl, el.nextSibling);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.8">3.8</a> <a name="3.8"></a> is</p>
+<p>如果匹配给定的选择器，返回true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.is(selector);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.matches(selector);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#3.9">3.9</a> <a name="3.9"></a> clone</p>
+<p>深拷贝被选元素。（生成被选元素的副本，包含子节点、文本和属性。）</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jQuery</span></span><br><span class="line">$el.clone();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Native</span></span><br><span class="line">el.cloneNode();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//深拷贝添加参数‘true’</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.10">3.10</a> <a name="3.10"></a> empty</p>
+<p>移除所有子节点</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jQuery</span></span><br><span class="line">$el.empty();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Native</span></span><br><span class="line">el.innerHTML = <span class="string">''</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.11">3.11</a> <a name="3.11"></a> wrap</p>
+<p>把每个被选元素放置在指定的HTML结构中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jQuery</span></span><br><span class="line">$(<span class="string">".inner"</span>).wrap(<span class="string">'&lt;div class="wrapper"&gt;&lt;/div&gt;'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Native</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.forEach.call(<span class="built_in">document</span>.querySelector(<span class="string">'.inner'</span>), (el) =&gt; &#123;</span><br><span class="line">   <span class="keyword">const</span> wrapper = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">   wrapper.className = <span class="string">'wrapper'</span>;</span><br><span class="line">   el.parentNode.insertBefore(wrapper, el);</span><br><span class="line">   el.parentNode.removeChild(el);</span><br><span class="line">   wrapper.appendChild(el);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="#3.12">3.12</a> <a name="3.12"></a> unwrap</p>
+<p>移除被选元素的父元素的DOM结构</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">'.inner'</span>).unwrap();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.forEach.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'.inner'</span>), (el) =&gt; &#123;</span><br><span class="line">      <span class="keyword">let</span> elParentNode = el.parentNode</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(elParentNode !== <span class="built_in">document</span>.body) &#123;</span><br><span class="line">          elParentNode.parentNode.insertBefore(el, elParentNode)</span><br><span class="line">          elParentNode.parentNode.removeChild(elParentNode)</span><br><span class="line">      &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.13">3.13</a> <a name="3.13"></a> replaceWith</p>
+<p>用指定的元素替换被选的元素</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jQuery</span></span><br><span class="line">$(<span class="string">'.inner'</span>).replaceWith(<span class="string">'&lt;div class="outer"&gt;&lt;/div&gt;'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Native</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.forEach.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'.inner'</span>),(el) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> outer = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">  outer.className = <span class="string">"outer"</span>;</span><br><span class="line">  el.parentNode.insertBefore(outer, el);</span><br><span class="line">  el.parentNode.removeChild(el);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#3.14">3.14</a> <a name="3.14"></a> simple parse</p>
+<p>解析 HTML/SVG/XML 字符串</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="string">`&lt;ol&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;a&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;b&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ol&gt;</span></span><br><span class="line"><span class="string">&lt;ol&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;c&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;d&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ol&gt;`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">range = <span class="built_in">document</span>.createRange();</span><br><span class="line">parse = range.createContextualFragment.bind(range);</span><br><span class="line"></span><br><span class="line">parse(<span class="string">`&lt;ol&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;a&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;b&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ol&gt;</span></span><br><span class="line"><span class="string">&lt;ol&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;c&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li&gt;d&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ol&gt;`</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h2><p><a href="https://fetch.spec.whatwg.org/" target="_blank" rel="noopener">Fetch API</a> 是用于替换 XMLHttpRequest 处理 ajax 的新标准，Chrome 和 Firefox 均支持，旧浏览器可以使用 polyfills 提供支持。</p>
+<p>IE9+ 请使用 <a href="http://github.com/github/fetch" target="_blank" rel="noopener">github/fetch</a>，IE8+ 请使用 <a href="https://github.com/camsong/fetch-ie8/" target="_blank" rel="noopener">fetch-ie8</a>，JSONP 请使用 <a href="https://github.com/camsong/fetch-jsonp" target="_blank" rel="noopener">fetch-jsonp</a>。</p>
+<ul>
+<li><a href="#4.1">4.1</a> <a name="4.1"></a> 从服务器读取数据并替换匹配元素的内容。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(selector).load(url, completeCallback)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">fetch(url).then(<span class="function"><span class="params">data</span> =&gt;</span> data.text()).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(selector).innerHTML = data</span><br><span class="line">&#125;).then(completeCallback)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h2><p>完整地替代命名空间和事件代理，链接到 <a href="https://github.com/oneuijs/oui-dom-events" target="_blank" rel="noopener">https://github.com/oneuijs/oui-dom-events</a></p>
+<ul>
+<li><a href="#5.0">5.0</a> <a name="5.0"></a> Document ready by <code>DOMContentLoaded</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(eventHandler);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="comment">// 检测 DOMContentLoaded 是否已完成</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.readyState !== <span class="string">'loading'</span>) &#123;</span><br><span class="line">  eventHandler();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, eventHandler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#5.1">5.1</a> <a name="5.1"></a> 使用 on 绑定事件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.on(eventName, eventHandler);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.addEventListener(eventName, eventHandler);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#5.2">5.2</a> <a name="5.2"></a> 使用 off 解绑事件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.off(eventName, eventHandler);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.removeEventListener(eventName, eventHandler);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#5.3">5.3</a> <a name="5.3"></a> Trigger</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$(el).trigger(<span class="string">'custom-event'</span>, &#123;<span class="attr">key1</span>: <span class="string">'data'</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.CustomEvent) &#123;</span><br><span class="line">  <span class="keyword">const</span> event = <span class="keyword">new</span> CustomEvent(<span class="string">'custom-event'</span>, &#123;<span class="attr">detail</span>: &#123;<span class="attr">key1</span>: <span class="string">'data'</span>&#125;&#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> event = <span class="built_in">document</span>.createEvent(<span class="string">'CustomEvent'</span>);</span><br><span class="line">  event.initCustomEvent(<span class="string">'custom-event'</span>, <span class="literal">true</span>, <span class="literal">true</span>, &#123;<span class="attr">key1</span>: <span class="string">'data'</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">el.dispatchEvent(event);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h2><p>大部分实用工具都能在 native API 中找到. 其他高级功能可以选用专注于该领域的稳定性和性能都更好的库来代替，推荐 <a href="https://lodash.com" target="_blank" rel="noopener">lodash</a>。</p>
+<ul>
+<li><p><a href="#6.1">6.1</a> <a name="6.1"></a> 基本工具</p>
+<ul>
+<li>isArray</li>
+</ul>
+<p>检测参数是不是数组。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.isArray(range);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Array</span>.isArray(range);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>isWindow</p>
+<p>检测参数是不是 window。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.isWindow(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isWindow</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj !== <span class="literal">null</span> &amp;&amp; obj !== <span class="literal">undefined</span> &amp;&amp; obj === obj.window;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>inArray</p>
+<p>在数组中搜索指定值并返回索引 (找不到则返回 -1)。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.inArray(item, array);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">array.indexOf(item) &gt; <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6-way</span></span><br><span class="line">array.includes(item);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>isNumeric</p>
+<p>检测传入的参数是不是数字。<br>Use <code>typeof</code> to decide the type or the <code>type</code> example for better accuracy.</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.isNumeric(item);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNumeric</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> !<span class="built_in">isNaN</span>(<span class="built_in">parseFloat</span>(n)) &amp;&amp; <span class="built_in">isFinite</span>(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>isFunction</p>
+<p>检测传入的参数是不是 JavaScript 函数对象。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.isFunction(item);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFunction</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> type = <span class="built_in">Object</span>.prototype.toString(item);</span><br><span class="line">  <span class="keyword">return</span> type === <span class="string">'[object Function]'</span> || type === <span class="string">'[object GeneratorFunction]'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>isEmptyObject</p>
+<p>检测对象是否为空 (包括不可枚举属性).</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.isEmptyObject(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEmptyObject</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.keys(obj).length === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>isPlainObject</p>
+<p>检测是不是扁平对象 (使用 “{}” 或 “new Object” 创建).</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.isPlainObject(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPlainObject</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> (obj) !== <span class="string">'object'</span> || obj.nodeType || obj !== <span class="literal">null</span> &amp;&amp; obj !== <span class="literal">undefined</span> &amp;&amp; obj === obj.window) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (obj.constructor &amp;&amp;</span><br><span class="line">      !<span class="built_in">Object</span>.prototype.hasOwnProperty.call(obj.constructor.prototype, <span class="string">'isPrototypeOf'</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>extend</p>
+<p>合并多个对象的内容到第一个对象。<br>object.assign 是 ES6 API，也可以使用 <a href="https://github.com/ljharb/object.assign" target="_blank" rel="noopener">polyfill</a>。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.extend(&#123;&#125;, defaultOpts, opts);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Object</span>.assign(&#123;&#125;, defaultOpts, opts);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>trim</p>
+<p>移除字符串头尾空白。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.trim(string);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">string.trim();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>map</p>
+<p>将数组或对象转化为包含新内容的数组。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.map(array, (value, index) =&gt; &#123;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">array.map(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>each</p>
+<p>轮询函数，可用于平滑的轮询对象和数组。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.each(array, (index, value) =&gt; &#123;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">array.forEach(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>grep</p>
+<p>找到数组中符合过滤函数的元素。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.grep(array, (value, index) =&gt; &#123;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">array.filter(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>type</p>
+<p>检测对象的 JavaScript [Class] 内部类型。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.type(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">type</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> reTypeOf = <span class="regexp">/(?:^\[object\s(.*?)\]$)/</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(item)</span><br><span class="line">    .replace(reTypeOf, <span class="string">'$1'</span>)</span><br><span class="line">    .toLowerCase();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>merge</p>
+<p>合并第二个数组内容到第一个数组。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.merge(array1, array2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="comment">// 使用 concat，不能去除重复值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [].concat(...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6，同样不能去除重复值</span></span><br><span class="line">array1 = [...array1, ...array2]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Set，可以去除重复值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>([].concat(...args)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>now</p>
+<p>返回当前时间的数字呈现。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Date</span>.now();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>proxy</p>
+<p>传入函数并返回一个新函数，该函数绑定指定上下文。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.proxy(fn, context);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">fn.bind(context);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>makeArray</p>
+<p>类数组对象转化为真正的 JavaScript 数组。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.makeArray(arrayLike);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.call(arrayLike);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6-way</span></span><br><span class="line"><span class="built_in">Array</span>.from(arrayLike);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#6.2">6.2</a> <a name="6.2"></a> 包含</p>
+<p>检测 DOM 元素是不是其他 DOM 元素的后代.</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.contains(el, child);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el !== child &amp;&amp; el.contains(child);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#6.3">6.3</a> <a name="6.3"></a> Globaleval</p>
+<p>全局执行 JavaScript 代码。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.globaleval(code);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Globaleval</span>(<span class="params">code</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">  script.text = code;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.head.appendChild(script).parentNode.removeChild(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use eval, but context of eval is current, context of $.Globaleval is global.</span></span><br><span class="line"><span class="built_in">eval</span>(code);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#6.4">6.4</a> <a name="6.4"></a> 解析</p>
+<ul>
+<li>parseHTML</li>
+</ul>
+<p>解析字符串为 DOM 节点数组.</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.parseHTML(htmlString);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseHTML</span>(<span class="params">string</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> context = <span class="built_in">document</span>.implementation.createHTMLDocument();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Set the base href for the created document so any parsed elements with URLs</span></span><br><span class="line">  <span class="comment">// are based on the document's URL</span></span><br><span class="line">  <span class="keyword">const</span> base = context.createElement(<span class="string">'base'</span>);</span><br><span class="line">  base.href = <span class="built_in">document</span>.location.href;</span><br><span class="line">  context.head.appendChild(base);</span><br><span class="line"></span><br><span class="line">  context.body.innerHTML = string;</span><br><span class="line">  <span class="keyword">return</span> context.body.children;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>parseJSON</p>
+<p>传入格式正确的 JSON 字符串并返回 JavaScript 值.</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.parseJSON(str);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">JSON</span>.parse(str);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><p>Promise 代表异步操作的最终结果。jQuery 用它自己的方式处理 promises，原生 JavaScript 遵循 <a href="http://promises-aplus.github.io/promises-spec/" target="_blank" rel="noopener">Promises/A+</a> 标准实现了最小 API 来处理 promises。</p>
+<ul>
+<li><p><a href="#7.1">7.1</a> <a name="7.1"></a> done, fail, always</p>
+<p><code>done</code> 会在 promise 解决时调用，<code>fail</code> 会在 promise 拒绝时调用，<code>always</code> 总会调用。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$promise.done(doneCallback).fail(failCallback).always(alwaysCallback)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">promise.then(doneCallback, failCallback).then(alwaysCallback, alwaysCallback)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#7.2">7.2</a> <a name="7.2"></a> when</p>
+<p><code>when</code> 用于处理多个 promises。当全部 promises 被解决时返回，当任一 promise 被拒绝时拒绝。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$.when($promise1, $promise2).done(<span class="function">(<span class="params">promise1Result, promise2Result</span>) =&gt;</span> &#123;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="built_in">Promise</span>.all([$promise1, $promise2]).then([promise1Result, promise2Result] =&gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#7.3">7.3</a> <a name="7.3"></a> Deferred</p>
+<p>Deferred 是创建 promises 的一种方式。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> defer = <span class="keyword">new</span> $.Deferred();</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">      defer.resolve(<span class="string">'some_value_computed_asynchronously'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      defer.reject(<span class="string">'failed'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> defer.promise();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        resolve(<span class="string">'some_value_computed_asynchronously'</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="string">'failed'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Deferred way</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> deferred = &#123;&#125;;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    deferred.resolve = resolve;</span><br><span class="line">    deferred.reject = reject;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  deferred.promise = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> promise;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> deferred;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> defer = defer();</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">      defer.resolve(<span class="string">'some_value_computed_asynchronously'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      defer.reject(<span class="string">'failed'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> defer.promise();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h2><ul>
+<li><a href="#8.1">8.1</a> <a name="8.1"></a> Show &amp; Hide</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.show();</span><br><span class="line">$el.hide();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="comment">// 更多 show 方法的细节详见 https://github.com/oneuijs/oui-dom-utils/blob/master/src/index.js#L363</span></span><br><span class="line">el.style.display = <span class="string">''</span>|<span class="string">'inline'</span>|<span class="string">'inline-block'</span>|<span class="string">'inline-table'</span>|<span class="string">'block'</span>;</span><br><span class="line">el.style.display = <span class="string">'none'</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#8.2">8.2</a> <a name="8.2"></a> Toggle</p>
+<p>显示或隐藏元素。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.toggle();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="keyword">if</span> (el.ownerDocument.defaultView.getComputedStyle(el, <span class="literal">null</span>).display === <span class="string">'none'</span>) &#123;</span><br><span class="line">  el.style.display = <span class="string">''</span>|<span class="string">'inline'</span>|<span class="string">'inline-block'</span>|<span class="string">'inline-table'</span>|<span class="string">'block'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  el.style.display = <span class="string">'none'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#8.3">8.3</a> <a name="8.3"></a> FadeIn &amp; FadeOut</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.fadeIn(<span class="number">3000</span>);</span><br><span class="line">$el.fadeOut(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.style.transition = <span class="string">'opacity 3s'</span>;</span><br><span class="line"><span class="comment">// fadeIn</span></span><br><span class="line">el.style.opacity = <span class="string">'1'</span>;</span><br><span class="line"><span class="comment">// fadeOut</span></span><br><span class="line">el.style.opacity = <span class="string">'0'</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#8.4">8.4</a> <a name="8.4"></a> FadeTo</p>
+<p>调整元素透明度。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.fadeTo(<span class="string">'slow'</span>,<span class="number">0.15</span>);</span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.style.transition = <span class="string">'opacity 3s'</span>; <span class="comment">// 假设 'slow' 等于 3 秒</span></span><br><span class="line">el.style.opacity = <span class="string">'0.15'</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#8.5">8.5</a> <a name="8.5"></a> FadeToggle</p>
+<p>动画调整透明度用来显示或隐藏。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.fadeToggle();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.style.transition = <span class="string">'opacity 3s'</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; opacity &#125; = el.ownerDocument.defaultView.getComputedStyle(el, <span class="literal">null</span>);</span><br><span class="line"><span class="keyword">if</span> (opacity === <span class="string">'1'</span>) &#123;</span><br><span class="line">  el.style.opacity = <span class="string">'0'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  el.style.opacity = <span class="string">'1'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="#8.6">8.6</a> <a name="8.6"></a> SlideUp &amp; SlideDown</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.slideUp();</span><br><span class="line">$el.slideDown();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="keyword">const</span> originHeight = <span class="string">'100px'</span>;</span><br><span class="line">el.style.transition = <span class="string">'height 3s'</span>;</span><br><span class="line"><span class="comment">// slideUp</span></span><br><span class="line">el.style.height = <span class="string">'0px'</span>;</span><br><span class="line"><span class="comment">// slideDown</span></span><br><span class="line">el.style.height = originHeight;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#8.7">8.7</a> <a name="8.7"></a> SlideToggle</p>
+<p>滑动切换显示或隐藏。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.slideToggle();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line"><span class="keyword">const</span> originHeight = <span class="string">'100px'</span>;</span><br><span class="line">el.style.transition = <span class="string">'height 3s'</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; height &#125; = el.ownerDocument.defaultView.getComputedStyle(el, <span class="literal">null</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">parseInt</span>(height, <span class="number">10</span>) === <span class="number">0</span>) &#123;</span><br><span class="line">  el.style.height = originHeight;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"> el.style.height = <span class="string">'0px'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="#8.8">8.8</a> <a name="8.8"></a> Animate</p>
+<p>执行一系列 CSS 属性动画。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery</span></span><br><span class="line">$el.animate(&#123; params &#125;, speed);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Native</span></span><br><span class="line">el.style.transition = <span class="string">'all '</span> + speed;</span><br><span class="line"><span class="built_in">Object</span>.keys(params).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span></span><br><span class="line">  el.style[key] = params[key]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h2><ul>
+<li><a href="http://youmightnotneedjquery.com/" target="_blank" rel="noopener">你可能不需要 jQuery (You Might Not Need jQuery)</a> - 如何使用原生 JavaScript 实现通用事件，元素，ajax 等用法。</li>
+<li><a href="http://github.com/npm-dom" target="_blank" rel="noopener">npm-dom</a> 以及 <a href="http://github.com/webmodules" target="_blank" rel="noopener">webmodules</a> - 在 NPM 上提供独立 DOM 模块的组织</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2018/05/20/article-js-jq-native/" title="jQuery API 替代的方法">https://doubleray.top/2018/05/20/article-js-jq-native/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/daily-js-es6-skill/" rel="next" title="ES6 的小技巧">
+                <i class="fa fa-chevron-left"></i> ES6 的小技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/article-js-regex/" rel="prev" title="自用正则手册">
+                自用正则手册 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Query-Selector"><span class="nav-text">Query Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-amp-Style"><span class="nav-text">CSS &amp; Style</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-Manipulation"><span class="nav-text">DOM Manipulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax"><span class="nav-text">Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Events"><span class="nav-text">Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utilities"><span class="nav-text">Utilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promises"><span class="nav-text">Promises</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Animation"><span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alternatives"><span class="nav-text">Alternatives</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

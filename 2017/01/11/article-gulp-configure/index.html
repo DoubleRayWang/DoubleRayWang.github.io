@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="gulp,node,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="本文旨在记录 gulp 配置及使用的过程，方便日后查阅。（本文参考 一点|gulp详细入门教程 ） 　　gulp 是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。">
+<meta name="keywords" content="gulp,node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp 实用指南">
+<meta property="og:url" content="https://doubleray.top/2017/01/11/article-gulp-configure/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="本文旨在记录 gulp 配置及使用的过程，方便日后查阅。（本文参考 一点|gulp详细入门教程 ） 　　gulp 是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://doubleray.top/styles/images/gulp/node.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/gulp/gulp-cmd.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/gulp/gulp-w1.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/gulp/gulp-w2.png">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp 实用指南">
+<meta name="twitter:description" content="本文旨在记录 gulp 配置及使用的过程，方便日后查阅。（本文参考 一点|gulp详细入门教程 ） 　　gulp 是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。">
+<meta name="twitter:image" content="https://doubleray.top/styles/images/gulp/node.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/01/11/article-gulp-configure/">
+
+
+
+
+
+  <title>gulp 实用指南 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/01/11/article-gulp-configure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">gulp 实用指南</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-11T19:45:15+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实践之路/" itemprop="url" rel="index">
+                    <span itemprop="name">实践之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/11/article-gulp-configure/" class="leancloud_visitors" data-flag-title="gulp 实用指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　<strong>本文旨在记录 gulp 配置及使用的过程，方便日后查阅。（本文参考 <a href="http://www.ydcss.com/" target="_blank" rel="noopener">一点|gulp详细入门教程</a> ）</strong></p>
+<p>　　gulp 是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。<a id="more"></a></p>
+<p>　　gulp 是基于 Nodejs 的自动任务运行器， 她能自动化地完成javascript/coffee/sass/less/html/image/css等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。在实现上，它借鉴了Unix操作系统的管道（pipe）思想，前一级的输出，直接变成后一级的输入，使得在操作上非常简单。通过本文，我们将学习如何使用Gulp来改变开发流程，从而使开发更加快速高效。gulp 和 grunt 非常类似，但相比于 grunt 的频繁 IO 操作，gulp 的流操作，能更快地更便捷地完成构建工作。</p>
+<p>　　gulp 参考地址：<a href="http://gulpjs.com" target="_blank" rel="noopener">gulp官方网址</a>、<a href="http://gulpjs.com/plugins" target="_blank" rel="noopener">gulp插件地址</a>、<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md" target="_blank" rel="noopener">gulp 官方API</a>、<a href="http://www.ydcss.com/archives/424" target="_blank" rel="noopener">gulp 中文API</a>、<a href="http://www.gulpjs.com.cn/" target="_blank" rel="noopener">gulp.js 中文网</a>… …</p>
+<br>
+
+<h2 id="gulp-配置"><a href="#gulp-配置" class="headerlink" title="gulp 配置"></a>gulp 配置</h2><p>　　首先当然是安装 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs</a>，通过 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs</a> 的 npm 全局安装和项目安装 gulp，其次在项目里安装所需要的 gulp 插件，然后新建 gulp 的配置文件 gulpfile.js 并写好配置信息（定义 gulp 任务），最后通过命令提示符运行 gulp 任务即可。</p>
+<p>　　<strong>安装nodejs -&gt; 全局安装gulp -&gt; 项目安装gulp以及gulp插件 -&gt; 配置gulpfile.js -&gt; 运行任务</strong></p>
+<h3 id="1-node-js-安装"><a href="#1-node-js-安装" class="headerlink" title="1. node.js 安装"></a>1. node.js 安装</h3><p>　　打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs官网</a>，点击硕大的绿色 Download 按钮，它会根据系统信息选择对应版本（.msi文件）。然后像安装QQ一样安装它就可以了（安装路径随意）。</p>
+<p>　　通过命令行　<em>node -v</em>　和　<em>npm -v</em>　分别检查 node 和 npm 是否全局安装成功（如下图出现版本号即为安装成功，npm是在安装nodejs时一同安装的）。</p>
+<img src="/styles/images/gulp/node.png" alt="nodejs安装成功">
+
+<h3 id="2-npm-使用"><a href="#2-npm-使用" class="headerlink" title="2. npm 使用"></a>2. npm 使用</h3><p>　　npm（node package manager）nodejs 的包管理器，用于 node 插件管理（包括安装、卸载、管理依赖等），使用npm安装插件：命令提示符执行 <strong>npm install &lt;name&gt; -g --save-dev</strong> ,-g 为全局安装、--save-dev 为保存到本地，信息会配置到 package.json 内。</p>
+<p>　　因为 npm 的服务器在国外，受网络影响大，可能出现异常，所以我们选择<a href="http://npm.taobao.org/" target="_blank" rel="noopener"> 淘宝的 npmjs.org 镜像 </a>，命令提示符执行 <strong>npm install cnpm -g –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></strong>；　<strong>注意</strong>：安装完后最好查看其版本号 <em>cnpm -v</em> 或关闭命令提示符重新打开，安装完直接使用有可能会出现错误。</p>
+<p>　　<strong>注</strong>：cnpm 跟 npm 用法完全一致，只是在执行命令时将 npm 改为 cnpm （以下操作将以 cnpm 代替 npm ）。</p>
+<h3 id="3-gulp-安装"><a href="#3-gulp-安装" class="headerlink" title="3. gulp 安装"></a>3. gulp 安装</h3><p>　　在安装 gulp 之前需先在项目根目录下新建 package.json 文件或通过命令提示符执行 <strong>cnpm init</strong>（文件内不允许写注释，<a href="https://www.zhihu.com/question/23004511" target="_blank" rel="noopener">为什么？</a>）。</p>
+<br>
+
+<h4 id="3-1-全局安装-gulp"><a href="#3-1-全局安装-gulp" class="headerlink" title="3.1 全局安装 gulp"></a>3.1 全局安装 gulp</h4><p>　　命令提示符执行 <strong>cnpm install gulp -g</strong> 全局安装 gulp，<em>gulp -v</em> 出现版本号即为正确安装（全局安装 gulp 目的是为了通过她执行 gulp 任务）。</p>
+<br>
+
+<h4 id="3-2-本地安装-gulp"><a href="#3-2-本地安装-gulp" class="headerlink" title="3.2 本地安装 gulp"></a>3.2 本地安装 gulp</h4><p>　　在项目根目录下执行命令提示符 <strong>cnpm install gulp --save-dev</strong> 本地安装 gulp（本地安装 gulp 目的是为了调用 gulp 插件的功能）。</p>
+<h3 id="4-gulp-插件安装"><a href="#4-gulp-插件安装" class="headerlink" title="4. gulp 插件安装"></a>4. gulp 插件安装</h3><p>　　gulp的插件数量虽然没有grunt那么多，但也可以说是应有尽有了，下面列举一些常用的插件。</p>
+<br>
+
+<ul>
+<li><p>浏览器自动刷新页面：命令提示符执行 <strong>cnpm install gulp-livereload --save-dev</strong>；</p>
+</li>
+<li><p>自动处理浏览器前缀：命令提示符执行 <strong>cnpm install gulp-autoprefixer --save-dev</strong>；</p>
+</li>
+<li><p>合并javascript文件：命令提示符执行 <strong>cnpm install gulp-concat --save-dev</strong>；</p>
+</li>
+<li><p>压缩css文件：命令提示符执行 <strong>cnpm install gulp-clean-css --save-dev</strong>；</p>
+</li>
+<li><p>压缩图片文件：命令提示符执行 <strong>cnpm install gulp-imagemin --save-dev</strong>；</p>
+</li>
+<li><p>压缩html：命令提示符执行 <strong>cnpm install gulp-htmlmin --save-dev</strong>；</p>
+</li>
+<li><p>less(sass)文件编译成css：命令提示符执行 <strong>cnpm install gulp-less(sass) --save-dev</strong>；</p>
+</li>
+</ul>
+<br>
+
+<p>　　插件安装完成后打开　package.json　查看一下各个插件的版本号是否已被记录在 devDependencies 下，如被记录（如下）则说明插件安装成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;gulp&quot;: &quot;^3.9.1&quot;,</span><br><span class="line">    &quot;gulp-autoprefixer&quot;: &quot;^3.1.1&quot;,</span><br><span class="line">    &quot;gulp-clean-css&quot;: &quot;^2.3.2&quot;,</span><br><span class="line">    &quot;gulp-concat&quot;: &quot;^2.6.1&quot;,</span><br><span class="line">    &quot;gulp-htmlmin&quot;: &quot;^3.0.0&quot;,</span><br><span class="line">    &quot;gulp-imagemin&quot;: &quot;^3.1.1&quot;,</span><br><span class="line">    &quot;gulp-less&quot;: &quot;^3.3.0&quot;,</span><br><span class="line">    &quot;gulp-livereload&quot;: &quot;^3.8.1&quot;,</span><br><span class="line">    &quot;gulp-uglify&quot;: &quot;^2.0.0&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="gulp-运行"><a href="#gulp-运行" class="headerlink" title="gulp 运行"></a>gulp 运行</h2><p>　　在 gulp 插件安装完成之后，还需要在项目根目录下新建一个 <strong>gulpfile.js</strong> 的配置文件（很重要）,参考配置内容如下：</p>
+<br>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line"> <span class="comment">//导入工具包 require('node_modules里对应模块')</span></span><br><span class="line">     less = <span class="built_in">require</span>(<span class="string">'gulp-less'</span>),<span class="comment">//编译less</span></span><br><span class="line">     clean = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>),<span class="comment">//压缩css</span></span><br><span class="line">     imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>),<span class="comment">//图片压缩</span></span><br><span class="line">     uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>),<span class="comment">//压缩js</span></span><br><span class="line">     htmlmin = <span class="built_in">require</span>(<span class="string">'gulp-htmlmin'</span>), <span class="comment">//html压缩</span></span><br><span class="line">     livereload = <span class="built_in">require</span>(<span class="string">'gulp-livereload'</span>),  <span class="comment">//浏览器自动刷新页面</span></span><br><span class="line">     autoprefixer = <span class="built_in">require</span>(<span class="string">'gulp-autoprefixer'</span>),  <span class="comment">//根据设置浏览器版本自动处理浏览器前缀</span></span><br><span class="line">     concat = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>);  <span class="comment">//合并js文件</span></span><br><span class="line"> <span class="comment">//css压缩</span></span><br><span class="line"> gulp.task(<span class="string">'testCssmin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'src/index.css'</span>)</span><br><span class="line">         .pipe(clean(&#123;</span><br><span class="line">             advanced: <span class="literal">true</span>,  <span class="comment">//类型：Boolean 默认：true [是否开启高级优化（合并选择器等）]</span></span><br><span class="line">             compatibility: <span class="string">'ie7'</span>,  <span class="comment">//保留ie7及以下兼容写法 类型：String 默认：''or'*' [启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式]</span></span><br><span class="line">             keepBreaks: <span class="literal">true</span>,  <span class="comment">//类型：Boolean 默认：false [是否保留换行]</span></span><br><span class="line">             keepSpecialComments: <span class="string">'*'</span>  <span class="comment">//保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀</span></span><br><span class="line">         &#125;))</span><br><span class="line">     .   pipe(gulp.dest(<span class="string">'src'</span>)); </span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//less编译</span></span><br><span class="line"> gulp.task(<span class="string">'less'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'Machinery/public/less/index.less'</span>)</span><br><span class="line">         .pipe(less())</span><br><span class="line">         .pipe(gulp.dest(<span class="string">'Machinery/build/css'</span>))</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//js压缩</span></span><br><span class="line"> gulp.task(<span class="string">'jsmin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'Machinery/public/js/*.js'</span>)</span><br><span class="line">         .pipe(uglify())</span><br><span class="line">         .pipe(gulp.dest(<span class="string">'Machinery/build/js'</span>));</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//js合并</span></span><br><span class="line"> gulp.task(<span class="string">'testConcat'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'src/*.js'</span>)</span><br><span class="line">         .pipe(concat(<span class="string">'zepto.concat.js'</span>))<span class="comment">//合并后的文件名</span></span><br><span class="line">         .pipe(gulp.dest(<span class="string">'src'</span>));</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//图片压缩</span></span><br><span class="line"> gulp.task(<span class="string">'testImagemin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'last/construction/public/images/*.&#123;png,jpg,gif,ico&#125;'</span>)</span><br><span class="line">         .pipe(imagemin())</span><br><span class="line">         .pipe(gulp.dest(<span class="string">'last/construction/build/images'</span>));</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//html压缩</span></span><br><span class="line"> gulp.task(<span class="string">'testHtmlmin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> options = &#123;</span><br><span class="line">         removeComments: <span class="literal">true</span>,<span class="comment">//清除HTML注释</span></span><br><span class="line">         collapseWhitespace: <span class="literal">true</span>,<span class="comment">//压缩HTML</span></span><br><span class="line">         collapseBooleanAttributes: <span class="literal">true</span>,<span class="comment">//省略布尔属性的值 &lt;input checked="true"/&gt; ==&gt; &lt;input /&gt;</span></span><br><span class="line">         removeEmptyAttributes: <span class="literal">true</span>,<span class="comment">//删除所有空格作属性值 &lt;input id="" /&gt; ==&gt; &lt;input /&gt;</span></span><br><span class="line">         removeScriptTypeAttributes: <span class="literal">true</span>,<span class="comment">//删除&lt;script&gt;的type="text/javascript"</span></span><br><span class="line">         removeStyleLinkTypeAttributes: <span class="literal">true</span>,<span class="comment">//删除&lt;style&gt;和&lt;link&gt;的type="text/css"</span></span><br><span class="line">         minifyJS: <span class="literal">true</span>,<span class="comment">//压缩页面JS</span></span><br><span class="line">         minifyCSS: <span class="literal">true</span><span class="comment">//压缩页面CSS</span></span><br><span class="line">     &#125;;</span><br><span class="line">     gulp.src(<span class="string">'Machinery/*.html'</span>)</span><br><span class="line">         .pipe(htmlmin(options))</span><br><span class="line">         .pipe(gulp.dest(<span class="string">'Machinery/.min.html'</span>));</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//自动刷新页面</span></span><br><span class="line"> gulp.task(<span class="string">'less'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'src/less/*.less'</span>)</span><br><span class="line">         .pipe(less())</span><br><span class="line">         .pipe(gulp.dest(<span class="string">'src/css'</span>))</span><br><span class="line">         .pipe(livereload());</span><br><span class="line"> &#125;);</span><br><span class="line"> <span class="comment">//自动处理浏览器前缀</span></span><br><span class="line"> gulp.task(<span class="string">'testAutoFx'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     gulp.src(<span class="string">'src/css/index.css'</span>)</span><br><span class="line">         .pipe(autoprefixer(&#123;</span><br><span class="line">             browsers: [<span class="string">'last 2 versions'</span>, <span class="string">'Android &gt;= 4.0'</span>,<span class="string">'last 2 Explorer versions'</span>],</span><br><span class="line">             cascade: <span class="literal">false</span>, <span class="comment">//是否美化属性值 默认：true 像这样：</span></span><br><span class="line">             <span class="comment">//-webkit-transform: rotate(45deg);</span></span><br><span class="line">             <span class="comment">//        transform: rotate(45deg);</span></span><br><span class="line">             remove:<span class="literal">true</span> <span class="comment">//是否去掉不必要的前缀 默认：true</span></span><br><span class="line">         &#125;))</span><br><span class="line">         .pipe(gulp.dest(<span class="string">'dist/css'</span>));</span><br><span class="line"> &#125;);</span><br><span class="line"> gulp.task(<span class="string">'default'</span>,[<span class="string">'testLess'</span>, <span class="string">'elseTask'</span>]); <span class="comment">//定义默认任务 elseTask为其他任务，该示例没有定义elseTask任务</span></span><br><span class="line"> <span class="comment">//当执行gulp default或gulp将会调用default任务里的所有任务[‘testLess’,’elseTask’]。</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">//gulp.task(name[, deps], fn) 定义任务  name：任务名称 deps：依赖任务名称 fn：回调函数</span></span><br><span class="line"> <span class="comment">//gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组) </span></span><br><span class="line"> <span class="comment">//gulp.dest(path[, options]) 处理完后文件生成路径</span></span><br></pre></td></tr></table></figure>
+
+<p>　　以上为我现在本地的配置内容，最基础的使用足够，还有更深度的配置可参照 <a href="http://www.ydcss.com/archives/category/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7" target="_blank" rel="noopener">一点|gulp详细入门教程</a>，gulp 相关的 API 介绍看 <a href="http://www.ydcss.com/archives/424" target="_blank" rel="noopener">这里</a> 。</p>
+<h3 id="1-命令提示符运行-gulp-任务"><a href="#1-命令提示符运行-gulp-任务" class="headerlink" title="1. 命令提示符运行 gulp 任务"></a>1. 命令提示符运行 gulp 任务</h3><p>　　<strong>运行 gulp 时执行命令提示符 <em>gulp 任务名称</em>，例如：编译less：命令提示符执行 <em>gulp testLess</em>。</strong></p>
+<img src="/styles/images/gulp/gulp-cmd.png" alt="命令提示符运行 gulp 任务">
+
+<h3 id="2-webstorm-运行gulp任务"><a href="#2-webstorm-运行gulp任务" class="headerlink" title="2. webstorm 运行gulp任务"></a>2. webstorm 运行gulp任务</h3><p>　　使用 webstorm 可视化运行 gulp 任务，首先将项目导入 webstorm ，右键 gulpfile.js  选择 ”Show Gulp Tasks” 打开 Gulp 窗口，若出现 ”No task found” ，选择右键 ”Reload tasks” ，双击运行即可。</p>
+<p><img src="/styles/images/gulp/gulp-w1.png" alt="webstorm运行gulp任务"><img src="/styles/images/gulp/gulp-w2.png" alt="webstorm运行gulp任务"></p>
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>安装 nodejs；</p>
+</li>
+<li><p>新建 package.json 文件；</p>
+</li>
+<li><p>全局和本地安装 gulp；</p>
+</li>
+<li><p>安装 gulp 插件；</p>
+</li>
+<li><p>新建 gulpfile.js 文件；</p>
+</li>
+<li><p>通过命令提示符或 webstorm 运行 gulp 任务。</p>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/01/11/article-gulp-configure/" title="gulp 实用指南">https://doubleray.top/2017/01/11/article-gulp-configure/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp/" rel="tag"># gulp</a>
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/11/article-awesome-gulp/" rel="next" title="awesome-gulp 中文版">
+                <i class="fa fa-chevron-left"></i> awesome-gulp 中文版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/13/article-js-variate/" rel="prev" title="JavaScript 变量作用域">
+                JavaScript 变量作用域 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-配置"><span class="nav-text">gulp 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-js-安装"><span class="nav-text">1. node.js 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-npm-使用"><span class="nav-text">2. npm 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gulp-安装"><span class="nav-text">3. gulp 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-全局安装-gulp"><span class="nav-text">3.1 全局安装 gulp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-本地安装-gulp"><span class="nav-text">3.2 本地安装 gulp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-gulp-插件安装"><span class="nav-text">4. gulp 插件安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-运行"><span class="nav-text">gulp 运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-命令提示符运行-gulp-任务"><span class="nav-text">1. 命令提示符运行 gulp 任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-webstorm-运行gulp任务"><span class="nav-text">2. webstorm 运行gulp任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="gulp,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="一份gulp的资源，插件和使用实例清单， 致力于打造更好的前端工程构建流程。  本文转自 Pines-Cheng  github 的 awesome-gulp-cn 项目。 被老外的awesome 清单刺激到，觉得有必要翻译一份，为国产的程序员们做点事情，本清单将保持实时更新同步。">
+<meta name="keywords" content="gulp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="awesome-gulp 中文版">
+<meta property="og:url" content="https://doubleray.top/2017/01/11/article-awesome-gulp/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="一份gulp的资源，插件和使用实例清单， 致力于打造更好的前端工程构建流程。  本文转自 Pines-Cheng  github 的 awesome-gulp-cn 项目。 被老外的awesome 清单刺激到，觉得有必要翻译一份，为国产的程序员们做点事情，本清单将保持实时更新同步。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="awesome-gulp 中文版">
+<meta name="twitter:description" content="一份gulp的资源，插件和使用实例清单， 致力于打造更好的前端工程构建流程。  本文转自 Pines-Cheng  github 的 awesome-gulp-cn 项目。 被老外的awesome 清单刺激到，觉得有必要翻译一份，为国产的程序员们做点事情，本清单将保持实时更新同步。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/01/11/article-awesome-gulp/">
+
+
+
+
+
+  <title>awesome-gulp 中文版 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/01/11/article-awesome-gulp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">awesome-gulp 中文版</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-11T10:13:05+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/干货分享/" itemprop="url" rel="index">
+                    <span itemprop="name">干货分享</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/11/article-awesome-gulp/" class="leancloud_visitors" data-flag-title="awesome-gulp 中文版">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>一份<a href="https://github.com/gulpjs/gulp" target="_blank" rel="noopener">gulp</a>的资源，插件和使用实例清单， 致力于打造更好的前端工程构建流程。</li>
+</ul>
+<p><strong>本文转自 <a href="https://github.com/Pines-Cheng/" target="_blank" rel="noopener">Pines-Cheng</a>  github 的 <a href="https://github.com/Pines-Cheng/awesome-gulp-cn" target="_blank" rel="noopener">awesome-gulp-cn</a> 项目。</strong></p>
+<p>被老外的<a href="https://github.com/sindresorhus/awesome" target="_blank" rel="noopener">awesome</a> 清单刺激到，觉得有必要翻译一份，为国产的程序员们做点事情，本清单将保持实时更新同步。<a id="more"></a>PS:进都进来了，就顺便看看其他的吧:</p>
+<ul>
+<li><a href="https://github.com/Pines-Cheng/awesome-nodejs-cn" target="_blank" rel="noopener">awesome-nodejs-cn</a></li>
+<li><a href="https://github.com/Pines-Cheng/awesome-react-cn" target="_blank" rel="noopener">awesome-react-cn</a></li>
+<li><a href="https://github.com/Pines-Cheng/awesome-npm-cn" target="_blank" rel="noopener">awesome-npm-cn</a></li>
+<li><a href="https://github.com/Pines-Cheng/awesome-react-native-cn" target="_blank" rel="noopener">awesome-react-native-cn</a></li>
+</ul>
+<blockquote>
+<p>项目的Github地址：<a href="https://github.com/Pines-Cheng/awesome-gulp-cn" target="_blank" rel="noopener">awesome-react-cn</a>,欢迎start。</p>
+<p>翻译得仓促，如有问题，请提<a href="https://github.com/Pines-Cheng/awesome-gulp-cn/issues" target="_blank" rel="noopener">issues</a>。</p>
+<p>如果想贡献，请<a href="https://github.com/Pines-Cheng/awesome-gulp-cn/pulls" target="_blank" rel="noopener">Pull Requests</a>。</p>
+</blockquote>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#资源">资源</a><ul>
+<li><a href="#通用资源">通用资源</a></li>
+<li><a href="#官方文档">官方文档</a></li>
+<li><a href="#组织">组织</a></li>
+<li><a href="#入门教程">入门教程</a><ul>
+<li><a href="#gulp入门">Gulp 入门</a></li>
+<li><a href="#gulp-4-入门">Gulp 4 入门</a></li>
+<li><a href="#gulp-with-browserify">Gulp with Browserify</a></li>
+<li><a href="#gulp-with-browserify">Gulp with Angular</a></li>
+<li><a href="#gulp-with-angular-and-browserify">Gulp with Angular and Browserify</a></li>
+<li><a href="#gulp-with-angular-and-webpack">Gulp with Angular and Webpack</a></li>
+<li><a href="#gulp-with-react-and-browserify">Gulp with React and Browserify</a></li>
+<li><a href="#gulp-with-ember">Gulp with Ember</a></li>
+</ul>
+</li>
+<li><a href="#其他资源">其他资源</a></li>
+</ul>
+</li>
+<li><a href="#插件">插件</a><ul>
+<li><a href="#编辑">编辑</a></li>
+<li><a href="#编译">编译</a></li>
+<li><a href="#合并">合并</a></li>
+<li><a href="#压缩">压缩</a></li>
+<li><a href="#优化">优化</a></li>
+<li><a href="#资源注入">资源注入</a></li>
+<li><a href="#模板">模板</a></li>
+<li><a href="#代码校验">代码校验</a></li>
+<li><a href="#实时加载">实时加载</a></li>
+<li><a href="#缓存">缓存</a></li>
+<li><a href="#流控制">流控制</a></li>
+<li><a href="#日志">日志</a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#其他插件">其他插件</a></li>
+</ul>
+</li>
+<li><a href="#脚手架">脚手架</a><ul>
+<li><a href="#参考工程">参考工程</a></li>
+<li><a href="#yeoman生成器">Yeoman生成器</a></li>
+</ul>
+</li>
+<li><a href="#其他">其他</a></li>
+</ul>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><h3 id="1-通用资源"><a href="#1-通用资源" class="headerlink" title="1.通用资源"></a>1.通用资源</h3><ul>
+<li><a href="http://gulpjs.com/" target="_blank" rel="noopener">官网</a></li>
+<li><a href="https://github.com/gulpjs/gulp" target="_blank" rel="noopener">Github库</a></li>
+<li><a href="http://gulpjs.com/plugins/" target="_blank" rel="noopener">插件注册</a></li>
+<li><a href="https://www.npmjs.com/package/gulp" target="_blank" rel="noopener">NPM模块</a></li>
+<li><a href="https://github.com/gulpjs/plugins/blob/master/src/blackList.json" target="_blank" rel="noopener">插件黑名单</a></li>
+</ul>
+<h3 id="2-官方文档"><a href="#2-官方文档" class="headerlink" title="2.官方文档"></a>2.官方文档</h3><ul>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md" target="_blank" rel="noopener">快速开始</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md" target="_blank" rel="noopener">API文档</a></li>
+<li><a href="https://github.com/gulpjs/gulp/tree/master/docs#articles" target="_blank" rel="noopener">CLI 文档</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md" target="_blank" rel="noopener">开始写一个插件</a></li>
+<li><a href="https://github.com/gulpjs/gulp/tree/master/docs/recipes" target="_blank" rel="noopener">使用诀窍</a></li>
+</ul>
+<h3 id="3-组织"><a href="#3-组织" class="headerlink" title="3.组织"></a>3.组织</h3><ul>
+<li><a href="http://stackoverflow.com/questions/tagged/gulp" target="_blank" rel="noopener">StackOverflow</a></li>
+<li><a href="https://twitter.com/gulpjs" target="_blank" rel="noopener">Twitter</a></li>
+</ul>
+<h3 id="4-入门教程"><a href="#4-入门教程" class="headerlink" title="4.入门教程"></a>4.入门教程</h3><h4 id="1）Gulp入门"><a href="#1）Gulp入门" class="headerlink" title="1）Gulp入门"></a>1）Gulp入门</h4><ul>
+<li><a href="https://www.smashingmagazine.com/2014/06/building-with-gulp/" target="_blank" rel="noopener">使用Gulp构建前端工程</a></li>
+<li><a href="https://scotch.io/tutorials/automate-your-tasks-easily-with-gulp-js" target="_blank" rel="noopener">通过Gulp.js轻松自动化构建你的前端工程</a></li>
+<li><a href="https://medium.com/@contrahacks/gulp-3828e8126466" target="_blank" rel="noopener">Gulp，让前端工程可视化</a></li>
+<li><a href="http://stefanimhoff.de/tag/gulp/" target="_blank" rel="noopener">Gulp.js是什么？</a></li>
+<li><a href="http://blog.johnnyreilly.com/2015/02/using-gulp-in-asp-net-instead-of-web-optimization.html" target="_blank" rel="noopener">使用Gulp在你的HTML中直接插入Scripts和Styles标签</a></li>
+<li><a href="http://denbuzze.com/post/5-lessons-learned-using-gulpjs/" target="_blank" rel="noopener">5节课学会使用Gulp.js</a></li>
+<li><a href="http://lab.brightnorth.co.uk/2014/08/13/automating-linkage-how-i-learned-to-stop-worrying-and-love-the-build/" target="_blank" rel="noopener">我是怎样摆脱前端工程的困扰的？</a></li>
+<li><a href="https://www.codementor.io/development-process/tutorial/how-to-set-up-gulp-beginner-guide#/" target="_blank" rel="noopener">第一次开始Gulp Task</a></li>
+<li><a href="http://blog.overzealous.com/post/74121048393/why-you-shouldnt-create-a-gulp-plugin-or-how-to" target="_blank" rel="noopener">为什么你不自己写一个Gulp插件？</a></li>
+<li><a href="http://blog.rangle.io/angular-gulp-bestpractices/" target="_blank" rel="noopener">6个最好的从根本改善你的开发经验的Gulp实战练习</a></li>
+<li><a href="https://css-tricks.com/gulp-for-beginners/" target="_blank" rel="noopener">Gulp初学者教程</a></li>
+</ul>
+<h4 id="2）Gulp-4-入门"><a href="#2）Gulp-4-入门" class="headerlink" title="2）Gulp 4 入门"></a>2）Gulp 4 入门</h4><ul>
+<li><a href="https://blog.wearewizards.io/migrating-to-gulp-4-by-example" target="_blank" rel="noopener">迁移到Gulp 4的例子</a></li>
+<li><a href="http://fettblog.eu/gulp-4-parallel-and-series/" target="_blank" rel="noopener">Gulp 4: 新的task执行系统 - gulp.parallel 和 gulp.series</a></li>
+</ul>
+<h4 id="3）Gulp-with-Browserify"><a href="#3）Gulp-with-Browserify" class="headerlink" title="3）Gulp with Browserify"></a>3）Gulp with Browserify</h4><ul>
+<li><a href="https://medium.com/@sogko/gulp-browserify-the-gulp-y-way-bb359b3f9623" target="_blank" rel="noopener">Gulp + Browserify, the Gulp-y Way</a></li>
+<li><a href="https://viget.com/extend/gulp-browserify-starter-faq" target="_blank" rel="noopener">Gulp + Browserify</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/fast-browserify-builds-with-watchify.md" target="_blank" rel="noopener">快速构建Browserify和Watchify</a></li>
+</ul>
+<h4 id="4）Gulp-with-Angular"><a href="#4）Gulp-with-Angular" class="headerlink" title="4）Gulp with Angular"></a>4）Gulp with Angular</h4><ul>
+<li><a href="http://blog.jhades.org/what-every-angular-project-likely-needs-and-a-gulp-build-to-provide-it/" target="_blank" rel="noopener">Angular工程需要什么 - Gulp能提供什么</a></li>
+</ul>
+<h4 id="5）Gulp-with-Angular-and-Browserify"><a href="#5）Gulp-with-Angular-and-Browserify" class="headerlink" title="5）Gulp with Angular and Browserify"></a>5）Gulp with Angular and Browserify</h4><ul>
+<li><a href="http://omarfouad.com/blog/2015/03/21/advanced-angularjs-structure-with-gulp-node-and-browserify/" target="_blank" rel="noopener">使用 Gulp, Node and Browserify构建先进的 AngularJS工程结构</a></li>
+</ul>
+<h4 id="6）Gulp-with-React-and-Browserify"><a href="#6）Gulp-with-React-and-Browserify" class="headerlink" title="6）Gulp with React and Browserify"></a>6）Gulp with React and Browserify</h4><ul>
+<li><a href="https://hacks.mozilla.org/2014/08/browserify-and-gulp-with-react/" target="_blank" rel="noopener">Browserify、Gulp 和 React</a></li>
+<li><a href="http://pomax.github.io/1420592591221/taking-react-to-the-next-level-mixins-gulp-and-browserify" target="_blank" rel="noopener">Taking React to the Next Level: Mixins, Gulp, and Browserify</a></li>
+</ul>
+<h4 id="7）Gulp-with-Ember"><a href="#7）Gulp-with-Ember" class="headerlink" title="7）Gulp with Ember"></a>7）Gulp with Ember</h4><ul>
+<li><a href="http://www.sitepoint.com/improving-ember-js-workflow-using-gulp-js/" target="_blank" rel="noopener">使用Gulp.js改进你的Ember.js工作流</a></li>
+</ul>
+<h3 id="5-其他资源"><a href="#5-其他资源" class="headerlink" title="5.其他资源"></a>5.其他资源</h3><ul>
+<li><a href="https://github.com/osscafe/gulp-cheatsheet" target="_blank" rel="noopener">Gulp 备忘录</a></li>
+<li><a href="https://github.com/johnpapa/gulp-patterns" target="_blank" rel="noopener">Gulp清单</a></li>
+</ul>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="1-编译"><a href="#1-编译" class="headerlink" title="1.编译"></a>1.编译</h3><ul>
+<li><p><a href="https://github.com/dlmanning/gulp-sass" target="_blank" rel="noopener">gulp-sass</a> - 通过 <a href="https://github.com/sass/libsass" target="_blank" rel="noopener">libsass</a>将Sass编译成 CSS </p>
+</li>
+<li><p><a href="https://github.com/sindresorhus/gulp-ruby-sass" target="_blank" rel="noopener">gulp-ruby-sass</a> - 通过 Ruby Sass将Sass编译成CSS </p>
+</li>
+<li><p><a href="https://github.com/appleboy/gulp-compass" target="_blank" rel="noopener">gulp-compass</a> - 通过 Ruby Sass和CompassSass编译成CSS </p>
+</li>
+<li><p><a href="https://github.com/plus3network/gulp-less" target="_blank" rel="noopener">gulp-less</a> - <a href="https://github.com/less/less.js" target="_blank" rel="noopener">Less</a>编译成 CSS.</p>
+</li>
+<li><p><a href="https://github.com/stevelacy/gulp-stylus" target="_blank" rel="noopener">gulp-stylus</a> - <a href="https://github.com/stylus/stylus" target="_blank" rel="noopener">Stylus</a> 编译成 CSS.</p>
+</li>
+<li><p><a href="https://github.com/postcss/gulp-postcss" target="_blank" rel="noopener">gulp-postcss</a> - Pipe CSS 通过 <a href="https://github.com/postcss/postcss" target="_blank" rel="noopener">PostCSS</a> processors with a single parse.</p>
+</li>
+<li><p><a href="https://github.com/contra/gulp-coffee" target="_blank" rel="noopener">gulp-coffee</a> - <a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="noopener">Coffeescript</a> 编译成 JavaScript.</p>
+</li>
+<li><p><a href="https://github.com/ivogabe/gulp-typescript" target="_blank" rel="noopener">gulp-typescript</a> - <a href="https://github.com/Microsoft/TypeScript" target="_blank" rel="noopener">TypeScript</a>编译成JavaScript.</p>
+</li>
+<li><p><a href="https://github.com/sindresorhus/gulp-react" target="_blank" rel="noopener">gulp-react</a> - Facebook <a href="https://github.com/facebook/react" target="_blank" rel="noopener">React</a> JSX 模板编译成JavaScript.</p>
+</li>
+<li><p><a href="https://github.com/shama/webpack-stream" target="_blank" rel="noopener">webpack-stream</a> - 将<a href="https://github.com/webpack/webpack" target="_blank" rel="noopener">webpack</a>集成在Gulp中使用。</p>
+</li>
+<li><p><a href="https://github.com/babel/gulp-babel" target="_blank" rel="noopener">gulp-babel</a> - ES6编译成ES5 通过 <a href="https://github.com/babel/babel" target="_blank" rel="noopener">babel</a>.</p>
+</li>
+<li><p><a href="https://github.com/sindresorhus/gulp-traceur" target="_blank" rel="noopener">gulp-traceur</a> - ES6编译成ES5 通过 <a href="https://github.com/google/traceur-compiler" target="_blank" rel="noopener">Traceur</a>.</p>
+</li>
+<li><p><a href="https://github.com/sindresorhus/gulp-regenerator" target="_blank" rel="noopener">gulp-regenerator</a> - ES6编译成ES5 通过 <a href="https://github.com/facebook/regenerator" target="_blank" rel="noopener">Regenerator</a>.</p>
+</li>
+<li><p><a href="https://github.com/sindresorhus/gulp-es6-transpiler" target="_blank" rel="noopener">gulp-es6-transpiler</a> - [过时的] ES6编译成ES5 通过 <a href="https://github.com/termi/es6-transpiler" target="_blank" rel="noopener">es6-transpiler</a>.</p>
+</li>
+<li><p><a href="https://github.com/sindresorhus/gulp-myth" target="_blank" rel="noopener">gulp-myth</a> - <a href="https://github.com/segmentio/myth" target="_blank" rel="noopener">Myth</a> - a polyfill for future versions of the CSS spec.</p>
+</li>
+<li><p><a href="https://github.com/MoOx/gulp-cssnext" target="_blank" rel="noopener">gulp-cssnext</a> - [过时的] 使用下一代的 CSS 规范通过 <a href="https://github.com/MoOx/postcss-cssnext" target="_blank" rel="noopener">cssnext</a>.</p>
+</li>
+</ul>
+<h3 id="2-合并"><a href="#2-合并" class="headerlink" title="2.合并"></a>2.合并</h3><ul>
+<li><a href="https://github.com/contra/gulp-concat" target="_blank" rel="noopener">gulp-concat</a> - 合并文件.</li>
+</ul>
+<h3 id="3-压缩"><a href="#3-压缩" class="headerlink" title="3.压缩"></a>3.压缩</h3><ul>
+<li><a href="https://github.com/scniro/gulp-clean-css" target="_blank" rel="noopener">gulp-clean-css</a> - 压缩 CSS 通过 <a href="https://github.com/jakubpawlowicz/clean-css" target="_blank" rel="noopener">clean-css</a>.</li>
+<li><a href="https://github.com/ben-eb/gulp-csso" target="_blank" rel="noopener">gulp-csso</a> - 压缩 CSS 通过 <a href="https://github.com/css/csso" target="_blank" rel="noopener">CSSO</a>.</li>
+<li><a href="https://github.com/terinjokes/gulp-uglify" target="_blank" rel="noopener">gulp-uglify</a> - 压缩 JavaScript 通过 <a href="https://github.com/mishoo/UglifyJS2" target="_blank" rel="noopener">UglifyJS2</a>.</li>
+<li><a href="https://github.com/jonschlinkert/gulp-htmlmin" target="_blank" rel="noopener">gulp-htmlmin</a> - 压缩 HTML 通过 <a href="https://github.com/kangax/html-minifier" target="_blank" rel="noopener">html-minifier</a>.</li>
+<li><a href="https://github.com/murphydanger/gulp-minify-html" target="_blank" rel="noopener">gulp-minify-html</a> - 压缩 HTML 通过<br><a href="https://github.com/Swaagie/minimize" target="_blank" rel="noopener">Minimize</a>.</li>
+<li><a href="https://github.com/sindresorhus/gulp-imagemin" target="_blank" rel="noopener">gulp-imagemin</a> - 压缩 PNG, JPEG, GIF and SVG 图片 通过 <a href="https://github.com/imagemin/imagemin" target="_blank" rel="noopener">imagemin</a>.</li>
+<li><a href="https://github.com/ben-eb/gulp-svgmin" target="_blank" rel="noopener">gulp-svgmin</a> - 通过Gulp压缩 SVG 文件</li>
+</ul>
+<h3 id="4-优化"><a href="#4-优化" class="headerlink" title="4.优化"></a>4.优化</h3><ul>
+<li><a href="https://github.com/ben-eb/gulp-uncss" target="_blank" rel="noopener">gulp-uncss</a> - 移除未使用的CSS选择器通过 <a href="https://github.com/giakki/uncss" target="_blank" rel="noopener">UnCSS</a>.</li>
+<li><a href="https://github.com/zckrs/gulp-css-base64" target="_blank" rel="noopener">gulp-css-base64</a> - 将CSS文件中所有的资源(有url()声明的)变成base64-encoded 数据的URI字符串</li>
+<li><a href="https://github.com/akoenig/gulp-svg2png" target="_blank" rel="noopener">gulp-svg2png</a> - 将SVGs转换成PNGs</li>
+<li><a href="https://github.com/mahnunchik/gulp-responsive" target="_blank" rel="noopener">gulp-responsive</a> - 生成不同尺寸的图片</li>
+<li><a href="https://github.com/w0rm/gulp-svgstore" target="_blank" rel="noopener">gulp-svgstore</a> -将svg files 合并成一个通过<symbol> 元素</symbol></li>
+<li><a href="https://github.com/nfroidure/gulp-iconfont" target="_blank" rel="noopener">gulp-iconfont</a> - 通过SVG icons创建 icon fonts</li>
+</ul>
+<h3 id="5-资源注入"><a href="#5-资源注入" class="headerlink" title="5.资源注入"></a>5.资源注入</h3><ul>
+<li><a href="https://github.com/jonkemp/gulp-useref" target="_blank" rel="noopener">gulp-useref</a> - 解析HTML文件中特殊标签里面的script或style标签，合并成一个script或css文件，并替换。</li>
+<li><a href="https://github.com/klei/gulp-inject" target="_blank" rel="noopener">gulp-inject</a> - 将指定的css或js文件以标签的形式插入到HTML中的指定标志内。</li>
+<li><a href="https://github.com/taptapship/wiredep" target="_blank" rel="noopener">wiredep</a> - 将Bower依赖自动注入HTML文件中。</li>
+</ul>
+<h3 id="6-模板"><a href="#6-模板" class="headerlink" title="6.模板"></a>6.模板</h3><ul>
+<li><a href="https://github.com/miickel/gulp-angular-templatecache" target="_blank" rel="noopener">gulp-angular-templatecache</a> - 在$templateCache中联系并注册AngularJS模板</li>
+<li><a href="https://github.com/phated/gulp-jade" target="_blank" rel="noopener">gulp-jade</a> - <a href="https://github.com/pugjs/jade" target="_blank" rel="noopener">Jade</a> 转换成 HTML.</li>
+<li><a href="https://github.com/lazd/gulp-handlebars" target="_blank" rel="noopener">gulp-handlebars</a> - <a href="https://github.com/wycats/handlebars.js" target="_blank" rel="noopener">Handlebars</a>模板转换成 JavaScript.</li>
+<li><a href="https://github.com/shannonmoeller/gulp-hb" target="_blank" rel="noopener">gulp-hb</a> - <a href="https://github.com/wycats/handlebars.js" target="_blank" rel="noopener">Handlebars</a> 模板转换成 HTML.</li>
+<li><a href="https://github.com/sindresorhus/gulp-nunjucks" target="_blank" rel="noopener">gulp-nunjucks</a> - <a href="https://github.com/mozilla/nunjucks" target="_blank" rel="noopener">Nunjucks</a>模板转换成JavaScript.</li>
+<li><a href="https://github.com/sindresorhus/gulp-dust" target="_blank" rel="noopener">gulp-dustjs</a> - <a href="https://github.com/linkedin/dustjs" target="_blank" rel="noopener">Dust</a>模板转换成JavaScript.</li>
+<li><a href="https://github.com/e-jigsaw/gulp-riot" target="_blank" rel="noopener">gulp-riot</a> - <a href="https://github.com/riot/riot" target="_blank" rel="noopener">Riot</a>模板转换成JavaScript.</li>
+<li><a href="https://github.com/sindresorhus/gulp-markdown" target="_blank" rel="noopener">gulp-markdown</a> - Markdown → HTML.</li>
+<li><a href="https://github.com/sindresorhus/gulp-template" target="_blank" rel="noopener">gulp-template</a> - <a href="https://github.com/lodash/lodash" target="_blank" rel="noopener">Lodash </a>模板转换成JavaScript.</li>
+<li><a href="https://github.com/colynb/gulp-swig" target="_blank" rel="noopener">gulp-swig</a> - <a href="https://github.com/paularmstrong/swig" target="_blank" rel="noopener">Swig</a>模板转换成HTML.</li>
+<li><a href="https://github.com/denysdovhan/gulp-remark" target="_blank" rel="noopener">gulp-remark</a> - Gulp plugin for [remark]的Gulp插件(<a href="https://github.com/wooorm/remark" target="_blank" rel="noopener">https://github.com/wooorm/remark</a>) 通过插件处理markdown</li>
+</ul>
+<h3 id="7-代码校验"><a href="#7-代码校验" class="headerlink" title="7.代码校验"></a>7.代码校验</h3><ul>
+<li><a href="https://www.npmjs.com/package/gulp-csslint" target="_blank" rel="noopener">gulp-csslint</a> - 通过<a href="https://github.com/CSSLint/csslint" target="_blank" rel="noopener">CSSLint</a>自动校验CSS.</li>
+<li><a href="https://github.com/bezoerb/gulp-htmlhint" target="_blank" rel="noopener">gulp-htmlhint</a> - 通过<a href="https://github.com/yaniswang/HTMLHint" target="_blank" rel="noopener">HTMLHint</a>校验HTML.</li>
+<li><a href="https://github.com/spalger/gulp-jshint" target="_blank" rel="noopener">gulp-jshint</a> - 通过<a href="https://github.com/jshint/jshint" target="_blank" rel="noopener">JSHint</a>发现错误和潜在的问题.</li>
+<li><a href="https://github.com/jscs-dev/gulp-jscs" target="_blank" rel="noopener">gulp-jscs</a> - 通过<a href="https://github.com/jscs-dev/node-jscs" target="_blank" rel="noopener">jscs</a>检查JavaScript代码风格.</li>
+<li><a href="https://github.com/janraasch/gulp-coffeelint" target="_blank" rel="noopener">gulp-coffeelint</a> - 一种用来保证<a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="noopener">CoffeeScript</a>代码风格统一的检查。</li>
+<li><a href="https://github.com/panuhorsmalahti/gulp-tslint" target="_blank" rel="noopener">gulp-tslint</a> - gulp的<a href="https://github.com/Microsoft/TypeScript" target="_blank" rel="noopener">TypeScript</a>代码校验插件.</li>
+<li><a href="https://github.com/adametry/gulp-eslint" target="_blank" rel="noopener">gulp-eslint</a> - ECMAScript/JavaScript代码校验.</li>
+<li><a href="https://github.com/callumacrae/gulp-w3cjs" target="_blank" rel="noopener">gulp-w3cjs</a> - 通过<a href="https://github.com/thomasdavis/w3cjs" target="_blank" rel="noopener">w3cjs</a>检验HTML.</li>
+<li><a href="https://github.com/lesshint/gulp-lesshint" target="_blank" rel="noopener">gulp-lesshint</a> - 通过<a href="https://github.com/lesshint/lesshint" target="_blank" rel="noopener">lesshint</a>校验LESS.</li>
+</ul>
+<h3 id="8-实时加载"><a href="#8-实时加载" class="headerlink" title="8.实时加载"></a>8.实时加载</h3><ul>
+<li><a href="https://github.com/BrowserSync/browser-sync" target="_blank" rel="noopener">browser-sync</a> - 保证多个浏览器或设备网页同步显示 (<a href="https://github.com/BrowserSync/gulp-browser-sync" target="_blank" rel="noopener">recipes</a>).</li>
+<li><a href="https://github.com/vohof/gulp-livereload" target="_blank" rel="noopener">gulp-livereload</a> - Gulp的实时加载插件.</li>
+</ul>
+<h3 id="9-缓存"><a href="#9-缓存" class="headerlink" title="9.缓存"></a>9.缓存</h3><ul>
+<li><a href="https://github.com/sindresorhus/gulp-changed" target="_blank" rel="noopener">gulp-changed</a> - 仅让发生改变的文件通过.</li>
+<li><a href="https://github.com/contra/gulp-cached" target="_blank" rel="noopener">gulp-cached</a> - 一个简单的文件内存缓存.</li>
+<li><a href="https://github.com/ahaurw01/gulp-remember" target="_blank" rel="noopener">gulp-remember</a> - 记忆并回收通过了的文件.</li>
+<li><a href="https://github.com/tschaub/gulp-newer" target="_blank" rel="noopener">gulp-newer</a> - 只让新的源码通过.</li>
+</ul>
+<h3 id="10-流控制"><a href="#10-流控制" class="headerlink" title="10.流控制"></a>10.流控制</h3><ul>
+<li><a href="https://github.com/grncdr/merge-stream" target="_blank" rel="noopener">merge-stream</a> - 合并多个流到一个插入的流.</li>
+<li><a href="https://github.com/nfroidure/StreamQueue" target="_blank" rel="noopener">streamqueue</a> - 逐渐输入队列的流.</li>
+<li><a href="https://github.com/OverZealous/run-sequence" target="_blank" rel="noopener">run-sequence</a> - 按要求运行一些依赖的Gulptask.</li>
+<li><a href="https://github.com/robrich/gulp-if" target="_blank" rel="noopener">gulp-if</a> - 按照条件运行task.</li>
+</ul>
+<h3 id="11-日志"><a href="#11-日志" class="headerlink" title="11.日志"></a>11.日志</h3><ul>
+<li><a href="https://github.com/mikaelbr/gulp-notify" target="_blank" rel="noopener">gulp-notify</a> - Gulp的通知插件.</li>
+<li><a href="https://github.com/sindresorhus/gulp-size" target="_blank" rel="noopener">gulp-size</a> - 显示你的项目的大小.</li>
+<li><a href="https://github.com/sindresorhus/gulp-debug" target="_blank" rel="noopener">gulp-debug</a> - 通过调试文件流来观察那些文件通过了你的Gulp管道.</li>
+</ul>
+<h3 id="12-测试"><a href="#12-测试" class="headerlink" title="12.测试"></a>12.测试</h3><ul>
+<li><a href="https://github.com/sindresorhus/gulp-mocha" target="_blank" rel="noopener">gulp-mocha</a> - 运行<a href="https://github.com/mochajs/mocha" target="_blank" rel="noopener">Mocha</a>测试用例.</li>
+<li><a href="https://github.com/sindresorhus/gulp-jasmine" target="_blank" rel="noopener">gulp-jasmine</a> - 在Node.js中运行<a href="https://github.com/jasmine/jasmine" target="_blank" rel="noopener">Jasmine 2</a> 测试用例.</li>
+<li><a href="https://github.com/mllrsohn/gulp-protractor" target="_blank" rel="noopener">gulp-protractor</a> - 为<a href="https://github.com/angular/protractor" target="_blank" rel="noopener">Protractor</a>测试用例包裹Gulp.</li>
+<li><a href="https://github.com/dylanb/gulp-coverage" target="_blank" rel="noopener">gulp-coverage</a> - 为Node.js覆盖相对于运行的测试运行独立的报告.</li>
+<li><a href="https://github.com/karma-runner/gulp-karma" target="_blank" rel="noopener">gulp-karma</a> - 通过Gulp运行Karma测试用例.</li>
+<li><a href="https://github.com/sindresorhus/gulp-ava" target="_blank" rel="noopener">gulp-ava</a>- 通过Gulp运行<a href="https://github.com/sindresorhus/ava" target="_blank" rel="noopener">AVA</a> 测试用例.</li>
+</ul>
+<h3 id="13-其他插件"><a href="#13-其他插件" class="headerlink" title="13.其他插件"></a>13.其他插件</h3><ul>
+<li><a href="https://github.com/gulpjs/gulp-util" target="_blank" rel="noopener">gulp-util</a> - 包含一系列有用插件.</li>
+<li><a href="https://github.com/floatdrop/gulp-plumber" target="_blank" rel="noopener">gulp-plumber</a> - 防止错误引起管道中断Prevent pipe breaking caused by errors.</li>
+<li><a href="https://github.com/jackfranklin/gulp-load-plugins" target="_blank" rel="noopener">gulp-load-plugins</a> - 自动加载Gulp插件.</li>
+<li><a href="https://github.com/ck86/main-bower-files" target="_blank" rel="noopener">main-bower-files</a> - 构建时自动获取bower库的文件.</li>
+<li><a href="https://github.com/postcss/autoprefixer" target="_blank" rel="noopener">autoprefixer</a> - 解析CSS且根据规则添加浏览器兼容性前缀.</li>
+<li><a href="https://github.com/floridoo/gulp-sourcemaps" target="_blank" rel="noopener">gulp-sourcemaps</a> - 提供source map支持.</li>
+<li><a href="https://github.com/lazd/gulp-replace" target="_blank" rel="noopener">gulp-replace</a> - Gulp的一个字符串替换插件.</li>
+<li><a href="https://github.com/hparra/gulp-rename" target="_blank" rel="noopener">gulp-rename</a> - 轻松重命名文件.</li>
+<li><a href="https://github.com/sindresorhus/gulp-rev" target="_blank" rel="noopener">gulp-rev</a> - 在静态文件名的后面添加hash值，如: unicorn.css → unicorn-d41d8cd98f.css.</li>
+<li><a href="https://github.com/sindresorhus/del" target="_blank" rel="noopener">del</a> - 使用globs删除文件/文件夹.</li>
+<li><a href="https://github.com/robrich/gulp-exec" target="_blank" rel="noopener">gulp-exec</a> - 运行一个shell命令.</li>
+<li><a href="https://github.com/sindresorhus/gulp-strip-debug" target="_blank" rel="noopener">gulp-strip-debug</a> - 除去javascript代码中的console,alert,debugger声明.</li>
+<li><a href="https://github.com/unlight/gulp-cssimport" target="_blank" rel="noopener">gulp-cssimport</a> - 解析CSS文件，找到imports,将连接文件替换成imort声明.</li>
+<li><a href="https://github.com/jonkemp/gulp-inline-css" target="_blank" rel="noopener">gulp-inline-css</a> - 将HTML中的css属性放到style标签中.</li>
+<li><a href="https://github.com/shinnn/gulp-gh-pages" target="_blank" rel="noopener">gulp-gh-pages</a> - 将内容发布到GiHub有页面.</li>
+<li><a href="https://github.com/Kagami/gulp-ng-annotate" target="_blank" rel="noopener">gulp-ng-annotate</a> - 通过<a href="https://github.com/olov/ng-annotate" target="_blank" rel="noopener">ng-annotate</a>添加Angular依赖注入.</li>
+<li><a href="https://github.com/stevelacy/gulp-bump" target="_blank" rel="noopener">gulp-bump</a> - 通过Gulp Bump任何semvar JSON版本.</li>
+<li><a href="https://github.com/coderhaoxin/gulp-file-include" target="_blank" rel="noopener">gulp-file-include</a> - 通过Gulp Include文件.</li>
+<li><a href="https://github.com/sindresorhus/gulp-zip" target="_blank" rel="noopener">gulp-zip</a> - 以ZIP格式压缩文件.</li>
+<li><a href="https://github.com/stevelacy/gulp-git" target="_blank" rel="noopener">gulp-git</a> - 通过Gulp运行git命令.</li>
+<li><a href="https://github.com/sindresorhus/gulp-filter" target="_blank" rel="noopener">gulp-filter</a> - 使用globbing过滤文件.</li>
+<li><a href="https://github.com/jas/gulp-preprocess" target="_blank" rel="noopener">gulp-preprocess</a> - 基于自定义内容或环境配置预处理文件.</li>
+</ul>
+<h2 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h2><h3 id="1-模板"><a href="#1-模板" class="headerlink" title="1.模板"></a>1.模板</h3><ul>
+<li><a href="https://github.com/google/web-starter-kit" target="_blank" rel="noopener">web-starter-kit</a> - Google的Web Starter Kit.</li>
+<li><a href="https://github.com/sindresorhus/gulp-plugin-boilerplate" target="_blank" rel="noopener">gulp-plugin-boilerplate</a> - 创建Gulp插件的开始模板.</li>
+<li><a href="https://github.com/polymerelements/polymer-starter-kit" target="_blank" rel="noopener">polymer-starter-kit</a> -Polymer 1.0 应用的起点.</li>
+<li><a href="https://github.com/este/este" target="_blank" rel="noopener">este</a> - 同构的web应用最全面的React/Flux开发栈和开始模板.</li>
+<li><a href="https://github.com/mrmrs/mnml" target="_blank" rel="noopener">mnml</a> - 开发响应式HTML5/Sass项目的最小开始模板.</li>
+<li><a href="https://github.com/cferdinandi/kraken" target="_blank" rel="noopener">kraken</a> 一个轻量级的、移动端优先的前端开发开始模板.</li>
+<li><a href="https://github.com/jakemmarsh/angularjs-gulp-browserify-boilerplate" target="_blank" rel="noopener">angularjs-gulp-browserify-boilerplate</a> - 一个使用AngularJS, Sass, gulp, 和 Browserify技术的开始模板.</li>
+<li><a href="https://github.com/poeticninja/hapi-ninja" target="_blank" rel="noopener">hapi-ninja</a> - 一个使用Node.js, Hapi, and Swig技术的开始模板.</li>
+<li><a href="https://github.com/rappasoft/laravel-5-boilerplate" target="_blank" rel="noopener">laravel-5-boilerplate</a> - 一个Laravel 5 开始模板.</li>
+<li><a href="https://github.com/wbkd/react-starterkit" target="_blank" rel="noopener">react-starterkit</a> - 包含react-router, Reflux, jest, webpack, gulp and Stylus的React开始模板.</li>
+</ul>
+<h3 id="2-Yeoman生成器"><a href="#2-Yeoman生成器" class="headerlink" title="2.Yeoman生成器"></a>2.Yeoman生成器</h3><ul>
+<li><a href="https://github.com/yeoman/generator-gulp-webapp" target="_blank" rel="noopener">generator-gulp-webapp</a> - A 一个流行的web应用的gulp生成器.</li>
+<li><a href="https://github.com/Swiip/generator-gulp-angular" target="_blank" rel="noopener">generator-gulp-angular</a> -  使用Gulp的AngularJS 的Yeoman生成器.</li>
+<li><a href="https://github.com/randylien/generator-react-gulp-browserify" target="_blank" rel="noopener">generator-react-gulp-browserify</a> - 一个React库的Yeoman生成器，包含gulp, Browserify, Browsersync and Bootstrap.</li>
+<li><a href="https://github.com/youngmountain/generator-node-gulp" target="_blank" rel="noopener">generator-node-gulp</a> - 一个Node.js模块生成器，包含gulp和 Mocha.</li>
+<li><a href="https://github.com/niallobrien/generator-gulp-bootstrap" target="_blank" rel="noopener">generator-gulp-bootstrap</a> - 一个包含Bootstrap, gulp 和libsass的Yeoman生成器·.</li>
+<li><a href="https://github.com/jgoux/generator-angulpify" target="_blank" rel="noopener">generator-angulpify</a> -  一个包含AngularJS, gulp和Browserify的Yeoman生成器.</li>
+<li><a href="https://github.com/tmaximini/generator-ionic-gulp" target="_blank" rel="noopener">generator-ionic-gulp</a> - 一个Ionic工厂的Yeoman生成器.</li>
+<li><a href="https://github.com/sindresorhus/generator-gulp-plugin-boilerplate" target="_blank" rel="noopener">generator-gulp-plugin-boilerplate</a> -一个输出 <a href="https://github.com/sindresorhus/gulp-plugin-boilerplate" target="_blank" rel="noopener">gulp plugin boilerplate</a>的脚手架.</li>
+<li><a href="https://github.com/sondr3/generator-jekyllized" target="_blank" rel="noopener">generator-jekyllized</a> - 一个包含gulp, Sass, AutoPrefixer,资源优化，缓存等的Jekyll工作流.</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="https://github.com/laravel/elixir" target="_blank" rel="noopener">elixir</a> - 一个为你的应用定义基本的gulp任务的干净、灵活的API.</li>
+<li><a href="https://github.com/sindresorhus/gulp-app" target="_blank" rel="noopener">gulp-app</a> - 将Gulp作为一个应用(OS X).</li>
+<li><a href="https://github.com/Lostmyname/lmn-gulp-tasks" target="_blank" rel="noopener">lmn-gulp-tasks</a> - gulp任务的单元测试示例.</li>
+<li><a href="http://gulp-cookery.github.io/gulp-chef/" target="_blank" rel="noopener">gulp-chef</a> - 一个优雅的、简单的重复使用gulp task的方法.</li>
+</ul>
+<hr>
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/01/11/article-awesome-gulp/" title="awesome-gulp 中文版">https://doubleray.top/2017/01/11/article-awesome-gulp/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp/" rel="tag"># gulp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/article-liquid-skills/" rel="next" title="Liquid 指南">
+                <i class="fa fa-chevron-left"></i> Liquid 指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/11/article-gulp-configure/" rel="prev" title="gulp 实用指南">
+                gulp 实用指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-通用资源"><span class="nav-text">1.通用资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-官方文档"><span class="nav-text">2.官方文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-组织"><span class="nav-text">3.组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-入门教程"><span class="nav-text">4.入门教程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）Gulp入门"><span class="nav-text">1）Gulp入门</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）Gulp-4-入门"><span class="nav-text">2）Gulp 4 入门</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）Gulp-with-Browserify"><span class="nav-text">3）Gulp with Browserify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）Gulp-with-Angular"><span class="nav-text">4）Gulp with Angular</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5）Gulp-with-Angular-and-Browserify"><span class="nav-text">5）Gulp with Angular and Browserify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6）Gulp-with-React-and-Browserify"><span class="nav-text">6）Gulp with React and Browserify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7）Gulp-with-Ember"><span class="nav-text">7）Gulp with Ember</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-其他资源"><span class="nav-text">5.其他资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-编译"><span class="nav-text">1.编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-合并"><span class="nav-text">2.合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-压缩"><span class="nav-text">3.压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-优化"><span class="nav-text">4.优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-资源注入"><span class="nav-text">5.资源注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-模板"><span class="nav-text">6.模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-代码校验"><span class="nav-text">7.代码校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-实时加载"><span class="nav-text">8.实时加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-缓存"><span class="nav-text">9.缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-流控制"><span class="nav-text">10.流控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-日志"><span class="nav-text">11.日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-测试"><span class="nav-text">12.测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-其他插件"><span class="nav-text">13.其他插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚手架"><span class="nav-text">脚手架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-模板"><span class="nav-text">1.模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Yeoman生成器"><span class="nav-text">2.Yeoman生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

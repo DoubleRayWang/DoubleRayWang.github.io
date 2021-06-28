@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CoffeeScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="CoffeeScript是一门简洁的，构架于JavaScript之上的预处理器语言，可以静态编译成JavaScript，语法主要受ruby和python影响，目前已经为众多rails和node项目采用。">
+<meta name="keywords" content="CoffeeScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探 CoffeeScript">
+<meta property="og:url" content="https://doubleray.top/2017/01/18/article-cs-know/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="CoffeeScript是一门简洁的，构架于JavaScript之上的预处理器语言，可以静态编译成JavaScript，语法主要受ruby和python影响，目前已经为众多rails和node项目采用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探 CoffeeScript">
+<meta name="twitter:description" content="CoffeeScript是一门简洁的，构架于JavaScript之上的预处理器语言，可以静态编译成JavaScript，语法主要受ruby和python影响，目前已经为众多rails和node项目采用。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/01/18/article-cs-know/">
+
+
+
+
+
+  <title>初探 CoffeeScript | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/01/18/article-cs-know/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">初探 CoffeeScript</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-18T12:19:15+08:00">
+                2017-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实践之路/" itemprop="url" rel="index">
+                    <span itemprop="name">实践之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/18/article-cs-know/" class="leancloud_visitors" data-flag-title="初探 CoffeeScript">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　<code>CoffeeScript</code>是一门简洁的，构架于<code>JavaScript</code>之上的预处理器语言，可以静态编译成<code>JavaScript</code>，语法主要受<code>ruby</code>和<code>python</code>影响，目前已经为众多<code>rails</code>和<code>node</code>项目采用。<a id="more"></a></p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><blockquote>
+<p>　为什么要用<code>CoffeeScript</code>?</p>
+</blockquote>
+<ul>
+<li>更少，更紧凑，和更清晰的代码</li>
+<li>通过规避和改变对<code>JavaScript</code>中不良部分的使用，只留下精华，让代码减少出错率，更容易维护</li>
+<li>在很多常用模式的实现上采用了<code>JavaScript</code>中的最佳实践</li>
+<li><code>CoffeeScript</code>生成的<code>JavaScript</code>代码都可以完全通过<code>JSLint</code>的检测</li>
+</ul>
+<blockquote>
+<p>　什么情况下不推荐使用<code>CoffeeScript</code>?</p>
+</blockquote>
+<ul>
+<li><code>CoffeeScript</code>不是<code>JavaScript</code>的超集，也<strong>不是完全替代品</strong>，不应该在不会<code>JavaScript</code>的情况下使用<code>CoffeeScript</code>工作。</li>
+</ul>
+<p>　　<code>CoffeeScript</code>是一种需要预编译的语言，不能在运行时(<code>Runtime</code>)解释，这造成了她普遍被人质疑的一点，就是如果代码中出现运行时错误时难以调试，不过从实际使用上来看，因为<code>CoffeeScript</code>的编译结果大部分情况下自然而合理，至少我从来没有发现从生成的<code>JavaScript</code>代码回溯到对应的<code>CoffeeScript</code>代码有什么困难之处，我们稍后会看到这种对应关系的细节。</p>
+<p>　　这种静态编译还有一个额外的好处，就是<code>CoffeeScript</code>和现有的环境(浏览器, Node , Rhino 等)与库完全兼容。</p>
+<blockquote>
+<p>　<code>CoffeeScript</code>安装</p>
+</blockquote>
+<p>　　最简单的安装和测试<code>CoffeeScript</code>的方法，是使用<code>node.js</code>的<code>npm</code>安装，然后使用命令行脚本实时编译:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g coffee-script</span><br><span class="line"># watch and compile</span><br><span class="line">coffee -w --output lib --compile src</span><br></pre></td></tr></table></figure>
+
+<p>　　这里假设你的<code>coffee</code>代码在<code>src</code>目录下，这个 demo 会自动检测文件的改变，并编译成<code>js</code>文件放到<code>lib</code>目录下。</p>
+<h2 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h2><p>　　与<code>SASS/LESS</code>和<code>CSS</code>的关系不同，<strong><code>CoffeeScript</code>不是<code>JavaScript</code>的超集，不能在<code>CoffeeScript</code>程序中写<code>JavaScript</code>代码</strong>，比如<code>function</code>等关键字。</p>
+<h3 id="2-1-格式"><a href="#2-1-格式" class="headerlink" title="2.1 格式"></a>2.1 格式</h3><p>　　在<code>js</code>中，如果认为当前语句和随后语句是一个整体的话，就不会自己加<code>;</code>，比如以下<code>javascript</code>代码:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javascript code</span></span><br><span class="line"><span class="keyword">var</span> y = x+f</span><br><span class="line">(a+b).toString()</span><br><span class="line"></span><br><span class="line"><span class="comment">//parsed to:</span></span><br><span class="line"><span class="keyword">var</span> y = x+f(a+b).toString();</span><br></pre></td></tr></table></figure>
+
+<p>　　很多<code>js</code>中的问题由此引起(实际上现在把<code>;</code>放在哪里，在<code>js</code>社区内也是个争论的话题)；</p>
+<p>　　而<code>CoffeeScript</code>在编译时为每条语句加上<code>;</code>，因此在代码中不需要写<code>;</code>；</p>
+<p>　　<code>CoffeeScript</code>中的注释采用<code>#</code>:</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># single line comment</span></span><br><span class="line"><span class="comment">### </span></span><br><span class="line"><span class="comment">  multi line comment</span></span><br><span class="line"><span class="comment">###</span></span><br></pre></td></tr></table></figure>
+
+<p>　　<code>CoffeeScript</code>中对空白敏感，这种做法来自<code>python</code>，任何需要(<code>{}</code>)的场合下，可以用缩进代替。</p>
+<h3 id="2-2-作用域"><a href="#2-2-作用域" class="headerlink" title="2.2 作用域"></a>2.2 作用域</h3><p>　　在<code>js</code>中最糟糕的设计就是全局变量，当你忘记用<code>var</code>声明变量的时候，这个变量会成为全局对象上的一个属性;<code>CoffeeScript</code>避免了这点：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo = <span class="string">"bar"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　会编译成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> foo;</span><br><span class="line">  foo = <span class="string">"bar"</span>;</span><br><span class="line">&#125;).call(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+
+<p>　　任何的代码都会使用<strong><code>Immediate Function</code></strong>包装，这样<code>foo</code>成为了本地变量，并且，可以通过<code>call</code>指定的<code>this</code>引用全局对象，为了方便起见，之后的编译后代码描述不会再加上这个包装。</p>
+<p>　　实际上在<code>CoffeeScript</code>中，你也不需要再用<code>var</code>声明变量，编译后会自动加上<code>var</code>，并且将声明<code>hoisting</code>，即放到作用域的顶部，看一个来自官方文档的例子：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outer = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="title">change</span> = -&gt;</span></span><br><span class="line">  inner = <span class="number">-1</span></span><br><span class="line">  outer = <span class="number">10</span></span><br><span class="line">inner = change()</span><br></pre></td></tr></table></figure>
+
+<p>　　<code>-&gt;</code>是函数定义的简写方式，之后我们会探讨；编译后的<code>js</code>如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> change, inner, outer;</span><br><span class="line"></span><br><span class="line">outer = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">change = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> inner;</span><br><span class="line">  inner = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">return</span> outer = <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">inner = change();</span><br></pre></td></tr></table></figure>
+
+<p>　　这是类似<code>ruby</code>中的自然的作用域实现方式，<code>inner</code>在<code>change()</code>内定义成了局部变量，因为在代码中之前没有定义过。</p>
+<h3 id="2-3-赋值"><a href="#2-3-赋值" class="headerlink" title="2.3 赋值"></a>2.3 赋值</h3><p>　　首先是字符串可以用类<code>ruby</code>的语法内嵌：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target = <span class="string">"world"</span></span><br><span class="line">alert <span class="string">"hello, <span class="subst">#&#123;target&#125;</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　其次是字面量，可以用类似<code>YAML</code>的方法定义对象字面量：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object1 = one: <span class="number">1</span>, two: <span class="number">2</span></span><br><span class="line">object2 =</span><br><span class="line">  one: <span class="number">1</span></span><br><span class="line">  two: <span class="number">2</span></span><br><span class="line">  class: "numbers"</span><br></pre></td></tr></table></figure>
+
+<p>　　注意保留字<code>class</code>，现在可以直接作为对象的<code>key</code>了。</p>
+<p>　　数组也可以分行：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr = [</span><br><span class="line">  <span class="number">1</span></span><br><span class="line">  <span class="number">2</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>　　也可以解构赋值(Destructuring)：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;a:<span class="string">"foo"</span>, b:<span class="string">"bar"</span>&#125;</span><br><span class="line">&#123;a, b&#125; = obj</span><br><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">[a, b] = arr</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-数组"><a href="#2-4-数组" class="headerlink" title="2.4 数组"></a>2.4 数组</h3><p>　　数组的操作引入了来自<code>ruby</code>的<code>Range</code>概念，并且可以将字符串完全作为数组操作：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">0.</span><span class="number">.9</span>]</span><br><span class="line">numbers[<span class="number">3.</span><span class="number">.5</span>] = [<span class="number">-3</span>, <span class="number">-4</span>, <span class="number">-5</span>]</span><br><span class="line">my = <span class="string">"my string"</span>[<span class="number">0.</span><span class="number">.1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>　　判断一个值是否在数组内，在<code>js</code>中可以用<code>Array.prototype.indexOf</code>，不过 IE8 及以下不支持，<code>CoffeeScript</code>提供了跨浏览器的<code>in</code>操作符解决：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="string">"foo"</span>, <span class="string">"bar"</span>]</span><br><span class="line"><span class="string">"foo"</span> <span class="keyword">in</span> arr</span><br></pre></td></tr></table></figure>
+
+<p>　　具体的实现上，是一个对<code>indexOf</code>的<code>Shim</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> arr,</span><br><span class="line">   __indexOf = [].indexOf || <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123; </span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="keyword">this</span>.length; i &lt; l; i++) &#123; </span><br><span class="line">       <span class="keyword">if</span> (i <span class="keyword">in</span> <span class="keyword">this</span> &amp;&amp; <span class="keyword">this</span>[i] === item) </span><br><span class="line">         <span class="keyword">return</span> i; </span><br><span class="line">     &#125; </span><br><span class="line">     <span class="keyword">return</span> <span class="number">-1</span>; </span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">arr = [<span class="string">"foo"</span>, <span class="string">"bar"</span>];</span><br><span class="line"></span><br><span class="line">__indexOf.call(arr, <span class="string">"foo"</span>) &gt;= <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>　　<code>for..in</code>语法可以用在数组上了，背后是用<code>js</code>的<code>for</code>循环实现的，这比数组的迭代器方法要效率高一些：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, i <span class="keyword">in</span> [<span class="string">"Roger"</span>, <span class="string">"Roderick"</span>]</span><br><span class="line">  alert <span class="string">"<span class="subst">#&#123;i&#125;</span> - Release <span class="subst">#&#123;name&#125;</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　　也具有过滤器<code>when</code>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">prisoners = [<span class="string">"Roger"</span>, <span class="string">"Roderick"</span>, <span class="string">"Brian"</span>]</span><br><span class="line">release prisoner <span class="keyword">for</span> prisoner <span class="keyword">in</span> prisoners <span class="keyword">when</span> prisoner[<span class="number">0</span>] <span class="keyword">is</span> <span class="string">"R"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　看起来很像普通英语了，也可以用<code>()</code>收集遍历的结果：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = (item <span class="keyword">for</span> item <span class="keyword">in</span> array <span class="keyword">when</span> item.name <span class="keyword">is</span> <span class="string">"test"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　遍历对象的属性可以用<code>of</code>,这是用<code>js</code>自己的<code>for..in</code>实现的：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names = sam: seaborn, donna: moss</span><br><span class="line">alert(<span class="string">"<span class="subst">#&#123;first&#125;</span> <span class="subst">#&#123;last&#125;</span>"</span>) <span class="keyword">for</span> first, last <span class="keyword">of</span> names</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-流程控制"><a href="#2-5-流程控制" class="headerlink" title="2.5 流程控制"></a>2.5 流程控制</h3><p>　　<code>CoffeeScript</code>使用来自<code>ruby</code>的省略语法，让控制流变得很紧凑，也引进了<code>unless,not,then</code>等语法糖式的关键字：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">if</span> <span class="keyword">not</span> <span class="literal">true</span> <span class="keyword">then</span> <span class="string">"false"</span></span><br><span class="line">result = <span class="keyword">unless</span> <span class="literal">true</span> <span class="keyword">then</span> <span class="string">"false"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　<code>CoffeeScript</code>中非常好的一点，就是直接取消了<code>js</code>中的<code>==</code>判断，改成全部用<code>===</code>进行严格比较，<code>js</code>中的<code>==</code>会做大量诡异的类型转换，很多情况下是 bug 的来源；</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">"1"</span> == <span class="number">1</span> </span><br><span class="line">  alert(<span class="string">"equal"</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  alert(<span class="string">"not equal"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>　　在使用<code>if</code>来进行空值的判断时，<code>js</code>有时会让人困扰，因为<code>&quot;&quot;</code>和<code>0</code>都会被转换成<code>false</code>，Coffee 提供了<code>?</code>操作符解决这个问题，她只有在变量为<code>null</code>或<code>undefined</code>时才为<code>false</code>。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">""</span>? <span class="comment">#true</span></span><br><span class="line"><span class="literal">null</span>? <span class="comment">#false</span></span><br></pre></td></tr></table></figure>
+
+<p>　　也可以用常见的类似<code>ruby</code>中<code>||=</code>的方法，判断赋值，此外还可以用<code>and,or,is</code>关键字代替<code>&amp;&amp;,||,==</code>。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash <span class="keyword">or</span>= &#123;&#125;</span><br><span class="line">hash ?= &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　经常有当某个属性存在的时候，才会调用属性上的方法的情况，这时候也可以用<code>?</code>；</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knight.hasSword()?.poke()</span><br></pre></td></tr></table></figure>
+
+<p>　　只有当<code>hasSword()</code>返回对象不为空时，才会调用<code>poke</code>方法，以下是编译的<code>js</code>代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _ref;</span><br><span class="line"><span class="keyword">if</span> ((_ref = knight.hasSword()) != <span class="literal">null</span>) &#123;</span><br><span class="line">  _ref.poke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　另一种情况是当<code>poke</code>方法存在时才调用：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knight.hasSword().poke?()</span><br></pre></td></tr></table></figure>
+
+<p>　　对应的js代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _base;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> (_base = knight.hasSword()).poke === <span class="string">"function"</span>) &#123;</span><br><span class="line">  _base.poke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　<code>switch case</code>语句也有了一些语法糖，并且会默认加上<code>break</code>：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> day</span><br><span class="line">  <span class="keyword">when</span> <span class="string">"Sun"</span> <span class="keyword">then</span> go relax</span><br><span class="line">  <span class="keyword">when</span> <span class="string">"Sat"</span> <span class="keyword">then</span> go dancing</span><br><span class="line">  <span class="keyword">else</span> go work</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-函数"><a href="#2-6-函数" class="headerlink" title="2.6 函数"></a>2.6 函数</h3><p>　　<code>CoffeeScript</code>对<code>JavaScript</code>的函数做了很大的简化，举个例子，看一个求和函数：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">sum</span> = <span class="params">(nums...)</span> -&gt;</span></span><br><span class="line">  nums.reduce (x, y) -&gt; x+y</span><br><span class="line"></span><br><span class="line">sum <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>　　对应<code>JavaScript</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum,</span><br><span class="line">    __slice = [].slice;</span><br><span class="line"></span><br><span class="line">sum = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> nums;</span><br><span class="line">  nums = <span class="number">1</span> &lt;= <span class="built_in">arguments</span>.length ? __slice.call(<span class="built_in">arguments</span>, <span class="number">0</span>) : [];</span><br><span class="line">  <span class="keyword">return</span> nums.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以使用和<code>ruby 1.9</code>类似的<code>lambda</code>函数写法<code>-&gt;</code>来代替<code>function</code></li>
+<li>参数列表放在<code>-&gt;</code>的前边，且可省略</li>
+<li>取消了函数声明，只能将函数作为值定义</li>
+<li>在<code>CoffeeScript</code>中，任何语句都是表达式(除了<code>break</code>和<code>continue</code>)，都有返回值，因此像<code>ruby</code>一样，不需要显式<code>return</code></li>
+<li><code>js</code>的函数参数有一个很讨厌的地方，就是参数对象<code>arguments</code>不是一个真正的数组，要使用数组方法，必须转换成数组<code>[].slice.call(arguments, 0)</code>这样，而在<code>CoffeeScript</code>中收束<code>(加...)</code>的参数是一个真正的数组</li>
+</ul>
+<p>　　<code>CoffeeScript</code>的函数可以有默认参数，如：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">times</span> = <span class="params">(a = <span class="number">1</span>, b = <span class="number">2</span>)</span> -&gt;</span> a * b</span><br></pre></td></tr></table></figure>
+
+<p>　　<code>CoffeeScript</code>的函数调用可以不用<code>()</code>语法包围参数，像<code>ruby</code>一样跟在函数名后面就可以，不过这也有时候会带来问题，特别是没有参数的调用：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert</span><br></pre></td></tr></table></figure>
+
+<p>　　对应的<code>js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert;</span><br></pre></td></tr></table></figure>
+
+<p>　　而不是<code>alert()</code>，这和<code>ruby</code>不同，需要注意!</p>
+<p>　　缩进的格式有时需要小心，比如用多个函数做参数的时候，需要这样写：</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".toggle"</span>).toggle -&gt;</span><br><span class="line">  <span class="string">"on"</span></span><br><span class="line">, <span class="function">-&gt;</span></span><br><span class="line">  <span class="string">"off"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　对应<code>js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".toggle"</span>).toggle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"on"</span>;</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"off"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-模式"><a href="#3-模式" class="headerlink" title="3. 模式"></a>3. 模式</h2><p>　　使用<code>CoffeeScript</code>的一个重要理由，就是她用自己的语法实现了很多很常用的<code>js</code>编程模式，而且，通常是在社区内广泛被承认的最佳实践，如果不熟悉<code>JavaScript</code>的这些模式，可能会在调试代码上遇到一些麻烦，不过，基本上来说还是比较简单易懂的，下面我们会花一些时间研究一下<code>CoffeeScript</code>是用什么样的方法来封装这些通用编程模式的。</p>
+<h3 id="3-1-闭包"><a href="#3-1-闭包" class="headerlink" title="3.1 闭包"></a>3.1 闭包</h3><p>　　在<code>js</code>中，普遍会使用闭包实现各种事件的<code>handler</code>或封装模块，以下是<code>CoffeeScript</code>对这一普遍模式的实现。</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">closure = <span class="keyword">do</span> -&gt;</span><br><span class="line">  _private = <span class="string">"foo"</span></span><br><span class="line">  -&gt; _private</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(closure()) <span class="comment">#=&gt; "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　<code>do</code>关键词可以产生一个<strong>Immediate Function</strong>,下面是对应js代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> closure;</span><br><span class="line"></span><br><span class="line">closure = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _private;</span><br><span class="line">  _private = <span class="string">"foo"</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _private;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>　　闭包中经常需要绑定<code>this</code>的值给闭包的私有变量，<code>CoffeeScript</code>使用特殊的<code>=&gt;</code>语法省去了这个麻烦。</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@clickHandler = <span class="function">-&gt;</span> alert <span class="string">"clicked"</span></span><br><span class="line">element.addEventListener <span class="string">"click"</span>, <span class="function"><span class="params">(e)</span> =&gt;</span> @clickHandler(e)</span><br></pre></td></tr></table></figure>
+
+<p>　　使用<code>=&gt;</code>生成函数，可以看到生成代码中会加上对<code>this</code>的绑定：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.clickHandler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> alert(<span class="string">"clicked"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> _this.clickHandler(e);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>　　这里<code>CoffeeScript</code>对于<code>this</code>有简单的别名<code>@</code>。</p>
+<h3 id="3-2-扩展"><a href="#3-2-扩展" class="headerlink" title="3.2 扩展"></a>3.2 扩展</h3><p>　　在<code>js</code>中，所有的对象都是开放的，有时候会扩展原有对象的行为(比如对数组的ECMA5 shim)，这也称为<code>Monkey patching</code>：</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String::dasherize = <span class="function">-&gt;</span> @replace <span class="regexp">/_/g</span>, <span class="string">"-"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　<code>::</code>代表原型的引用，<code>js</code>代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.dasherize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/_/g</span>, <span class="string">"-"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-类"><a href="#3-3-类" class="headerlink" title="3.3 类"></a>3.3 类</h3><p>　　在<code>js</code>中是否要模拟传统编程语言的类，是个一直以来都有争议的话题，不同的项目，不同的团队，在类的使用上会有不同的看法，不过，一旦决定要使用类，那么至少需要一套良好的实现，<code>CoffeeScript</code>在语言内部实现了类的模拟，我们来看一看一个完整的例子：</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Gadget</span></span></span><br><span class="line">  @CITY = <span class="string">"beijing"</span></span><br><span class="line"></span><br><span class="line">  @create: <span class="function"><span class="params">(name, price)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">new</span> Gadget(name, price)</span><br><span class="line"></span><br><span class="line">  _price = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  constructor: <span class="function"><span class="params">(@name, price)</span> -&gt;</span></span><br><span class="line">    _price = price</span><br><span class="line"></span><br><span class="line">  sell: <span class="function">=&gt;</span></span><br><span class="line">    <span class="string">"Buy <span class="subst">#&#123;@name&#125;</span> with <span class="subst">#&#123;_price&#125;</span> in <span class="subst">#&#123;Gadget.CITY&#125;</span>"</span></span><br><span class="line"></span><br><span class="line">iphone = <span class="keyword">new</span> Gadget(<span class="string">"iphone"</span>, <span class="number">4999</span>)</span><br><span class="line"><span class="built_in">console</span>.log iphone.name <span class="comment">#=&gt; "iphone"</span></span><br><span class="line"><span class="built_in">console</span>.log iphone.sell() <span class="comment">#=&gt; "Buy iphone with 4999 in beijing"</span></span><br><span class="line"></span><br><span class="line">ipad = Gadget.create(<span class="string">"ipad"</span>, <span class="number">3999</span>)</span><br><span class="line"><span class="built_in">console</span>.log ipad.sell() <span class="comment">#=&gt; "Buy ipad with 3999 in beijing"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　这个<code>Gadget</code>类具有通常语言中类的功能：</p>
+<ul>
+<li><code>constructor</code>是构造函数，必须用这个名称，类似<code>ruby</code>中的<code>initialize</code></li>
+</ul>
+<ul>
+<li><code>name</code>是实例变量,可以通过<code>iphone.name</code>获取</li>
+<li>构造函数中如果给实例变量赋值，直接将<code>@name</code>写在参数中即可，等价于在函数体中的<code>@name = name</code></li>
+<li><code>_price</code>是私有变量,需要赋初始值</li>
+<li><code>sell</code>是实例方法</li>
+<li><code>create</code>是类方法，注意这里使用了<code>@create</code>，这和<code>ruby</code>有些像，在定义时的<code>this</code>指的是这个类本身</li>
+<li><code>CITY</code>是类变量</li>
+</ul>
+<p>　　要注意的是，对于实例方法，要用<code>=&gt;</code>来绑定<code>this</code>，这样可以作为闭包传递，比如：</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iphone = <span class="keyword">new</span> Gadget(<span class="string">"iphone"</span>, <span class="number">4999</span>)</span><br><span class="line">$(<span class="string">"#sell"</span>).click(iphone.sell())</span><br></pre></td></tr></table></figure>
+
+<p>　　如果不用<code>=&gt;</code>，闭包被调用时就会丢失实例对象的值(<code>iphone</code>)。</p>
+<p>　　对于熟悉基于类的面向对象编程的人，<code>CoffeeScript</code>的类是一目了然的，下面来看看对应的<code>js</code>代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Gadget,</span><br><span class="line">  __bind = <span class="function"><span class="keyword">function</span>(<span class="params">fn, me</span>)</span>&#123; <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> fn.apply(me, <span class="built_in">arguments</span>); &#125;; &#125;;</span><br><span class="line"></span><br><span class="line">Gadget = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _price;</span><br><span class="line"></span><br><span class="line">  Gadget.name = <span class="string">'Gadget'</span>;</span><br><span class="line"></span><br><span class="line">  Gadget.CITY = <span class="string">"beijing"</span>;</span><br><span class="line"></span><br><span class="line">  Gadget.create = <span class="function"><span class="keyword">function</span>(<span class="params">name, price</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Gadget(name, price);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  _price = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Gadget</span>(<span class="params">name, price</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.sell = __bind(<span class="keyword">this</span>.sell, <span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    _price = price;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Gadget.prototype.sell = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Buy "</span> + <span class="keyword">this</span>.name + <span class="string">" with "</span> + _price + <span class="string">" in "</span> + Gadget.CITY;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> Gadget;</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>　　以上的代码有很多值得注意的地方：</p>
+<ul>
+<li>整体上来说，<code>CoffeeScript</code>的类模拟使用的是一个构造函数闭包，这是最常用的模拟类的模式，好处是可以完整地封装内部变量，且可以使用<code>new</code>来生成实例对象</li>
+<li><code>_price</code>就是被封装在闭包内部的私有变量</li>
+<li><code>sell</code>这样的实例方法是原型方法，并且在初始化时使用自定义的<code>bind</code>函数绑定实例(用<code>=&gt;</code>定义的情况)</li>
+<li><code>reate</code>和<code>CITY</code>这样的类成员使用构造函数的属性实现，重复一下，在<code>CoffeeScript</code>类定义中的<code>this</code>指的是整个闭包<code>Gadget</code></li>
+<li><code>Gadget.name</code>是额外定义的类名属性</li>
+</ul>
+<h3 id="3-4-类的继承"><a href="#3-4-类的继承" class="headerlink" title="3.4 类的继承"></a>3.4 类的继承</h3><p>　　<code>CoffeeScript</code>中为方便地实现类的继承也定义了自己的语法，我们把上面的类简化，来看一下如何继承：</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Gadget</span></span></span><br><span class="line">  constructor: <span class="function"><span class="params">(@name)</span> -&gt;</span></span><br><span class="line">  sell: <span class="function">=&gt;</span></span><br><span class="line">    <span class="string">"Buy <span class="subst">#&#123;@name&#125;</span>"</span> </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IPhone</span> <span class="keyword">extends</span> <span class="title">Gadget</span></span></span><br><span class="line">  constructor: <span class="function">-&gt;</span> <span class="keyword">super</span>(<span class="string">"iphone"</span>)</span><br><span class="line">  nosell: <span class="function">=&gt;</span></span><br><span class="line">    <span class="string">"Don't <span class="subst">#&#123;@sell()&#125;</span>"</span></span><br><span class="line"></span><br><span class="line">iphone = <span class="keyword">new</span> IPhone</span><br><span class="line">iphone.nosell() <span class="comment">#=&gt; Don't Buy iphone</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>extends</code>关键字可以继承父类中的所有实例属性,比如<code>sell</code></li>
+<li><code>super</code>方法可以调用父类的同名方法</li>
+<li>如果不覆盖<code>constructor</code>，则她被子类默认调用</li>
+</ul>
+<p>　　来看一下对应的<code>js</code>代码，这有一些复杂，我们把和上边类定义中重复的地方去掉，只留下继承的实现部分；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Gadget, IPhone,</span><br><span class="line">  __extends = <span class="function"><span class="keyword">function</span>(<span class="params">child, parent</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> parent) &#123; </span><br><span class="line">      <span class="keyword">if</span> (&#123;&#125;.hasOwnProperty.call(parent, key)) </span><br><span class="line">        child[key] = parent[key]; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ctor</span>(<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.constructor = child; &#125; </span><br><span class="line"></span><br><span class="line">    ctor.prototype = parent.prototype; </span><br><span class="line">    child.prototype = <span class="keyword">new</span> ctor; </span><br><span class="line">    child.__super__ = parent.prototype; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> child; </span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">IPhone = (<span class="function"><span class="keyword">function</span>(<span class="params">_super</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  __extends(IPhone, _super);</span><br><span class="line"></span><br><span class="line">  IPhone.name = <span class="string">'IPhone'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">IPhone</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.nosell = __bind(<span class="keyword">this</span>.nosell, <span class="keyword">this</span>);</span><br><span class="line">    IPhone.__super__.constructor.call(<span class="keyword">this</span>, <span class="string">"iphone"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  IPhone.prototype.nosell = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Don't "</span> + (<span class="keyword">this</span>.sell());</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> IPhone;</span><br><span class="line"></span><br><span class="line">&#125;)(Gadget);</span><br></pre></td></tr></table></figure>
+
+<p>　　这里重点有三个：</p>
+<ul>
+<li><p><code>__extends</code>函数使用了代理构造函数ctor来实现继承，这是非常普遍的<code>js</code>中对象继承的实践模式，进一步解释一下：</p>
+<ul>
+<li><p>使用代理构造函数的目的是为了避免子类被更改时父类受到影响</p>
+</li>
+<li><p>使用<code>ctor.prototype = parent.prototype</code>的意义是只继承定义在<code>prototype</code>上的公用属性</p>
+</li>
+</ul>
+</li>
+<li><p>父类的类成员被直接引用拷贝到子类，而不是原型继承</p>
+</li>
+<li><p><code>super</code>的实现方法是<code>parent.prototype.constructor.call(this)</code></p>
+</li>
+</ul>
+<h3 id="3-5-混入-Mixin"><a href="#3-5-混入-Mixin" class="headerlink" title="3.5 混入(Mixin)"></a>3.5 混入(Mixin)</h3><p>　　在<code>ruby</code>语言中的<code>Mixin</code>，能够让你的类获得多个模块的方法，可以说是对多重继承一种很好的实现，虽然在<code>CoffeeScript</code>中并没有像<code>ruby</code>的<code>include</code>一样的内置功能，但很容易实现他：</p>
+<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Module</span></span></span><br><span class="line">  @extend: <span class="function"><span class="params">(obj)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">for</span> key, value <span class="keyword">of</span> obj </span><br><span class="line">      @[key] = value</span><br><span class="line"></span><br><span class="line">  @include: <span class="function"><span class="params">(obj)</span> -&gt;</span></span><br><span class="line">    <span class="keyword">for</span> key, value <span class="keyword">of</span> obj </span><br><span class="line">      @::[key] = value</span><br><span class="line"></span><br><span class="line">classProperties =</span><br><span class="line">  find: <span class="function"><span class="params">(id)</span> -&gt;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"find <span class="subst">#&#123;id&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">instanceProperties =</span><br><span class="line">  save: <span class="function">-&gt;</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"save"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Module</span></span></span><br><span class="line">  @extend classProperties</span><br><span class="line">  @include instanceProperties</span><br><span class="line"></span><br><span class="line">user = User.find(<span class="number">1</span>)</span><br><span class="line">user = <span class="keyword">new</span> User</span><br><span class="line">user.save()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>继承了<code>Module</code>的类才可以<code>Mixin</code>，当然，这里也可以用组合或者直接为<code>js</code>的构造函数做<code>Monkey patching</code></li>
+<li><code>classProperties</code>是类成员模块，使用<code>@extend</code>来Mixin`，实现是简单的拷贝对象的属性</li>
+<li><code>instanceProperties</code>是实例成员模块，使用<code>@include</code>来<code>Mixin</code>，实现是拷贝对象原型的属性</li>
+<li>需要指出的是，这里的拷贝是引用拷贝，有可能外部会更改被<code>Mixin</code>的模块内部值，更好的方法是深层值拷贝(<code>clone</code>)，包括<code>JQuery</code>在内的很多类库都实现了这类扩展方法</li>
+</ul>
+<h2 id="4-结语"><a href="#4-结语" class="headerlink" title="4. 结语"></a>4. 结语</h2><p>　　<code>CoffeeScript</code>提供了一门比<code>JavaScript</code>更强大，优雅，表现力丰富的语言，但她毕竟架构于<code>JavaScript</code>之上，而且是静态地编译成<code>JavaScript</code>代码，也就是说，她不能完全避免对<code>JavaScript</code>中一些不良部分的滥用，比如<code>eval,typeof,instanceof</code>等，所以，在任何情况下，建议始终开启<code>Strict Mode</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span></span><br></pre></td></tr></table></figure>
+
+<p>　　严格模式是一个<code>ECMA5</code>标准提出的<code>js</code>子集，禁用了很多js设计中不好的方面，在未来会逐渐成为<code>js</code>的语言标准，详细介绍在<a href="/2017/01/24/js-strict/">这里</a>。</p>
+<hr>
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/01/18/article-cs-know/" title="初探 CoffeeScript">https://doubleray.top/2017/01/18/article-cs-know/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CoffeeScript/" rel="tag"># CoffeeScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/16/article-js-closure/" rel="next" title="JavaScript 闭包（Closure）">
+                <i class="fa fa-chevron-left"></i> JavaScript 闭包（Closure）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/20/article-js-nullundefined/" rel="prev" title="JavaScript 中 Null 和 Undefined">
+                JavaScript 中 Null 和 Undefined <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-语法"><span class="nav-text">2. 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-格式"><span class="nav-text">2.1 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-作用域"><span class="nav-text">2.2 作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-赋值"><span class="nav-text">2.3 赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-数组"><span class="nav-text">2.4 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-流程控制"><span class="nav-text">2.5 流程控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-函数"><span class="nav-text">2.6 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-模式"><span class="nav-text">3. 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-闭包"><span class="nav-text">3.1 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-扩展"><span class="nav-text">3.2 扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-类"><span class="nav-text">3.3 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-类的继承"><span class="nav-text">3.4 类的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-混入-Mixin"><span class="nav-text">3.5 混入(Mixin)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-结语"><span class="nav-text">4. 结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

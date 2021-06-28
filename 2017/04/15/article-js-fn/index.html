@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="本文转自 码农网 的 深入理解 JavaScript 中的函数。  本文旨在提供web开发人员必须了解的所有JavaScript函数的基本知识。 函数于软件开发者而言并不是什么奇幻世界。如果你的日常活动涉及到编码，哪怕是一点点，那么在一天结束的时候，你一定创建/修改了一个或多个函数。 简而言之函数只不过是一组执行某个操作的语句。函数可能会有一些输入参数（在函数体中使用），并在执行后返回值。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解 JavaScript 中的函数">
+<meta property="og:url" content="https://doubleray.top/2017/04/15/article-js-fn/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="本文转自 码农网 的 深入理解 JavaScript 中的函数。  本文旨在提供web开发人员必须了解的所有JavaScript函数的基本知识。 函数于软件开发者而言并不是什么奇幻世界。如果你的日常活动涉及到编码，哪怕是一点点，那么在一天结束的时候，你一定创建/修改了一个或多个函数。 简而言之函数只不过是一组执行某个操作的语句。函数可能会有一些输入参数（在函数体中使用），并在执行后返回值。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/function.png">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解 JavaScript 中的函数">
+<meta name="twitter:description" content="本文转自 码农网 的 深入理解 JavaScript 中的函数。  本文旨在提供web开发人员必须了解的所有JavaScript函数的基本知识。 函数于软件开发者而言并不是什么奇幻世界。如果你的日常活动涉及到编码，哪怕是一点点，那么在一天结束的时候，你一定创建/修改了一个或多个函数。 简而言之函数只不过是一组执行某个操作的语句。函数可能会有一些输入参数（在函数体中使用），并在执行后返回值。">
+<meta name="twitter:image" content="https://doubleray.top/styles/images/js/function.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/04/15/article-js-fn/">
+
+
+
+
+
+  <title>深入理解 JavaScript 中的函数 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/04/15/article-js-fn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">深入理解 JavaScript 中的函数</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T16:41:15+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/15/article-js-fn/" class="leancloud_visitors" data-flag-title="深入理解 JavaScript 中的函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文转自 <a href="http://www.codeceo.com/" target="_blank" rel="noopener">码农网</a> 的 <a href="http://www.codeceo.com/article/javascript-function-coding.html" target="_blank" rel="noopener">深入理解 JavaScript 中的函数</a>。</p>
+</blockquote>
+<p>本文旨在提供web开发人员必须了解的所有JavaScript函数的基本知识。</p>
+<p>函数于软件开发者而言并不是什么奇幻世界。如果你的日常活动涉及到编码，哪怕是一点点，那么在一天结束的时候，你一定创建/修改了一个或多个函数。</p>
+<p>简而言之函数只不过是一组执行某个操作的语句。函数可能会有一些输入参数（在函数体中使用），并在执行后返回值。<a id="more"></a></p>
+<p>JavaScript函数也具有这些特性，但它们不仅仅是常规函数。JavaScript函数是对象。你可以查看我曾经写的关于JavaScript对象的文章，里面我提到几乎JavaScript中的所有一切都是对象。</p>
+<p>作为对象，JavaScript函数可能会有属性和其他函数（方法）。让我们来看看JavaScript中的一个典型的函数定义。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNotSoGreatFunc</span>(<span class="params">visitor</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"Welcome to Code Morning Mr. "</span> + visitor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>没错。上面的函数不涉及什么宏伟大业，因为它仅是对博客访问者表示了欢迎。但它展示了JavaScript函数的样子。函数定义从关键字function开始，然后是函数名，空的或有参数的括号。实际的函数代码（JavaScript语句）被封装在一对花括号内{ }。对于函数而言，return语句是可选的。JavaScript函数总是会返回一个值。当function主体中没有return语句时，那么function返回undefined。</p>
+<p><img src="/styles/images/js/function.png" alt="函数"></p>
+<p>下面的代码调用传递visitor name作为参数的函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myNotSoGreatFunc(<span class="string">"Bob Martin"</span>);</span><br><span class="line"><span class="comment">// Output:&amp;nbsp;</span></span><br><span class="line"><span class="comment">// Welcome to Code Morning Mr. Bob Martin.</span></span><br></pre></td></tr></table></figure>
+
+<p>到现在为止，我们了解了函数非常基本的特征。现在，我们将对JavaScript函数的一些高级概念一探究竟。</p>
+<h2 id="1-匿名函数"><a href="#1-匿名函数" class="headerlink" title="1. 匿名函数"></a>1. 匿名函数</h2><p>JavaScript函数可以是匿名的。这意味着你可以从函数声明中省略函数名。但是，函数必须存储在变量中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addNumbers = <span class="function"><span class="keyword">function</span> (<span class="params">x, y</span>) </span>&#123; <span class="keyword">return</span> x + y; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述语法被也被称为函数表达式。你可以把变量addNumbers 当作函数名，以及像下面这样调用该函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = addNumbers(<span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当你想传递一个函数作为参数给另一个函数时，函数表达式就非常方便了。让我们用一个简单的例子来试着了解这一点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params">first, second</span>) </span>&#123; <span class="keyword">return</span> first + second &#125;;</span><br><span class="line"><span class="keyword">var</span> multiply = <span class="function"><span class="keyword">function</span> (<span class="params">first, second</span>) </span>&#123; <span class="keyword">return</span> first * second &#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calculate</span>(<span class="params">fun, a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fun(a, b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先我已经创建了两个匿名函数。第一个返回两个数的加法运算，第二个返回两个数的乘法运算。相当简单，没有什么可值得炫耀的地方。然后，我定义函数calculate，这个函数接受函数作为第一个参数后跟两个参数接受两个数字。</p>
+<p>我可以通过传递任意函数作为第一个参数来调用函数calculate。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = calculate(add, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// sum = 5</span></span><br><span class="line"><span class="keyword">var</span> multiplication = calculate(multiply, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// multiplication = 6</span></span><br></pre></td></tr></table></figure>
+
+<p>你可以看到将函数作为参数传递是多么容易。这种模式在AJAX中大量使用，当你在AJAX调用完成后，传递回调函数处理成功或失败的场景时。</p>
+<h2 id="2-关于参数的更多内容"><a href="#2-关于参数的更多内容" class="headerlink" title="2. 关于参数的更多内容"></a>2. 关于参数的更多内容</h2><p>JavaScript是非常灵活的，当涉及到传递或访问函数参数的时候。让我们看一下函数参数可以被操纵的方式。</p>
+<h3 id="2-1-缺少参数"><a href="#2-1-缺少参数" class="headerlink" title="2.1 缺少参数"></a>2.1 缺少参数</h3><p>调用函数时，函数的参数数量可以比要求的更少或更多。如果你调用的函数的参数比声明的少，那么缺少的参数被设置为undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callMe</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"c is "</span> + <span class="keyword">typeof</span> c);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">callMe(<span class="string">"Code"</span>, <span class="string">"Morning"</span>); </span><br><span class="line"><span class="comment">// Output: "c is undefined"</span></span><br><span class="line">callMe(<span class="string">"Learn"</span>, <span class="string">"JavaScript"</span>, <span class="string">"Functions"</span>); </span><br><span class="line"><span class="comment">// Output: "c is string"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-Arguments对象"><a href="#2-2-Arguments对象" class="headerlink" title="2.2 Arguments对象"></a>2.2 Arguments对象</h3><p>所有的JavaScript函数有一个特殊的对象，叫做arguments，它是在函数调用过程中传递的参数数组。该对象可以被用来访问单个参数或获得传递到函数的参数总数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callMe</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> i;</span><br><span class="line">   <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"Total arguments passed: "</span> + <span class="built_in">arguments</span>.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此函数假设没有传递任何参数，但就像我说的，你可以传递任何数量的参数到JavaScript函数。我可以像这样调用这个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">callMe(<span class="string">"Code"</span>, <span class="string">"Morning"</span>, <span class="string">"Mr. Programmer"</span>);</span><br><span class="line"><span class="comment">// Output":</span></span><br><span class="line"><span class="comment">// Code</span></span><br><span class="line"><span class="comment">// Morning</span></span><br><span class="line"><span class="comment">// Mr. Programmer</span></span><br><span class="line"><span class="comment">// Total arguments passed: 3</span></span><br></pre></td></tr></table></figure>
+
+<p>每个参数可以从arguments对象作为一个数组项被访问。被传递给函数的arguments的总数可从arguments.length属性获得。</p>
+<h3 id="2-3-默认参数"><a href="#2-3-默认参数" class="headerlink" title="2.3 默认参数"></a>2.3 默认参数</h3><p>你是C ++或C#程序员吗？你见过使用默认参数的函数吗？也许你会回答yes！ ECMAScript 6带来了JavaScript的这一特性，就是你可以定义带有默认参数的函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greetMyVisitors</span>(<span class="params">name, profession = <span class="string">"The cool programmer"</span></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Welcome Mr. "</span> + name + <span class="string">", "</span> + profession);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该函数有礼貌地地迎接了博客访问者。它有两个参数name 和profession，并在消息框中显示一个欢迎消息。如果在调用过程中没有参数（或“undefined”）传递，那么第二个参数取用默认值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">greetMyVisitors(<span class="string">"Justin Bieber"</span>, <span class="string">"The singer"</span>); </span><br><span class="line"><span class="comment">// Shows the message "Welcome Mr. Justin Bieber, The singer"</span></span><br><span class="line"> </span><br><span class="line">greetMyVisitors(<span class="string">"Bob Martin"</span>); </span><br><span class="line"><span class="comment">// Shows the message "Welcome Mr. Bob Martin, The cool programmer"</span></span><br><span class="line"> </span><br><span class="line">greetMyVisitors(<span class="string">"John Papa"</span>, <span class="literal">undefined</span>); </span><br><span class="line"><span class="comment">// Shows the message "Welcome Mr. John Papa, The cool programmer"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-嵌套函数"><a href="#3-嵌套函数" class="headerlink" title="3. 嵌套函数"></a>3. 嵌套函数</h2><p>函数可以在它的内部包含一个或多个函数。内部函数可能会在内部再次包含函数。让我们来看看以下操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wakeUpAndCode</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">wakeUp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"I just woke up"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">code</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"I am ready to code now"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   wakeUp();</span><br><span class="line">   code();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">wakeUpAndCode();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// I just woke up</span></span><br><span class="line"><span class="comment">// I am ready to code now</span></span><br></pre></td></tr></table></figure>
+
+<p>函数wakeUpAndCode包含两个内部函数wakeUp和code。当调用wakeUpAndCode时，函数主体开始执行函数主体。在外部函数中只有两个可执行语句，调用wakeUp和code的方法。调用wakeUp将执行内部wakeUp函数，这将写入string“I just woke up”到控制台。调用code将会写入“I am ready to code now”string到控制台。</p>
+<p>内部函数可以访问所有外部函数的变量和参数。内部函数是函数内部某种private实现，并且不能从外部函数以外被调用。内部函数的使用生成了JavaScript闭包，这个我将另起一篇文章讨论。</p>
+<h2 id="4-立即执行函数表达式（IIFE）"><a href="#4-立即执行函数表达式（IIFE）" class="headerlink" title="4. 立即执行函数表达式（IIFE）"></a>4. 立即执行函数表达式（IIFE）</h2><p>IIFE是被立即调用执行的匿名函数表达式。IIFE看上去像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">// Your awesome code here</span></span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+
+<p>所有你要做的就是创建一个匿名函数，在函数定义后马上放一对圆括号以调用函数，最后将所有代码封装在另一对圆括号中。最外层的括号将它里面的所有一切转变成一个表达式，因为括号不能包含JavaScript语句。函数定义后面的圆括号则立即调用函数。</p>
+<p>IIFE块中定义的任何变量或函数对块而言是本地的，并且不能被这个范围以外的任何代码改变。</p>
+<p>看看IIFE的这个例子。此函数没有调用也会自动执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"I run on my own."</span>);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+
+<p>只需在plunker中复制并粘贴代码，看看在浏览器控制台中的输出。如果你不知道去哪里找浏览器控制台，那么只要在浏览器窗口中按下F12就会出现开发者工具。跳转console选项卡以查看<code>console.log</code>语句的所有输出。</p>
+<p>IIFE是一个在代码中创建局部范围的很好方法。它们可以帮助你保护变量和函数，以避免被应用程序的其他部分更改或覆盖。JavaScript中IIFE的其他优势？它们是如何解决全局范围污染问题的？欢迎点击查看我关于<a href="/2017/01/14/js-IIFE/">立即执行函数表达式</a>的文章。</p>
+<h2 id="5-构造函数"><a href="#5-构造函数" class="headerlink" title="5. 构造函数"></a>5. 构造函数</h2><p>函数可以充当构造器的角色，并且可以使用构造函数来创建新的对象。这是使JavaScript面向对象的特点之一。使用构造函数的好处是，你将能够通过预定义的属性和方法，创造尽可能多的对象。如果你由此关联到其他语言中的类和对象，那么你做的对。</p>
+<p>让我们创建一个带有一些属性和方法的构造函数Programmer。你可以假设它在你最喜欢的语言中是一个类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Programmer</span>(<span class="params">name, company, expertise</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.name = name;</span><br><span class="line">   <span class="keyword">this</span>.company = company;</span><br><span class="line">   <span class="keyword">this</span>.expertise = expertise;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">this</span>.writeCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Writing some public static thing.."</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">this</span>.makeSkypeCall = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Making skype call.."</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">this</span>.doSalsa = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"I'm a programmer, I can only do Gangnam style.."</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">this</span>.canWriteJavaScript = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> expertise === <span class="string">"JavaScript"</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数有三个参数，并创建了一个具有三个属性和四种方法的对象。我不认为上面的代码需要任何解释。此外，我可以创建任意数量程序员对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> javaProgrammer = <span class="keyword">new</span> Programmer(<span class="string">"Mohit Srivastava"</span>, <span class="string">"Infosys"</span>, <span class="string">"Java"</span>);</span><br><span class="line"><span class="keyword">var</span> dotnetProgrammer = <span class="keyword">new</span> Programmer(<span class="string">"Atul Mishra"</span>, <span class="string">"Prowareness"</span>, <span class="string">".NET"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>虽然也可以创建一个使用对象文本语法带有相同属性和方法的对象，但我们需要多次编写相同的代码，这可不是什么伟大的实践。如果你知道编程DRY原则，那么你就不会不赞同我。构造函数使得可以一次定义对象，并创建真正的实例，无论什么时候你想要。</p>
+<blockquote>
+<p><strong>注意</strong>：</p>
+</blockquote>
+<p>始终使用new关键字来从构造器创建新的对象。忘记了new而像这个创建一个实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsProgrammer = Programmer(<span class="string">"Douglas Crockford"</span>, <span class="string">"Yahoo"</span>, <span class="string">"JavaScript"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>最终将添加所有属性和方法到全局的window对象，哇哦，这将是太可怕了。原因是，除非明确指定，否则“this”指向全局的window对象。使用new 设置“this”上下文到被创建的当前对象。</p>
+<p>然而，有一种变通方法可以来克服这个问题。你可以改变构造函数的实现以使域安全，然后在创建新的对象时，你就可以愉快地忽略new 关键字了。请参见以下修改了的构造函数代码。为了便于查看，我已删除了一些方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Programmer</span>(<span class="params">name, company, expertise</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Programmer)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Programmer(name, company, expertise);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">this</span>.name = name;</span><br><span class="line">   <span class="keyword">this</span>.company = company;</span><br><span class="line">   <span class="keyword">this</span>.expertise = expertise;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">this</span>.writeCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Writing some public static thing.."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>if 条件检查了this 对象是否是Programmer的一个实例。如果不是，它会创建一个新的Programmer对象，并通过再次调用构造器返回相同的内容。</p>
+<p>注意：你无法在不使用’new’关键字的情况下，在Strict模式下从构造器创建一个新的对象。Strict模式强制一些编码准则，并且在你写的东西不安全的情况下会抛出错误。要启用Strict模式，你只需要添加在你的代码开头添加字符串 ‘use strict’。在Strict模式下运行代码是一个良好的实践，可以查看我的另一篇文章<a href="/2017/01/24/js-strict/">JavaScript 严格模式（strict）</a>了解更多。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">//....</span></span><br><span class="line"> <span class="comment">//....</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在这篇文章中，我几乎已经涵盖了有关函数的所有内容。函数被认为是JavaScript中的一等公民。如果你想掌握JavaScript的话，理解函数可能是最重要的事情。</p>
+<hr>
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/04/15/article-js-fn/" title="深入理解 JavaScript 中的函数">https://doubleray.top/2017/04/15/article-js-fn/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/09/article-js-prototype-method/" rel="next" title="JavaScript 实现继承的方式">
+                <i class="fa fa-chevron-left"></i> JavaScript 实现继承的方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/20/article-js-pausebug/" rel="prev" title="JavaScript 断点调试">
+                JavaScript 断点调试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-匿名函数"><span class="nav-text">1. 匿名函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-关于参数的更多内容"><span class="nav-text">2. 关于参数的更多内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-缺少参数"><span class="nav-text">2.1 缺少参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Arguments对象"><span class="nav-text">2.2 Arguments对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-默认参数"><span class="nav-text">2.3 默认参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-嵌套函数"><span class="nav-text">3. 嵌套函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-立即执行函数表达式（IIFE）"><span class="nav-text">4. 立即执行函数表达式（IIFE）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-构造函数"><span class="nav-text">5. 构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

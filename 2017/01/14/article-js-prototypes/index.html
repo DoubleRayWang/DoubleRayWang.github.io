@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="之前对 JavaScript 中的原型链和原型对象有所了解，每当别人问我什么是原型链和原型对象时，我总是用很官方（其实自己不懂）的解释去描述。有一句话说的好：如果你不能把一个很复杂的东西用最简单的话语描述出来，那就说明你没有真正的理解。 　　本文转自 trigkit4专栏—— 原型和原型链详解。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 原型及原型链">
+<meta property="og:url" content="https://doubleray.top/2017/01/14/article-js-prototypes/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="之前对 JavaScript 中的原型链和原型对象有所了解，每当别人问我什么是原型链和原型对象时，我总是用很官方（其实自己不懂）的解释去描述。有一句话说的好：如果你不能把一个很复杂的东西用最简单的话语描述出来，那就说明你没有真正的理解。 　　本文转自 trigkit4专栏—— 原型和原型链详解。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/prototype1.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/prototype2.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/prototype3.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/prototype4.png">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 原型及原型链">
+<meta name="twitter:description" content="之前对 JavaScript 中的原型链和原型对象有所了解，每当别人问我什么是原型链和原型对象时，我总是用很官方（其实自己不懂）的解释去描述。有一句话说的好：如果你不能把一个很复杂的东西用最简单的话语描述出来，那就说明你没有真正的理解。 　　本文转自 trigkit4专栏—— 原型和原型链详解。">
+<meta name="twitter:image" content="https://doubleray.top/styles/images/js/prototype1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/01/14/article-js-prototypes/">
+
+
+
+
+
+  <title>JavaScript 原型及原型链 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/01/14/article-js-prototypes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JavaScript 原型及原型链</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-14T21:25:15+08:00">
+                2017-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试总结/" itemprop="url" rel="index">
+                    <span itemprop="name">面试总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/14/article-js-prototypes/" class="leancloud_visitors" data-flag-title="JavaScript 原型及原型链">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　之前对 JavaScript 中的原型链和原型对象有所了解，每当别人问我什么是原型链和原型对象时，我总是用很官方（其实自己不懂）的解释去描述。有一句话说的好：如果你不能把一个很复杂的东西用最简单的话语描述出来，那就说明你没有真正的理解。</p>
+<p>　　本文转自 <a href="https://segmentfault.com/a/1190000000662547#articleHeader4" target="_blank" rel="noopener">trigkit4专栏—— 原型和原型链详解</a>。<a id="more"></a></p>
+<hr>
+
+<h2 id="1-私有变量和函数"><a href="#1-私有变量和函数" class="headerlink" title="1. 私有变量和函数"></a>1. 私有变量和函数</h2><p>　　在函数内部定义的变量和函数，如果不对外提供接口，外部是无法访问到的，也就是该函数的私有的变量和函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Box</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> color = <span class="string">"blue"</span>;<span class="comment">//私有变量</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) //私有函数</span></span></span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　这样在函数对象<code>Box</code>外部无法访问变量<code>color</code>和<code>fn</code>，他们就变成私有的了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Box();</span><br><span class="line">    alert(obj.color);<span class="comment">//弹出 undefined</span></span><br><span class="line">    alert(obj.fn);<span class="comment">//同上</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-静态变量和函数"><a href="#2-静态变量和函数" class="headerlink" title="2. 静态变量和函数"></a>2. 静态变量和函数</h2><p>　　当定义一个函数后通过点号 “.” 为其添加的属性和函数，通过对象本身仍然可以访问得到，但是其实例却访问不到，这样的变量和函数分别被称为<strong>静态变量</strong>和<strong>静态函数</strong>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Obj</span><span class="params">()</span></span>&#123;&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    Obj.num = <span class="number">72</span>;<span class="comment">//静态变量</span></span></span><br><span class="line"><span class="javascript">    Obj.fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)  //静态函数</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    alert(Obj.num);<span class="comment">//72</span></span></span><br><span class="line"><span class="actionscript">    alert(<span class="keyword">typeof</span> Obj.fn)<span class="comment">//function</span></span></span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> t = <span class="keyword">new</span> Obj();</span></span><br><span class="line"><span class="actionscript">    alert(t.name);<span class="comment">//undefined</span></span></span><br><span class="line"><span class="actionscript">    alert(<span class="keyword">typeof</span> t.fn);<span class="comment">//undefined</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-实例变量和函数"><a href="#3-实例变量和函数" class="headerlink" title="3. 实例变量和函数"></a>3. 实例变量和函数</h2><p>　　在面向对象编程中除了一些库函数我们还是希望在对象定义的时候同时定义一些属性和方法，实例化后可以访问，<code>js</code>也能做到这样:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">          <span class="function"><span class="keyword">function</span> <span class="title">Box</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.a=[]; <span class="comment">//实例变量</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.fn=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; <span class="comment">//实例方法  </span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> Box.a); <span class="comment">//undefined</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> Box.fn); <span class="comment">//undefined</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> box=<span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> box.a); <span class="comment">//object</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> box.fn); <span class="comment">//function</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　为实例变量和方法添加新的方法和属性:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">Box</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.a=[]; <span class="comment">//实例变量</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.fn=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; <span class="comment">//实例方法</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> box1=<span class="keyword">new</span> Box();</span></span><br><span class="line">            box1.a.push(1);</span><br><span class="line">            box1.fn=&#123;&#125;;</span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(box1.a); <span class="comment">//[1]</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> box1.fn); <span class="comment">//object</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> box2=<span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(box2.a); <span class="comment">//[]</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> box2.fn); <span class="comment">//function</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　在<code>box1</code>中修改了<code>a</code>和<code>fn</code>，而在<code>box2</code>中没有改变，由于数组和函数都是对象，是引用类型，这就说明<code>box1</code>中的属性和方法与<code>box2</code>中的属性与方法虽然同名但却不是一个引用，而是对<code>Box</code>对象定义的属性和方法的一个复制。</p>
+<p>　　这个对属性来说没有什么问题，但是对于方法来说问题就很大了，因为方法都是在做完全一样的功能，但是却又两份复制，如果一个函数对象有上千和实例方法，那么它的每个实例都要保持一份上千个方法的复制，这显然是不科学的，这可肿么办呢，<code>prototype</code>应运而生。</p>
+<h2 id="4-基本概念"><a href="#4-基本概念" class="headerlink" title="4. 基本概念"></a>4. 基本概念</h2><p>　　我们创建的每个函数都有一个<code>prototype</code>属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。那么，<code>prototype</code>就是通过调用 <strong>构造函数</strong> 而创建的那个对象实例的原型对象。</p>
+<p>　　使用原型的好处是可以让对象实例共享它所包含的属性和方法。也就是说，不必在构造函数中添加定义对象信息，而是可以直接将这些信息添加到原型中。使用构造函数的主要问题就是每个方法都要在每个实例中创建一遍。</p>
+<p>　　在<code>JavaScript</code>中,一共有两种类型的值,原始值和对象值。每个对象都有一个内部属性 <code>prototype</code> ,我们通常称之为 <strong>原型</strong> 。原型的值可以是一个对象,也可以是<code>null</code>。如果它的值是一个对象，则这个对象也一定有自己的原型。这样就形成了一条线性的链，我们称之为 <strong>原型链</strong> 。</p>
+<h3 id="4-1-含义"><a href="#4-1-含义" class="headerlink" title="4.1 含义"></a>4.1 含义</h3><p>　　函数可以用来作为构造函数来使用。另外只有函数才有<code>prototype</code>属性并且可以访问到，但是对象实例不具有该属性，只有一个内部的不可访问的<code>__proto__</code>属性。<code>__proto__</code>是对象中一个指向相关原型的神秘链接。按照标准，<code>__proto__</code>是不对外公开的，也就是说是个私有属性，但是 <em>Firefox</em> 的引擎将他暴露了出来成为了一个共有的属性，我们可以对外访问和设置。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> Browser = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;;</span></span><br><span class="line"><span class="actionscript">    Browser.prototype.run = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        alert(<span class="string">"I'm Gecko,a kernel of firefox￼"</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> Bro = <span class="keyword">new</span> Browser();</span></span><br><span class="line">    Bro.run();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　当我们调用<code>Bro.run()</code>方法时，由于<code>Bro</code>中没有这个方法，所以，他就会去他的<code>__proto__</code>中去找，也就是Browser.prototype<code>，所以最终执行了该</code>run()`方法（在这里，函数首字母大写的都代表构造函数，以用来区分普通函数）。</p>
+<p>　　当调用构造函数创建一个实例的时候，实例内部将包含一个内部指针（<code>__proto__</code>）指向构造函数的<code>prototype</code>，这个连接存在于实例和构造函数的<code>prototype</code>之间，而不是实例与构造函数之间。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span></span>&#123;                             <span class="comment">//构造函数</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.name=name;</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line"><span class="javascript">            Person.prototype.printName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) //原型对象</span></span></span><br><span class="line">            &#123;</span><br><span class="line"><span class="actionscript">                alert(<span class="keyword">this</span>.name);</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> person1=<span class="keyword">new</span> Person(<span class="string">'Byron'</span>);<span class="comment">//实例化对象</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(person1.__proto__);<span class="comment">//Person</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(person1.constructor);<span class="comment">//自己试试看会是什么吧</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(Person.prototype);<span class="comment">//指向原型对象Person</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> person2=<span class="keyword">new</span> Person(<span class="string">'Frank'</span>);</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　<code>Person</code>的实例<code>person1</code>中包含了<code>name</code>属性，同时自动生成一个<code>__proto__</code>属性，该属性指向<code>Person</code>的<code>prototype</code>，可以访问到<code>prototype</code>内定义的<code>printName</code>方法，大概就是这个样子的:</p>
+<p><img src="/styles/images/js/prototype1.png" alt="ptototype"></p>
+<p>　　每个<code>JavaScript</code>函数都有<code>prototype</code>属性，这个属性引用了一个对象，这个对象就是原型对象。原型对象初始化的时候是空的，我们可以在里面自定义任何属性和方法，这些方法和属性都将被该构造函数所创建的对象继承。</p>
+<p>　　那么，现在问题来了。构造函数、实例和原型对象三者之间有什么关系呢？</p>
+<h2 id="5-构造函数、实例和原型对象的区别"><a href="#5-构造函数、实例和原型对象的区别" class="headerlink" title="5. 构造函数、实例和原型对象的区别"></a>5. 构造函数、实例和原型对象的区别</h2><p>　　实例就是通过构造函数创建的。实例一创造出来就具有<code>constructor</code>属性（指向构造函数）和<code>__proto__</code>属性（指向原型对象），构造函数中有一个<code>prototype</code>属性，这个属性是一个指针，指向它的原型对象。原型对象内部也有一个指针（<code>constructor</code>属性）指向构造函数：<code>Person.prototype.constructor = Person</code>；实例可以访问原型对象上定义的属性和方法。在这里<code>person1</code>和<code>person2</code>就是实例，<code>prototype</code>是他们的原型对象。</p>
+<p>　　再举个栗子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>)   //积累构造函数</span></span></span><br><span class="line">    &#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = name;<span class="comment">//设置对象属性</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="javascript">    Animal.prototype.behavior = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) //给基类构造函数的<span class="title">prototype</span>添加<span class="title">behavior</span>方法</span></span></span><br><span class="line">    &#123;  </span><br><span class="line"><span class="actionscript">        alert(<span class="string">"this is a "</span>+<span class="keyword">this</span>.name);</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> Dog = <span class="keyword">new</span> Animal(<span class="string">"dog"</span>);<span class="comment">//创建Dog对象</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> Cat = <span class="keyword">new</span> Animal(<span class="string">"cat"</span>);<span class="comment">//创建Cat对象</span></span></span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    Dog.behavior();<span class="comment">//通过Dog对象直接调用behavior方法</span></span></span><br><span class="line"><span class="actionscript">    Cat.behavior();<span class="comment">//output "this is a cat"</span></span></span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    alert(Dog.behavior==Cat.behavior);<span class="comment">//output true;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　可以从程序运行结果看出，<strong>构造函数</strong>的<code>prototype</code>上定义的方法确实可以通过对象直接调用到，而且代码是共享的。（可以试一下将<code>Animal.prototype.behavior</code> 中的<code>prototype</code>属性去掉，看看还能不能运行。）在这里，<code>prototype</code>属性指向<code>Animal</code>对象。</p>
+<h2 id="6-数组对象实例"><a href="#6-数组对象实例" class="headerlink" title="6. 数组对象实例"></a>6. 数组对象实例</h2><p>　　再看个数组对象的实例。当我们创建出<code>array1</code>这个对象的时候，<code>array1</code>实际在<code>Javascript</code>引擎中的对象模型如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p><img src="/styles/images/js/prototype2.png" alt="ptototype"></p>
+<p>　　array1对象具有一个length属性值为3，但是我们可以通过如下的方法来为array1增加元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array1.push(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>　　<code>push</code>这个方法来自于<code>array1</code>的<code>__proto__</code>成员指向对象的一个方法(<code>Array.prototye.push()</code>)。正是因为所有的数组对象（通过<code>[]</code>来创建的）都包含有一个指向同一个具有<code>push</code>,<code>reverse</code>等方法对象(<code>Array.prototype</code>)的<code>__proto__</code>成员，才使得这些数组对象可以使用<code>push</code>,<code>reverse</code>等方法。</p>
+<h2 id="7-函数对象实例"><a href="#7-函数对象实例" class="headerlink" title="7. 函数对象实例"></a>7. 函数对象实例</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Base</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.id = <span class="string">"base"</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/styles/images/js/prototype3.png" alt="ptototype"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Base();</span><br></pre></td></tr></table></figure>
+
+<p>　　这样代码的结果是什么，我们在<code>Javascript</code>引擎中看到的对象模型是：</p>
+<p><img src="/styles/images/js/prototype4.png" alt="ptototype"></p>
+<p>　　<code>new</code>操作符具体干了什么呢?其实很简单，就干了三件事情:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj  = &#123;&#125;;  </span><br><span class="line">obj.__proto__ = Base.prototype;  </span><br><span class="line">Base.call(obj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-原型链"><a href="#8-原型链" class="headerlink" title="8. 原型链"></a>8. 原型链</h2><p>　　<strong>原型链</strong>：当从一个对象那里调取属性或方法时，如果该对象自身不存在这样的属性或方法，就会去自己关联的<code>prototype</code>对象那里寻找，如果<code>prototype</code>没有，就会去<code>prototype</code>关联的前辈<code>prototype</code>那里寻找，如果再没有则继续查找<code>Prototype.Prototype</code>引用的对象，依次类推，直到<code>Prototype</code>.….<code>Prototype</code>为<code>undefined</code>（<code>Object</code>的<code>Prototype</code>就是<code>undefined</code>）从而形成了所谓的“<strong>原型链</strong>”。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Shape</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"shape"</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.toString = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">TwoShape</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"2 shape"</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Triangle</span><span class="params">(side,height)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"Triangle"</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.side = side;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.height = height;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.getArea = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.side*<span class="keyword">this</span>.height/<span class="number">2</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    TwoShape.prototype = <span class="keyword">new</span> Shape();</span></span><br><span class="line"><span class="actionscript">    Triangle.prototype = <span class="keyword">new</span> TwoShape();</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　这里，用构造器<code>Shape()</code>新建了一个实体，然后用它去覆盖该对象的原型。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Shape</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"shape"</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.toString = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">TwoShape</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"2 shape"</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Triangle</span><span class="params">(side,height)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"Triangle"</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.side = side;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.height = height;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.getArea = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.side*<span class="keyword">this</span>.height/<span class="number">2</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    TwoShape.prototype = <span class="keyword">new</span> Shape();</span></span><br><span class="line"><span class="actionscript">    Triangle.prototype = <span class="keyword">new</span> TwoShape();</span></span><br><span class="line">    </span><br><span class="line">    TwoShape.prototype.constructor = TwoShape;</span><br><span class="line">    Triangle.prototype.constructor = Triangle;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> my = <span class="keyword">new</span> Triangle(<span class="number">5</span>,<span class="number">10</span>);</span></span><br><span class="line">    my.getArea();</span><br><span class="line"><span class="actionscript">    my.toString();<span class="comment">//Triangle</span></span></span><br><span class="line"><span class="actionscript">    my.constructor;<span class="comment">//Triangle(side,height)</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-原型继承"><a href="#9-原型继承" class="headerlink" title="9. 原型继承"></a>9. 原型继承</h2><p>　　<strong>原型继承</strong>：在原型链的末端，就是<code>Object</code>构造函数<code>prototype</code>属性指向的那个原型对象。这个原型对象是所有对象的祖先，这个老祖宗实现了诸如<code>toString</code>等所有对象天生就该具有的方法。其他内置构造函数，如<code>Function</code>，<code>Boolean</code>，<code>String</code>，<code>Date</code>和<code>RegExp</code>等的<code>prototype</code>都是从这个老祖宗传承下来的，但他们各自又定义了自身的属性和方法，从而他们的子孙就表现出各自宗族的那些特征。</p>
+<p>　　<code>ECMAScript</code>中，实现继承的方法就是依靠原型链实现的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Father</span><span class="params">()</span></span>&#123;             <span class="comment">//被继承的函数叫做超类型（父类，基类）</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">this</span>.name = <span class="string">"Jack"</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">Son</span><span class="params">()</span></span>&#123;          <span class="comment">//继承的函数叫做子类型（子类，派生类）</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">this</span>.age = <span class="number">10</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="actionscript"><span class="comment">//通过原型链继承，赋值给子类型的原型属性</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//new Father()会将father构造里的信息和原型里的信息都交给Son</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">Son.prototype = <span class="keyword">new</span> Father();<span class="comment">//Son继承了Father,通过原型，形成链条</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> son = <span class="keyword">new</span> Son();</span></span><br><span class="line"><span class="actionscript">alert(son.name);<span class="comment">//弹出 Jack</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　<strong>原型链的问题</strong>：原型链虽然很强大，可以用它来实现继承，但它也存在一些问题。其中最主要的问题来自包含引用类型的值原型。包含引用类型的原型属性会被所有实例共享；而这也正是为什么要在构造函数中，而不是在原型对象中定义属性的原因。在通过原型来实现继承时，原型实际上回变成另一个类型的实例。于是，原先的实例属性也就变成了原型的属性。</p>
+<p>　　在创建子类型的实例时，不能向超类型的构造函数中传递参数。实际上，应该说是没有办法在不影响所有对象实例的情况下，给超类型的构造函数传递参数。再加上刚刚讨论的由于原型中包含引用类型值所带来的问题，实践中很少会单独使用原型链。</p>
+<p>　　再举个栗子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span></span></span></span><br><span class="line">    &#123;</span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = name;<span class="comment">//设置对象属性</span></span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    Person.prototype.company = <span class="string">"Microsoft"</span>;<span class="comment">//设置原型的属性</span></span></span><br><span class="line"><span class="javascript">    Person.prototype.SayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) //原型的方法</span></span></span><br><span class="line">    &#123;  </span><br><span class="line"><span class="actionscript">        alert(<span class="string">"Hello,I'm "</span>+ <span class="keyword">this</span>.name+ <span class="string">" of "</span> + <span class="keyword">this</span>.company);</span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> BillGates = <span class="keyword">new</span> Person(<span class="string">"BillGates"</span>);<span class="comment">//创建person对象</span></span></span><br><span class="line"><span class="actionscript">    BillGates.SayHello();<span class="comment">//继承了原型的内容，输出"Hello,I'm BillGates of Microsoft"</span></span></span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> Jobs = <span class="keyword">new</span> Person(<span class="string">"Jobs"</span>);</span></span><br><span class="line"><span class="actionscript">    Jobs.company = <span class="string">"Apple"</span>;<span class="comment">//设置自己的company属性，掩盖了原型的company属性</span></span></span><br><span class="line"><span class="actionscript">    Jobs.SayHello = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span></span><br><span class="line">    &#123;</span><br><span class="line"><span class="actionscript">        alert(<span class="string">"Hi,"</span>+<span class="keyword">this</span>.name + <span class="string">" like "</span> + <span class="keyword">this</span>.company);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="actionscript">    Jobs.SayHello();<span class="comment">//自己覆盖的属性和方法，输出"Hi,Jobs like Apple"</span></span></span><br><span class="line"><span class="actionscript">    BillGates.SayHello();<span class="comment">//Jobs的覆盖没有影响原型，BillGates还是照样输出</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="10-ptoto属性"><a href="#10-ptoto属性" class="headerlink" title="10. ptoto属性"></a>10. <strong>ptoto</strong>属性</h2><p>　　<code>__ptoto__</code>属性（IE 浏览器不支持）是实例指向原型对象的一个指针，它的作用就是指向构造函数的原型属性<code>constructor</code>，通过这两个属性，就可以访问原型里的属性和方法了。</p>
+<p>　　<code>Javascript</code>中的对象实例本质上是由一系列的属性组成的，在这些属性中，有一个内部的不可见的特殊属性——<code>__proto__</code>，该属性的值指向该对象实例的原型，一个对象实例只拥有一个唯一的原型。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Box</span><span class="params">()</span></span>&#123;        <span class="comment">//大写，代表构造函数</span></span></span><br><span class="line"><span class="actionscript">        Box.prototype.name = <span class="string">"trigkit4"</span>;<span class="comment">//原型属性</span></span></span><br><span class="line"><span class="actionscript">        Box.prototype.age = <span class="string">"21"</span>;</span></span><br><span class="line"><span class="javascript">        Box.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)//原型方法</span></span></span><br><span class="line">        &#123;  </span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.name + <span class="keyword">this</span>.age + <span class="string">'studying'</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> box1 = <span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> box2 = <span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="actionscript">    alert(box1.constructor);<span class="comment">//构造属性，可以获取构造函数本身，</span></span></span><br><span class="line"><span class="actionscript">                            <span class="comment">//作用是被原型指针定位，然后得到构造函数本身</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="10-1-proto属性和prototype属性的区别"><a href="#10-1-proto属性和prototype属性的区别" class="headerlink" title="10.1 proto属性和prototype属性的区别"></a>10.1 <strong>proto</strong>属性和prototype属性的区别</h3><p>　　<code>prototype</code>是<code>function</code>对象中专有的属性。 </p>
+<p>　　<code>__proto__</code>是普通对象的隐式属性，在<code>new</code>的时候，会指向<code>prototype</code>所指的对象；<code>__ptoto__</code>实际上是某个实体对象的属性，而<code>prototype</code>则是属于构造函数的属性。<code>__ptoto__</code>只能在学习或调试的环境下使用。</p>
+<h2 id="11-原型模式的执行流程"><a href="#11-原型模式的执行流程" class="headerlink" title="11. 原型模式的执行流程"></a>11. 原型模式的执行流程</h2><ol>
+<li><p>先查找构造函数实例里的属性或方法，如果有，就立即返回。</p>
+</li>
+<li><p>如果构造函数的实例没有，就去它的原型对象里找，如果有，就立即返回。</p>
+</li>
+</ol>
+<h3 id="11-1-原型对象的"><a href="#11-1-原型对象的" class="headerlink" title="11.1 原型对象的"></a>11.1 原型对象的</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Box</span><span class="params">()</span></span>&#123;        <span class="comment">//大写，代表构造函数</span></span></span><br><span class="line"><span class="actionscript">        Box.prototype.name = <span class="string">"trigkit4"</span>;<span class="comment">//原型属性</span></span></span><br><span class="line"><span class="actionscript">        Box.prototype.age = <span class="string">"21"</span>;</span></span><br><span class="line"><span class="javascript">        Box.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)//原型方法</span></span></span><br><span class="line">        &#123;  </span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.name + <span class="keyword">this</span>.age + <span class="string">'studying'</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> box1 = <span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="actionscript">    alert(box1.name);<span class="comment">//trigkit4,原型里的值</span></span></span><br><span class="line"><span class="actionscript">    box1.name = <span class="string">"Lee"</span>;</span></span><br><span class="line"><span class="actionscript">    alert(box1.name);<span class="comment">//Lee,就进原则</span></span></span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> box2 = <span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="actionscript">    alert(box2.name);<span class="comment">//trigkit4,原型的值，没有被box1修改</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="11-2-构造函数的"><a href="#11-2-构造函数的" class="headerlink" title="11.2 构造函数的"></a>11.2 构造函数的</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Box</span><span class="params">()</span></span>&#123;                   </span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.name = <span class="string">"Bill"</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    Box.prototype.name = <span class="string">"trigkit4"</span>;<span class="comment">//原型属性</span></span></span><br><span class="line"><span class="actionscript">    Box.prototype.age = <span class="string">"21"</span>;</span></span><br><span class="line"><span class="javascript">    Box.prototype.run = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)//原型方法</span></span></span><br><span class="line">    &#123;  </span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.name + <span class="keyword">this</span>.age + <span class="string">'studying'</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> box1 = <span class="keyword">new</span> Box();</span></span><br><span class="line"><span class="actionscript">    alert(box1.name);<span class="comment">//Bill,原型里的值</span></span></span><br><span class="line"><span class="actionscript">    box1.name = <span class="string">"Lee"</span>;</span></span><br><span class="line"><span class="actionscript">    alert(box1.name);<span class="comment">//Lee,就进原则</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　综上，整理一下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span></span>&#123;&#125;;</span></span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    Person.prototype.name = <span class="string">"trigkit4"</span>;</span></span><br><span class="line"><span class="actionscript">    Person.prototype.say = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        alert(<span class="string">"￼Hi"</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> p1 = <span class="keyword">new</span> Person();<span class="comment">//prototype是p1和p2的原型对象</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> p2 = <span class="keyword">new</span> Person();<span class="comment">//p2为实例化对象，其内部有一个__proto__属性，指向Person的prototype</span></span></span><br><span class="line">    </span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(p1.prototype);<span class="comment">//undefined,这个属性是一个对象，访问不到</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(Person.prototype);<span class="comment">//Person</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(Person.prototype.constructor);<span class="comment">//原型对象内部也有一个指针（constructor属性）指向构造函数</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(p1.__proto__);<span class="comment">//这个属性是一个指针指向prototype原型对象</span></span></span><br><span class="line"><span class="actionscript">    p1.say();<span class="comment">//实例可以访问到在原型对象上定义的属性和方法</span></span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">构造函数.prototype = 原型对象</span><br><span class="line">原型对象.constructor = 构造函数(模板)</span><br><span class="line">原型对象.isPrototypeof(实例对象)  <span class="comment">// 判断实例对象的原型 是不是当前对象</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="12-工厂模式"><a href="#12-工厂模式" class="headerlink" title="12. 工厂模式"></a>12. 工厂模式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">createObject</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    obj.name = name;</span><br><span class="line">    obj.age = age;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　工厂模式解决了实例化对象大量重复的问题，但还有一个问题，那就是根本无法搞清楚他们到底是哪个对象的实例。使用构造函数的方法，既解决了重复实例化的问题，又解决了对象识别的问题。</p>
+<p>　　使用构造函数的方法和工厂模式的不同之处在于：</p>
+<hr>
+
+<ol>
+<li>构造函数方法没有显示的创建对象(<code>new Object()</code>);</li>
+<li>直接将属性和方法赋值给<code>this</code>对象;</li>
+<li>没有<code>return</code> 语句。</li>
+</ol>
+<hr>
+
+<p>　　当使用了构造函数，并且<code>new</code> 构造函数，那么就在后台执行了<code>new Object()</code>；</p>
+<p>　　函数体内的<code>this</code>代表了<code>new Object()</code>出来的对象。</p>
+<hr>
+
+<ol>
+<li>判断属性是在构造函数的实例里，还是在原型里，可以使用<code>hasOwnProperty()</code>函数</li>
+<li>字面量创建的方式使用<code>constructor</code>属性不会指向实例，而会指向<code>Object</code>，构造函数创建的方式则相反；为什么指向<code>Object</code>？因为<code>Box.prototype = {}</code>;这种写法其实就是创建了一个新对象。而每创建一个函数，就会同时创建它的<code>prototype</code>，这个对象也会自动获取<code>constructor</code>属性</li>
+<li>如果是实例方法，不同的实例化，他们的方法地址是不一样的，是唯一的</li>
+<li>如果是原型方法，那么他们的地址的共享的</li>
+</ol>
+<hr>
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/01/14/article-js-prototypes/" title="JavaScript 原型及原型链">https://doubleray.top/2017/01/14/article-js-prototypes/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/14/article-js-IIFE/" rel="next" title="IIFE 详解">
+                <i class="fa fa-chevron-left"></i> IIFE 详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/15/article-css-flex/" rel="prev" title="Flex 布局新旧混合写法详解">
+                Flex 布局新旧混合写法详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-私有变量和函数"><span class="nav-text">1. 私有变量和函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-静态变量和函数"><span class="nav-text">2. 静态变量和函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-实例变量和函数"><span class="nav-text">3. 实例变量和函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-基本概念"><span class="nav-text">4. 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-含义"><span class="nav-text">4.1 含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-构造函数、实例和原型对象的区别"><span class="nav-text">5. 构造函数、实例和原型对象的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-数组对象实例"><span class="nav-text">6. 数组对象实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-函数对象实例"><span class="nav-text">7. 函数对象实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-原型链"><span class="nav-text">8. 原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-原型继承"><span class="nav-text">9. 原型继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-ptoto属性"><span class="nav-text">10. ptoto属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-proto属性和prototype属性的区别"><span class="nav-text">10.1 proto属性和prototype属性的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-原型模式的执行流程"><span class="nav-text">11. 原型模式的执行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-原型对象的"><span class="nav-text">11.1 原型对象的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-构造函数的"><span class="nav-text">11.2 构造函数的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-工厂模式"><span class="nav-text">12. 工厂模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

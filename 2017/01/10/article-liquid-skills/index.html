@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Jekyll,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="最近折腾 github pages 上博客的时候, 遇到一些 jekyll 问题，准确的来说应该是 Liquid 用法的问题。 　　于是一系列搜索之后终于找到了两篇根据 Liquid for Designers 翻译的不错的文档可以做基本的参考，分别是 Coffee coder 的 liquid用法笔记 和 Havee’s Space 的 Jekyll 扩展的 Liquid 设计 。">
+<meta name="keywords" content="Jekyll">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liquid 指南">
+<meta property="og:url" content="https://doubleray.top/2017/01/10/article-liquid-skills/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="最近折腾 github pages 上博客的时候, 遇到一些 jekyll 问题，准确的来说应该是 Liquid 用法的问题。 　　于是一系列搜索之后终于找到了两篇根据 Liquid for Designers 翻译的不错的文档可以做基本的参考，分别是 Coffee coder 的 liquid用法笔记 和 Havee’s Space 的 Jekyll 扩展的 Liquid 设计 。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Liquid 指南">
+<meta name="twitter:description" content="最近折腾 github pages 上博客的时候, 遇到一些 jekyll 问题，准确的来说应该是 Liquid 用法的问题。 　　于是一系列搜索之后终于找到了两篇根据 Liquid for Designers 翻译的不错的文档可以做基本的参考，分别是 Coffee coder 的 liquid用法笔记 和 Havee’s Space 的 Jekyll 扩展的 Liquid 设计 。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/01/10/article-liquid-skills/">
+
+
+
+
+
+  <title>Liquid 指南 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/01/10/article-liquid-skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Liquid 指南</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-10T19:25:15+08:00">
+                2017-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/干货分享/" itemprop="url" rel="index">
+                    <span itemprop="name">干货分享</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/01/10/article-liquid-skills/" class="leancloud_visitors" data-flag-title="Liquid 指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　最近折腾 github pages 上博客的时候, 遇到一些 jekyll 问题，准确的来说应该是 Liquid 用法的问题。</p>
+<p>　　于是一系列搜索之后终于找到了两篇根据 <a href="https://github.com/shopify/liquid/wiki/liquid-for-designers" target="_blank" rel="noopener">Liquid for Designers</a> 翻译的不错的文档可以做基本的参考，分别是 <a href="http://blog.csdn.net/dont27/article/details/38097581" target="_blank" rel="noopener">Coffee coder 的 liquid用法笔记</a> 和 <a href="https://havee.me/internet/2013-11/jekyll-liquid-designers.html" target="_blank" rel="noopener">Havee’s Space 的 Jekyll 扩展的 Liquid 设计 </a>。<a id="more"></a></p>
+<p>　　一下是本人参考以上文档做的小指南，方便以后翻阅。</p>
+<hr>
+<p>　　在 Liquid 中有两种类型的标记：<code>Output</code>(用于输出文本) 和 <code>Tag</code>(用于执行命令或者处理) 。</p>
+<ul>
+<li><code>Output</code> 标记被包含在：</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 两个配对的花括号中 &#125;&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">+ `</span>Tag<span class="string">` 标记被包含在:</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>ruby</span><br><span class="line">&#123;% 成对的花括号和百分号中 %&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Output</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 1. 基本输出</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">　　下面是关于输出标记的简单实例：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>liquid</span><br><span class="line">Hello &#123;&#123; name &#125;&#125;</span><br><span class="line">Hello &#123;&#123; user.name &#125;&#125;</span><br><span class="line">Hello &#123;&#123; <span class="string">'tobi'</span> &#125;&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 2. 高级 Output：过滤器 (Filters)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">　　输入标记带有过滤器，方法很简单。第一个参数总是过滤器左边值的输出。当下个过滤器运行时，刚刚所得到的过滤器返回值就会成为新的左边值。直到最后没有过滤器时，模板就会接受最后的结果字符串。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>liquid</span><br><span class="line">Hello &#123;&#123; <span class="string">'tobi'</span> <span class="params">| upcase &#125;&#125;</span></span><br><span class="line"><span class="params">Hello tobi has &#123;&#123; 'tobi' |</span> size &#125;&#125; letters!</span><br><span class="line">Hello &#123;&#123; <span class="string">'tobi'</span> <span class="params">| capitalize &#125;&#125;</span></span><br><span class="line"><span class="params">Hello &#123;&#123; '1984-02-01' |</span> <span class="symbol">date:</span> <span class="string">"%Y"</span> &#125;&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">　　输出结果是：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>ruby</span><br><span class="line">Hello &#123;&#123; <span class="string">'tobi'</span> <span class="params">| upcase &#125;&#125;</span></span><br><span class="line"><span class="params">Hello tobi has &#123;&#123; 'tobi' |</span> size &#125;&#125; letters!</span><br><span class="line">Hello &#123;&#123; <span class="string">'tobi'</span> <span class="params">| capitalize &#125;&#125;</span></span><br><span class="line"><span class="params">Hello &#123;&#123; '1984-02-01' |</span> <span class="symbol">date:</span> <span class="string">"%Y"</span> &#125;&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 3. 标准过滤器</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>liquid</span><br><span class="line">date - 格式化日期</span><br><span class="line">capitalize - 将输入语句的首字母大写</span><br><span class="line">downcase - 将输入字符串转为小写</span><br><span class="line">upcase - 将输入字符串转为大写</span><br><span class="line">first - 得到传递数组的第一个元素</span><br><span class="line">last - 得到传递数组的最后一个元素</span><br><span class="line">join - 将数组中的元素连成一串，中间通过某些字符分隔</span><br><span class="line">sort - 对数组元素进行排序</span><br><span class="line">map - 从一个给定属性中映射/收集一个数组</span><br><span class="line">size - 返回一个数组或字符串的大小</span><br><span class="line">escape - 对一串字符串进行编码</span><br><span class="line">escape_once - 返回一个转义的html版本，而不影响现有的转义文本</span><br><span class="line">strip_html - 去除一串字符串中的所有html标签</span><br><span class="line">strip_newlines - 从字符串中去除所有换行符(\n)</span><br><span class="line">newline_to_br - 将所有的换行符(\n)换成 html 的换行标记</span><br><span class="line">replace - 匹配每一处指定字符串，如 &#123;&#123; <span class="string">'foofoo'</span> <span class="params">| replace:'foo','bar' &#125;&#125; #=&gt; 'barbar'</span></span><br><span class="line"><span class="params">replace_first - 匹配第一处指定的字符串，如 &#123;&#123; 'barbar' |</span> <span class="symbol">replace_first:</span><span class="string">'bar'</span>,<span class="string">'foo'</span> &#125;&#125; <span class="comment">#=&gt; 'foobar'</span></span><br><span class="line">remove - 删除每一处匹配字符串，如 &#123;&#123; <span class="string">'foobarfoobar'</span> <span class="params">| remove:'foo' &#125;&#125; #=&gt; 'barbar'</span></span><br><span class="line"><span class="params">remove_first - 删除第一处匹配的字符串，如 &#123;&#123; 'barbar' |</span> <span class="symbol">remove_first:</span><span class="string">'bar'</span> &#125;&#125; <span class="comment">#=&gt; 'bar'</span></span><br><span class="line">truncate - 将一串字符串截断为x个字符</span><br><span class="line">truncatewords - 将一串字符串截断为x个单词</span><br><span class="line">prepend - 在一串字符串前面加上指定字符串，如 &#123;&#123; <span class="string">'bar'</span> <span class="params">| prepend:'foo' &#125;&#125; #=&gt; 'foobar'</span></span><br><span class="line"><span class="params">append - 在一串字符串后面加上指定字符串，如 &#123;&#123; 'foo' |</span> <span class="symbol">append:</span><span class="string">'bar'</span> &#125;&#125; <span class="comment">#=&gt; 'foobar'</span></span><br><span class="line">minus - 减，如 &#123;&#123; <span class="number">4</span> <span class="params">| minus:2 &#125;&#125; #=&gt; 2</span></span><br><span class="line"><span class="params">plus - 加，如 &#123;&#123; '1' |</span> <span class="symbol">plus:</span><span class="string">'1'</span> &#125;&#125; <span class="comment">#=&gt; '11', &#123;&#123; 1 | plus:1 &#125;&#125; #=&gt; 2</span></span><br><span class="line">times - 乘，如 &#123;&#123; <span class="number">5</span> <span class="params">| times:4 &#125;&#125; #=&gt; 20</span></span><br><span class="line"><span class="params">divided_by - 除，如 &#123;&#123; 10 |</span> <span class="symbol">divided_by:</span><span class="number">2</span> &#125;&#125; <span class="comment">#=&gt; 5</span></span><br><span class="line">split - 将一串字符串根据匹配模式分割成数组，如 &#123;&#123; <span class="string">"a~b"</span> <span class="params">| split:~ &#125;&#125; #=&gt; \['a','b'\]</span></span><br><span class="line"><span class="params">modulo - 余数，如 &#123;&#123; 3 |</span> <span class="symbol">modulo:</span><span class="number">2</span> &#125;&#125; <span class="comment">#=&gt; 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h2><p>　　<code>Tags</code> 用于你的模板逻辑。新的标签很容易开发，因此我希望在发布这些代码后，大家可以为标准标签库增加更多的内容。</p>
+<p>　　下列是当前已经支持的标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">assign - 将一些值赋给一个变量</span><br><span class="line">capture - 块标记，把一些文本捕捉到一个变量中</span><br><span class="line">case - 块标记，标准的 case 语句</span><br><span class="line">Comments - 块标记，将一块文本作为注释</span><br><span class="line">cycle - Cycle 通常用于循环轮换值，如颜色或 DOM 类。</span><br><span class="line">for - 用于循环 For loop</span><br><span class="line">if - 标准的 if/else 块</span><br><span class="line">include - 包含其他的模板；对于区块化非常有效</span><br><span class="line">raw - 暂时性的禁用的标签的解析</span><br><span class="line">unless - if 语句的简版</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-Comments"><a href="#1-Comments" class="headerlink" title="1. Comments"></a>1. Comments</h3><p>　　注释是最简单的标签，它只是把内容包含起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">We made 1 million dollars &#123;% comment %&#125; in losses &#123;% endcomment %&#125; this year</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">### 2. Raw</span><br><span class="line"></span><br><span class="line">　　Raw 暂时性的禁用标签的解析。这在需要展示一些可能产生冲突的内容（如本页面，要展示 liquid 语句，就需要包含在 raw 标签间，否则会被解析）时非常有用。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> &#123;% raw %&#125;</span><br><span class="line">```liquid</span><br><span class="line">｛% raw %｝</span><br><span class="line">    We made 1 million dollars &#123;% comment %&#125; in losses &#123;% endcomment %&#125; this year</span><br><span class="line">｛% endraw %｝</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-If-Else"><a href="#3-If-Else" class="headerlink" title="3. If/Else"></a>3. If/Else</h3><p>　　<code>if/else</code> 在其他编程语言里应该已经被熟知了。<code>Liquid</code> 使得你可以通过 if``` 或 <code>unless</code> ( <code>elsif</code> 和 <code>else</code> 为可选 ) 编写简单的表达式:</p>
+<pre><code class="liquid">{% if user %}
+    Hello {{ user.name }}
+{% endif %}
+
+{% if user.name == 'tobi' %}
+    Hello tobi
+{% elsif user.name == 'bob' %}
+    Hello bob
+{% endif %}
+
+{% if user.name == 'tobi' or user.name == 'bob' %}
+    Hello tobi or bob
+{% endif %}
+
+{% if user.name == 'bob' and user.age > 45 %}
+    Hello old bob
+{% endif %}
+
+{% if user.name != 'tobi' %}
+    Hello non-tobi
+{% endif %}
+
+# 同上
+{% unless user.name == 'tobi' %}
+    Hello non-tobi
+{% endunless %}
+
+# 检测是否用户有一张信用卡
+{% if user.creditcard != null %}
+   poor sob
+{% endif %}
+
+# 同上
+{% if user.creditcard %}
+   poor sob
+{% endif %}
+
+# Check for an empty array
+{% if user.payments == empty %}
+   you never paid !
+{% endif %}
+
+{% if user.age > 18 %}
+   Login here
+{% else %}
+   Sorry, you are too young
+{% endif %}
+
+# array = 1,2,3
+{% if array contains 2 %}
+   array includes 2
+{% endif %}
+
+# string = &apos;hello world&apos;
+{% if string contains 'hello' %}
+   string includes 'hello'
+{% endif %}</code></pre>
+<h3 id="4-Case"><a href="#4-Case" class="headerlink" title="4. Case"></a>4. Case</h3><p>　　如果你需要更多的条件判断，你可以使用 <code>case</code> 语句:</p>
+<pre><code class="liquid">{% case condition %}
+    {% when 1 %}
+        hit 1
+    {% when 2 or 3 %}
+        hit 2 or 3
+    {% else %}
+        ... else ...
+{% endcase %}</code></pre>
+<ul>
+<li><strong>Example</strong>:</li>
+</ul>
+<pre><code class="liquid">{% case template %}
+    {% when 'label' %}
+        // {{ label.title }}
+    {% when 'product' %}
+        // {{ product.vendor | link_to_vendor }} / {{ product.title }}
+    {% else %}
+        // {{page_title}}
+{% endcase %}</code></pre>
+<h3 id="5-Cycle"><a href="#5-Cycle" class="headerlink" title="5. Cycle"></a>5. Cycle</h3><p>　　我们常常需要在不同的颜色或类似的任务间轮流切换。<code>Liquid</code> 对于这样的操作有内置支持，通过使用 cicle``` 标签。</p>
+<pre><code class="liquid">{% cycle 'one', 'two', 'three' %}
+{% cycle 'one', 'two', 'three' %}
+{% cycle 'one', 'two', 'three' %}
+{% cycle 'one', 'two', 'three' %}
+
+will result in
+
+one
+two
+three
+one</code></pre>
+<p>　　如果一组 <code>cycle</code> 没有命名，那默认情况下有用相同参数的会被认为是一个组。如果你希望完全控制 <code>cycle</code> 组，你可以指定一个组名，这个组名甚至可以是一个变量。</p>
+<pre><code class="liquid">{% cycle 'group 1': 'one', 'two', 'three' %}
+{% cycle 'group 1': 'one', 'two', 'three' %}
+{% cycle 'group 2': 'one', 'two', 'three' %}
+{% cycle 'group 2': 'one', 'two', 'three' %}
+
+will result in
+
+one
+two
+one
+two</code></pre>
+<h3 id="6-for-循环"><a href="#6-for-循环" class="headerlink" title="6. for 循环"></a>6. for 循环</h3><p>　　<code>Liquid</code> 允许循环一个集合 :</p>
+<pre><code class="liquid">{% for item in array %}
+    {{ item }}
+{% endfor %}</code></pre>
+<p>　　在每次循环期间，下列的帮助变量都可用于额外的展示需要:</p>
+<pre><code class="coffeescript">forloop.length      <span class="comment"># =&gt; length of the entire for loop</span>
+forloop.index       <span class="comment"># =&gt; index of the current iteration</span>
+forloop.index0      <span class="comment"># =&gt; index of the current iteration (zero based)</span>
+forloop.rindex      <span class="comment"># =&gt; how many items are still left?</span>
+forloop.rindex0     <span class="comment"># =&gt; how many items are still left? (zero based)</span>
+forloop.first       <span class="comment"># =&gt; is this the first iteration?</span>
+forloop.last        <span class="comment"># =&gt; is this the last iteration?</span></code></pre>
+<p>　　你可以使用一些属性来影响接受循环中的哪项。</p>
+<p>　　<code>limit:int</code> 使你可以限制接受的循环项个数；offset:int 可以可以让你从循环集合的第 n 项开始。</p>
+<pre><code class="liquid"># array = \[1,2,3,4,5,6\]
+{% for item in array limit:2 offset:2 %}
+    {{ item }}
+{% endfor %}
+# results in 3,4</code></pre>
+<p>　　反转循环:</p>
+<pre><code class="liquid">{% for item in collection reversed %}
+    {{item}}
+{% endfor %}</code></pre>
+<p>　　除了对一个已经存在的集合进行循环，你还可以定义一段范围区域内的数字进行循环。这段区域既可以通过文字也可以通过变量数定义得到:</p>
+<pre><code class="liquid"># if item.quantity is 4...
+{% for i in (1..item.quantity) %}
+    {{ i }}
+{% endfor %}
+# results in 1,2,3,4</code></pre>
+<h3 id="7-Variable-Assignment-变量赋值"><a href="#7-Variable-Assignment-变量赋值" class="headerlink" title="7. Variable Assignment(变量赋值)"></a>7. Variable Assignment(变量赋值)</h3><p>　　你可以把数据存储在你自己定义的变量中，以便在输出或者其他标签中使用。创建一个变量的最简单方式是使用 assign 标签，其语法也是简单明了的：</p>
+<pre><code class="liquid">{% assign name = 'freestyle' %}
+
+{% for t in collections.tags %}
+    {% if t == name %}
+        <p>Freestyle!</p>
+    {% endif %}
+{% endfor %}</code></pre>
+<p>　　另一种常见用法是把 <code>true/false</code> 值赋给变量:</p>
+<pre><code class="liquid">{% assign freestyle = false %}
+
+{% for t in collections.tags %}
+    {% if t == 'freestyle' %}
+        {% assign freestyle = true %}
+    {% endif %}
+{% endfor %}
+
+{% if freestyle %}
+    <p>Freestyle!</p>
+{% endif %}</code></pre>
+<p>　　如果你希望把一系列字符串连接为一个字符串，并将其存储到变量中，你可以使用 <code>capture</code> 标签。这个标签是一个块级标签，它会 <code>captures</code> 任何在其中渲染的元素，并把捕获的值赋给给定的变量，而不是把这些值渲染在页面中。</p>
+<pre><code class="html"><span class="comment">{% capture attribute_name %}{{ item.title | handleize }}-{{ i }}-color{% endcapture %}</span>
+
+<span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"{{ attribute_name }}"</span>&gt;</span>Color:<span class="tag">&lt;/<span class="name">label</span>&gt;</span>
+<span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">"attributes[{{ attribute_name }}]"</span> <span class="attr">id</span>=<span class="string">"{{ attribute_name }}"</span>&gt;</span>
+  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"red"</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">option</span>&gt;</span>
+  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"green"</span>&gt;</span>Green<span class="tag">&lt;/<span class="name">option</span>&gt;</span>
+  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"blue"</span>&gt;</span>Blue<span class="tag">&lt;/<span class="name">option</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">select</span>&gt;</span></code></pre>
+<hr>
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/01/10/article-liquid-skills/" title="Liquid 指南">https://doubleray.top/2017/01/10/article-liquid-skills/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jekyll/" rel="tag"># Jekyll</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/article-jekyll-plug-ins/" rel="next" title="Jekyll 插件（持续更新···）">
+                <i class="fa fa-chevron-left"></i> Jekyll 插件（持续更新···）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/11/article-awesome-gulp/" rel="prev" title="awesome-gulp 中文版">
+                awesome-gulp 中文版 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tags"><span class="nav-text">Tags</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Comments"><span class="nav-text">1. Comments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-If-Else"><span class="nav-text">3. If/Else</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Case"><span class="nav-text">4. Case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Cycle"><span class="nav-text">5. Cycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-for-循环"><span class="nav-text">6. for 循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Variable-Assignment-变量赋值"><span class="nav-text">7. Variable Assignment(变量赋值)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>

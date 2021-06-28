@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="c6OiDotAFZoSZyFkoL2Bi4CxOC-4ssYMP_kX8K0bpTg">
+<meta name="baidu-site-verification" content="yicTeKMRnZ">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Love Light" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="虽然网上已经有多的数不清的调试教程了，但仍然没有发现哪篇文章写的通俗易懂，索性自己尝试写写自己的一些使用习惯或者说是心得，希望对那些还不是很懂得使用断点调试的孩子有一些帮助（大神请无视~）。 本文参考自 沐清风blog 的 js断点调试心得">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 断点调试">
+<meta property="og:url" content="https://doubleray.top/2017/04/20/article-js-pausebug/index.html">
+<meta property="og:site_name" content="Love Light">
+<meta property="og:description" content="虽然网上已经有多的数不清的调试教程了，但仍然没有发现哪篇文章写的通俗易懂，索性自己尝试写写自己的一些使用习惯或者说是心得，希望对那些还不是很懂得使用断点调试的孩子有一些帮助（大神请无视~）。 本文参考自 沐清风blog 的 js断点调试心得">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug1.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug2.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug3.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug4.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug5.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug6.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug7.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug8.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug9.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug10.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug11.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug12.png">
+<meta property="og:image" content="https://doubleray.top/styles/images/js/debug13.png">
+<meta property="og:updated_time" content="2021-06-24T04:02:41.969Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 断点调试">
+<meta name="twitter:description" content="虽然网上已经有多的数不清的调试教程了，但仍然没有发现哪篇文章写的通俗易懂，索性自己尝试写写自己的一些使用习惯或者说是心得，希望对那些还不是很懂得使用断点调试的孩子有一些帮助（大神请无视~）。 本文参考自 沐清风blog 的 js断点调试心得">
+<meta name="twitter:image" content="https://doubleray.top/styles/images/js/debug1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://doubleray.top/2017/04/20/article-js-pausebug/">
+
+
+
+
+
+  <title>JavaScript 断点调试 | Love Light</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cbe9a730ab6eb905106c161878dbbe1a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Love Light</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">我的世界不只有 Coding！</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://doubleray.top/2017/04/20/article-js-pausebug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DoubleRay">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Light">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JavaScript 断点调试</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T16:41:15+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/20/article-js-pausebug/" class="leancloud_visitors" data-flag-title="JavaScript 断点调试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>虽然网上已经有多的数不清的调试教程了，但仍然没有发现哪篇文章写的通俗易懂，索性自己尝试写写自己的一些使用习惯或者说是心得，希望对那些还不是很懂得使用断点调试的孩子有一些帮助（大神请无视~）。</p>
+<p><strong>本文参考自 <a href="http://www.cnblogs.com/mqfblog/" target="_blank" rel="noopener">沐清风blog</a> 的 <a href="http://www.cnblogs.com/mqfblog/p/5397282.html" target="_blank" rel="noopener">js断点调试心得</a></strong><a id="more"></a></p>
+<h2 id="1-断点调试是啥？难不难？"><a href="#1-断点调试是啥？难不难？" class="headerlink" title="1. 断点调试是啥？难不难？"></a>1. 断点调试是啥？难不难？</h2><p>断点调试其实并不是多么复杂的一件事，简单的理解无外呼就是打开浏览器，打开sources找到js文件，在行号上点一下罢了。操作起来似乎很简单，其实很多人纠结的是，是在哪里打断点？（我们先看一个断点截图，以chrome浏览器的断点为例）</p>
+<p><img src="/styles/images/js/debug1.png" alt="debugdemo"></p>
+<p>步骤记住没？</p>
+<p>用chrome浏览器打开页面 → 按f12打开开发者工具 → 打开Sources → 打开你要调试的js代码文件 → 在行号上单击一下，OK!恭喜你的处女断点打上了,哈哈~~</p>
+<h2 id="2-断点怎么打才合适？"><a href="#2-断点怎么打才合适？" class="headerlink" title="2. 断点怎么打才合适？"></a>2. 断点怎么打才合适？</h2><p>打断点操作很简单，核心的问题在于，断点怎么打才能够排查出代码的问题所在呢？下面我继续举个例子方便大家理解，废话不多说，上图：</p>
+<p><img src="/styles/images/js/debug2.png" alt="debugdemo"></p>
+<p>假设我们现在正在实现一个加载更多的功能，如上图，但是现在加载更多功能出现了问题，点击以后数据没有加载出来，这时候我们第一时间想到的应该是啥？（换一行写答案，大家可以看看自己的第一反应是啥）</p>
+<p>我最先想到的是，我点击到底有没有成功？点击事件里的方法有没有运行？好，要想知道这个问题的答案，我们立马去打个断点试试看，断点打在哪？自己先琢磨一下。</p>
+<p>接着上图：</p>
+<p><img src="/styles/images/js/debug3.png" alt="debugdemo"></p>
+<p>各位想到没？没错，既然想知道点击是否成功，我们当然是在代码中的点击事件处添加一个断点，切记不要添加在226行哦，因为被执行的是click方法内的函数，而不是226行的选择器。断点现在已经打上了，然后做什么呢？自己再琢磨琢磨~</p>
+<p>继续上图：</p>
+<p><img src="/styles/images/js/debug4.png" alt="debugdemo"></p>
+<p>然后我们当然是回去点击加载更多按钮啦，为什么？额。。。如果你这么问，不点击加载更多按钮，怎么去触发点击事件？不触发点击事件，怎么去执行点击事件里的函数？咆哮状。。不过我相信大家肯定不会问这么low的问题<del>不瞎扯了</del></p>
+<p>继续正题，上面的图就是点击加载更多按钮后的情况，我们可以看到左侧的页面被一个半透明的层给盖住了，页面上方还有一串英文和两个按钮，右侧代码227行被添加上了背景色，出现这个情况，先不管那些按钮英文是啥意思有啥作用，你从这个图得到了什么信息？继续琢磨琢磨~</p>
+<p>如果出现了上图这个情况，说明一点，click事件中的函数被调用了，进一步说明了点击事件生效。那么我们对于这个问题产生的第一个“犯罪嫌疑人”就被排除了。</p>
+<p>补充一下：</p>
+<p>如果没有出现上面的情况咋办？那是不是说明点击事件没有生效呢？那是什么导致点击事件没有生效？大家自己思考思考~</p>
+<p>可能导致点击事件没生效的原因很多，比多选择器错误，语法错误，被选择的元素是后生成的等。怎么解决呢？</p>
+<p>选择器错误，大家可以继续往后看到console部分的内容，我想大家就知道怎么处理了</p>
+<p>语法错误，细心排查一下，不熟悉的语法可以百度对比一下</p>
+<p>被选择的元素是后生成的，最简单的处理就是使用.on()方法去处理，这个东东带有事件委托处理，详情可以自行百度。</p>
+<p>那么接下来”犯罪嫌疑人“的身份锁定在哪里呢？</p>
+<p>我们将目光投向事件内部，click事件触发了，那么接下来的问题就是它内部的函数问题了。如果你要问为什么？请给我一块豆腐。。。</p>
+<p>打个比方，给你一支笔，让你写字，然后你在纸上写了一个字，发现字没出来，为啥？你说我写了呀，纸上都还有划痕。那是不是可能笔没有墨水或者笔尖坏了了？这个例子和点击加载更多一个道理，写字这个动作就是点击操作，而内部函数就是墨水或者笔尖。明白了不~</p>
+<p>接着我们分析下点击事件里面的内容，里面包含三句话，第一句话是变量i自增长，第二句话是给按钮添加一个i标签，第三句话是调用请求数据的方法。</p>
+<p>就通过这三句话的本身作用，我们可以将较大一部分嫌疑放在第三句话，一小部分放在第一句和第二句话上，有人可能会疑惑，第二句话怎么会有嫌疑呢？他的作用只不过是添加一个标签，对于数据完全没有影响啊，确实，这句话对于数据没有影响，但是出于严谨考虑，它仍然有可能出错，例如它要是少了一个分号呢？或者句子内部某个符号错误呢？往往就是这种小问题浪费我们很多时间。</p>
+<p>好，为了进一步锁定”犯罪嫌疑人“，给大家介绍一个工具，也是上图出现两个图标之一，见下图：</p>
+<p><img src="/styles/images/js/debug5.png" alt="debugdemo"></p>
+<p>这个小图标的功能叫”逐语句执行“或者叫”逐步执行“，这是我个人理解的一个叫法，意思就是，每点击它一次，js语句就会往后执行一句，它还有一个快捷键，F10。下图示范一下它被点击以后的效果：</p>
+<p><img src="/styles/images/js/debug6.png" alt="debugdemo"></p>
+<p>我单击了两次这个按钮（或者使用F10快捷键），js代码从227行执行到了229行，所以我管它叫”逐语句执行“或者”逐步执行“。这个功能非常的实用，大部分的调试都会使用到它。</p>
+<p>上面介绍到我单击了两次“逐语句执行”按钮，代码从227行运行到229行，大家觉得这意味着啥？是不是说明从语法上来说，前两句是没有问题的，那么是不是也同时意味着前两句就排除嫌疑了呢？我看不然。</p>
+<p>大家都知道，加载更多就是一个下一页的功能，而其中最核心的一个就是传给后台的页码数值，每当我点击加载更多按钮一次，页码的数值就要加1，所以如果下一页的数据没出来，是不是有可能是因为页码数值也就是[i变量]（下面统一称呼i）有问题？那么如何排查页码是否存在问题呢？大家自己先思考思考。</p>
+<p>下面教大家两种查看页码数值i]实际输出值的方法，上图：</p>
+<p>第一种：</p>
+<p><img src="/styles/images/js/debug7.png" alt="debugdemo"></p>
+<p>操作步骤如下：</p>
+<p>1.仍然是在227行打上断点 → 2. 点击加载更多按钮 → 3. 单击一次“逐语句执行“按钮，js代码执行到228行 → 4.用鼠标选中i++（什么叫选中大家里不理解？就是你要复制一个东西，是不是要选中它？对，就是这个选中） → 5. 选中以后，鼠标悬浮在目标上方，你就看到上图的结果。</p>
+<p>第二种：</p>
+<p><img src="/styles/images/js/debug8.png" alt="debugdemo"></p>
+<p>这个方法其实和第一种差不多，只不过是在控制台输出i的值，大家只需要按照第一种方法执行到第三步 → 4. 打开和sources同一级栏目的console → 5. 在console下方的输入栏里输入i → 6. 按enter回车键即可。</p>
+<p>上面的第二种方法里，提到了console这个东西，我们可以称呼它为控制台或者其他什么都可以，这不重要~console的功能很强大，在调试的过程中，我们往往需要知道某些变量的值到底输出了什么，或者我们使用选择器[$”.div”)这种]是否选中了我们想要的元素等，都可以在控制台打印出来。当然直接用第一种方法也可以。</p>
+<p>给大家示范一下在console里打印我们想要选中的元素。上图~</p>
+<p><img src="/styles/images/js/debug9.png" alt="debugdemo"></p>
+<p>在控制台中输入$(this)，即可得到选择的元素，没错，正是我们所点击的对象——加载更多按钮元素。</p>
+<p>在这里给大家说说我对console这个控制台的理解：这个东东就是一个js解析器，是浏览器本身用来解析运行js的家伙，只不过浏览器通过console让我们开发者在调试过程中，可以控制js的运行以及输出。通过上面的两种方法，大家可能觉得使用起来很简单，但是我要给大家提醒一下，或者说是一些新手比较容易遇到的困惑。</p>
+<blockquote>
+<p><strong>困惑一：在没有打断点的情况下，在console输入i，结果console报错了。</strong></p>
+</blockquote>
+<p>这应该是新手很常见的问题，为什么不打断点我就没有办法在控制台直接输出变量的值呢？个人理解这时候i只是一个局部变量，如果不打上断点，浏览器会把所有的js全部解析完成，console并不能访问到局部变量，只能访问到全局变量，所以这时候console会报错i未定义，但是当js打上断点时，console解析到了局部变量i所在的函数内，这时候i是能够被访问的。</p>
+<blockquote>
+<p><strong>困惑二：为什么我直接在console里输入$(“.xxx”)能打印出东西来呢？</strong></p>
+</blockquote>
+<p>很简单，console本身就是一个js解析器，$(“.xxx”)就是一个js语句，所以自然console能够解析这个语句然后输出结果。</p>
+<p>介绍完“逐语句执行”按钮和console控制台的用法，最后再介绍一个按钮，上图：</p>
+<p><img src="/styles/images/js/debug10.png" alt="debugdemo"></p>
+<p>这个按钮我称呼它为“逐过程执行”按钮，和“逐语句执行”按钮不同，“逐过程执行”按钮常用在一个方法调用多个js文件时，涉及到的js代码比较长，则会使用到这个按钮。</p>
+<p>上图：</p>
+<p><img src="/styles/images/js/debug11.png" alt="debugdemo"></p>
+<p>假设上图我只在227行打了个断点，然后一直点击逐语句执行”按钮到229行，这时候如果再点击一次“逐语句执行”按钮呢？则会进入下图的js里：</p>
+<p><img src="/styles/images/js/debug12.png" alt="debugdemo"></p>
+<p>这些都是zepto库文件的内容，没啥好看的，里面运行很复杂，我们不可能一直使用“逐语句执行”按钮，这样你会发现你按了大半天还在库文件里面绕。。。这时候咋办？那就该“逐过程执行”按钮上场了。</p>
+<p>上图：</p>
+<p><img src="/styles/images/js/debug13.png" alt="debugdemo"></p>
+<p>我除了在227行打了一个断点，同时还在237行打了一个断点，当我们运行到229行时，直接单击“逐过程执行”按钮，你会发现，js直接跳过了库文件，运行到了237行，大家可以自己使用体验一下。</p>
+<h2 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h2><p>本文主要介绍了“逐语句执行”按钮、“逐过程执行”按钮、console控制台这三个工具，以及调试bug时的一些思路。工具的用法我就不再赘述了，大家知道用法就行，具体怎么去更合理的使用，还需要大家通过大量的实践去总结提升~</p>
+<p>我其实在本文主要想讲的是调试bug的一个思路，但是由于选的例子涉及东西太多。。。怕全部写下来内容太长，大家也没兴趣看，所以我就简单的选了一部分给大家讲解，不知道大家有没有收获。别看我调试三句话写了一堆的东西，如果真的在实际项目中你也像我这样去做，估计你调试一个Bug的时间会比写一个脚本的时间还长很多。。。在实际情况下，我们应该养成拿到问题的第一时间，自行在脑海中排查问题，找到最有可能出现问题的点，如果没办法迅速的排查出最重要的点，那么你可以使用最麻烦但是很靠谱的方法，利用“逐语句执行”按钮将整个和问题相关的js依次去执行一遍，在执行的过程中，自己也跟着理清思路，同时注意下每个变量的值以及选择器选中的元素是否正确，一般来说，这样做一遍下来，bug都解决的差不多了。</p>
+<p>所以个人认为，我们调试bug的思路应该是这样的：首先，js是否成功的执行进来；其次，js是否存在逻辑问题，变量问题，参数问题等等；最后，如果上述都没有问题，请仔细查看各种符号。。。</p>
+<hr>
+      
+    </div>
+    
+    
+    
+      
+        <ul class="post-copyright">
+           <li class="post-copyright-author">
+              <strong>本文作者： </strong>DoubleRay
+           </li>
+           <li class="post-copyright-link">
+             <strong>本文链接：</strong>
+             <a href="https://doubleray.top/2017/04/20/article-js-pausebug/" title="JavaScript 断点调试">https://doubleray.top/2017/04/20/article-js-pausebug/</a>
+           </li><li>
+           </li><li class="post-copyright-license">
+             <strong>版权声明： </strong>
+           本文章采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+           </li>
+        </ul>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将是我写作最大的动力!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DoubleRay 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DoubleRay 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/15/article-js-fn/" rel="next" title="深入理解 JavaScript 中的函数">
+                <i class="fa fa-chevron-left"></i> 深入理解 JavaScript 中的函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/28/article-mobile-summarize/" rel="prev" title="移动端 H5 踩坑记录">
+                移动端 H5 踩坑记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="DoubleRay">
+            
+              <p class="site-author-name" itemprop="name">DoubleRay</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a rel="external nofollow" href="/archives/">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a rel="external nofollow" href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a rel="external nofollow" href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a rel="external nofollow" href="/atom.xml">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="https://github.com/DoubleRayWang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="mailto:doubleray.wang@gmail.com" target="_blank" title="G-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>G-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a rel="external nofollow" href="http://www.zhihu.com/people/wang-ray-60-48" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接导航
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a rel="external nofollow" href="https://doubleraywang.github.io/" title="旧版博客" target="_blank">旧版博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-断点调试是啥？难不难？"><span class="nav-text">1. 断点调试是啥？难不难？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-断点怎么打才合适？"><span class="nav-text">2. 断点怎么打才合适？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后总结"><span class="nav-text">最后总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DoubleRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a rel="external nofollow" class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+<span class="post-meta-divider">|</span>
+
+统计 &mdash; <a rel="external nofollow" class="theme-link" target="_blank" href="https://tongji.baidu.com/web/welcome/login">Bai Du</a>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("B7BfscJynJIFCGhwhALUf3M6-gzGzoHsz", "k8cYSdPHilAtu9tLgT3kcYuF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?61e699ed66dbcf31daa2eaa4857bd4ae";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</body>
+</html>
